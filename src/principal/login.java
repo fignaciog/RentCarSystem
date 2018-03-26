@@ -1,6 +1,7 @@
 
 package principal;
-import modelo.modelo_login;
+import modelo.modeloUsuario;
+import vista.*;
 
 /**
  *
@@ -24,8 +25,7 @@ public class login extends javax.swing.JFrame {
         
     }
     
-    protected modelo_login ml;
-    private int p = 1, u = 1;
+    protected modeloUsuario ml;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -116,7 +116,7 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/forward.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +154,7 @@ public class login extends javax.swing.JFrame {
         jLabel3.setText(" Acceso");
 
         msg.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        msg.setForeground(new java.awt.Color(255, 51, 51));
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,10 +189,13 @@ public class login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
+        inicio in = new inicio(txtUser.getText(), txtPass.getText());
+        this.dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+        vistaUsuario r = new vistaUsuario();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -201,16 +205,19 @@ public class login extends javax.swing.JFrame {
 
     private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
         // TODO add your handling code here:
-        ml = new modelo_login();
-        u++;
+        ml = new modeloUsuario();
         
-        if(u>6)
+        String user = txtUser.getText();
+        
+        if(user.length() > 6)
         {
-            if(ml.verificarUser(txtUser.getText()))
+            if(user.equals(ml.verificarUser(user)))
             {
                 txtPass.setEnabled(true);
+                msg.setText("");
+                txtUser.setEnabled(false);
             }else{
-                msg.setText("Usuario no existe");
+                msg.setText("Usuario no registrado");
             }
         }
         
@@ -218,19 +225,23 @@ public class login extends javax.swing.JFrame {
 
     private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
         // TODO add your handling code here:
-        ml = new modelo_login();
-        p++;
+        ml = new modeloUsuario();
+        String pass = txtPass.getText();
         
-        if(p>6)
+        if(txtPass.getText().equals(ml.verificarPass(txtPass.getText())) && pass.length() > 5)
         {
-            if(ml.verificarPass(txtPass.getText()))
+            msg.setText("");
+            btnEntrar.setEnabled(true);
+            txtPass.setEnabled(false);
+
+            if(ml.verificarAcceso(txtUser.getText(), txtPass.getText()).equals("0"))
             {
-                btnEntrar.setEnabled(true);
-            }else{
-                msg.setText("Contraseña incorrecta");
+                btnRegistrar.setEnabled(true);
             }
+
+        }else{
+            msg.setText("Contraseña incorrecta");
         }
-        
     }//GEN-LAST:event_txtPassKeyReleased
 
     private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
@@ -243,13 +254,11 @@ public class login extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         login i = new login();
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    public static javax.swing.JButton btnRegistrar;
+    public javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -257,7 +266,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel msg;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JTextField txtUser;
+    public javax.swing.JPasswordField txtPass;
+    public javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

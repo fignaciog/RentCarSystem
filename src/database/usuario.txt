@@ -1,0 +1,2 @@
+0,administrator,123456,0,Ignacio,Fortuna Guzman,ignaciofortuna.inc@correo.com
+1,ejemplo,654123,1,Ejemplo,Ejemplo Ejemplo,ejemplo@correo.com

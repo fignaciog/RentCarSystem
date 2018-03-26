@@ -1,2 +1,0 @@
-0,administrator,123456,0
-1,ignacio,111222,1
