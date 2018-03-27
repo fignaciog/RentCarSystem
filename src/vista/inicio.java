@@ -54,8 +54,8 @@ public class inicio extends javax.swing.JFrame {
         mCliente = new javax.swing.JMenuItem();
         mOfertas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        mReservaCliente = new javax.swing.JMenuItem();
+        mRecepcionVehiculo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -140,11 +140,21 @@ public class inicio extends javax.swing.JFrame {
 
         jMenu2.setText("Movimiento");
 
-        jMenuItem6.setText("Reserva de Clientes");
-        jMenu2.add(jMenuItem6);
+        mReservaCliente.setText("Reserva de Clientes");
+        mReservaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mReservaClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mReservaCliente);
 
-        jMenuItem7.setText("Recepcion de Vehiculos");
-        jMenu2.add(jMenuItem7);
+        mRecepcionVehiculo.setText("Recepcion de Vehiculos");
+        mRecepcionVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mRecepcionVehiculoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mRecepcionVehiculo);
 
         jMenuBar1.add(jMenu2);
 
@@ -291,6 +301,16 @@ public class inicio extends javax.swing.JFrame {
         vistaOferta vo = new vistaOferta();
     }//GEN-LAST:event_mOfertasActionPerformed
 
+    private void mReservaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaClienteActionPerformed
+        // TODO add your handling code here:
+        vistaReservaClientes vrc = new vistaReservaClientes();
+    }//GEN-LAST:event_mReservaClienteActionPerformed
+
+    private void mRecepcionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRecepcionVehiculoActionPerformed
+        // TODO add your handling code here:
+        vistaRecepcionVehiculo vrv = new vistaRecepcionVehiculo();
+    }//GEN-LAST:event_mRecepcionVehiculoActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -317,8 +337,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu lmVehiculo;
@@ -326,6 +344,8 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mCliente;
     private javax.swing.JMenuItem mGama;
     private javax.swing.JMenuItem mOfertas;
+    private javax.swing.JMenuItem mRecepcionVehiculo;
+    private javax.swing.JMenuItem mReservaCliente;
     private javax.swing.JMenuItem mSalir;
     private javax.swing.JMenuItem mUsuario;
     private javax.swing.JMenuItem mVehiculo;
