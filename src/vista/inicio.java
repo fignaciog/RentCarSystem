@@ -273,6 +273,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVehiculoActionPerformed
         // TODO add your handling code here:
+        vistaVehiculo vv = new vistaVehiculo();
     }//GEN-LAST:event_mVehiculoActionPerformed
 
     private void mGamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGamaActionPerformed
@@ -282,10 +283,12 @@ public class inicio extends javax.swing.JFrame {
 
     private void mClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClienteActionPerformed
         // TODO add your handling code here:
+        vistaCliente vc = new vistaCliente();
     }//GEN-LAST:event_mClienteActionPerformed
 
     private void mOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOfertasActionPerformed
         // TODO add your handling code here:
+        vistaOferta vo = new vistaOferta();
     }//GEN-LAST:event_mOfertasActionPerformed
 
     
