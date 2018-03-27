@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
+import controlador.modificar;
 
 /**
  *
@@ -15,15 +16,17 @@ import java.util.StringTokenizer;
  */
 public class modeloGama {
     
-    private int idGama = 0;
-    private String descGama = "";
-    private Double precioGama = 0.0;
+    public int idGama = 0;
+    public String descGama = "";
+    public Double precioGama = 0.0;
     
     private File gama;
     private FileReader fr = null;
     private FileWriter fw = null;
     private BufferedReader br = null;
     private PrintWriter pw = null;
+    modificar m = new modificar();
+    public String oldLinea = "";
     
     void abrir()
     {
@@ -66,6 +69,9 @@ public class modeloGama {
         
         boolean ver = false;
         abrir();
+        String d;
+        int i;
+        double p;
         
         try{
             
@@ -79,13 +85,17 @@ public class modeloGama {
             {
                 s = new StringTokenizer(linea, ",");
                 
-                idGama = Integer.valueOf(s.nextToken());
-                descGama = s.nextToken();
-                precioGama = Double.valueOf(s.nextToken());
+                i = Integer.valueOf(s.nextToken());
+                d = s.nextToken();
+                p = Double.valueOf(s.nextToken());
                 
-                if(dato.equals(String.valueOf(idGama)))
+                if(dato.equals(String.valueOf(i)))
                 {
+                    idGama = i;
+                    descGama = d;
+                    precioGama = p;
                     ver = true;
+                    oldLinea = idGama+","+descGama+","+precioGama;
                 }
                 
             }
@@ -94,6 +104,14 @@ public class modeloGama {
             ver = false;
         }
         return ver;
+    }
+    
+    public void getDatos(String l)
+    {
+        abrir();
+        m.setFile(gama.getPath());
+        m.editar(oldLinea, l);
+        //m.reset();
     }
     
     
