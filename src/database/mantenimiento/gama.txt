@@ -1,0 +1,8 @@
+0,Alta,20.0
+1,media,15.0
+2,baja,10.0
+3,baja sin musica,7.0
+0,Alta,20.0
+1,media,15.0
+2,baja,10.0
+3,baja sin musica,5.0

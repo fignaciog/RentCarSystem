@@ -1,3 +1,0 @@
-0,Alta: Vehiculos de lujo,0.3
-1,media,15.0
-2,Baja,10.0

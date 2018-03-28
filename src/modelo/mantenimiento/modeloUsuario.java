@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.mantenimiento;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ public class modeloUsuario {
     
     void abrir()
     {
-        login = new File("C:\\ProjectsJava\\RentCarSystem\\src\\database\\usuario.txt");
+        login = new File("C:\\ProjectsJava\\RentCarSystem\\src\\database\\mantenimiento\\usuario.txt");
     }
     
     public boolean Crear(String i, String u, String p, int n, String no, String a, String e)

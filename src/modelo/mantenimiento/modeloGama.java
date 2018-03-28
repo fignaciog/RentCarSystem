@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.mantenimiento;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,5 +1,5 @@
 
-package vista;
+package vista.movimiento;
 
 import javax.swing.JFrame;
 

@@ -1,6 +1,7 @@
 
 package principal;
-import modelo.modeloUsuario;
+import vista.mantenimientos.vistaUsuario;
+import modelo.mantenimiento.modeloUsuario;
 import vista.*;
 
 /**
@@ -44,6 +45,7 @@ public class login extends javax.swing.JFrame {
         msg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N

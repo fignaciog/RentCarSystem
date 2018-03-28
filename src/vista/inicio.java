@@ -1,8 +1,15 @@
 
 package vista;
+import vista.movimiento.vistaReservaClientes;
+import vista.movimiento.vistaRecepcionVehiculo;
+import vista.mantenimientos.vistaCliente;
+import vista.mantenimientos.vistaVehiculo;
+import vista.mantenimientos.vistaGama;
+import vista.mantenimientos.vistaOferta;
+import vista.mantenimientos.vistaUsuario;
 import principal.login;
 import vista.*;
-import modelo.modeloUsuario;
+import modelo.mantenimiento.modeloUsuario;
 
 /**
  *
@@ -63,12 +70,7 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
@@ -178,23 +180,8 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem15.setText("Vehiculos");
         jMenu6.add(jMenuItem15);
 
-        jMenuItem9.setText("Disponibles");
-        jMenu6.add(jMenuItem9);
-
-        jMenuItem14.setText("Rentados");
-        jMenu6.add(jMenuItem14);
-
         jMenuItem8.setText("Por Matricula");
         jMenu6.add(jMenuItem8);
-
-        jMenuItem10.setText("Por Gama");
-        jMenu6.add(jMenuItem10);
-
-        jMenuItem11.setText("Por Marca");
-        jMenu6.add(jMenuItem11);
-
-        jMenuItem17.setText("por Precio");
-        jMenu6.add(jMenuItem17);
 
         jMenu3.add(jMenu6);
 
@@ -325,20 +312,15 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu lmVehiculo;
     private javax.swing.JMenuItem mCerrarS;
     private javax.swing.JMenuItem mCliente;

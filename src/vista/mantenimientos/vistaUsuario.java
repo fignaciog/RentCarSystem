@@ -1,9 +1,9 @@
 
-package vista;
+package vista.mantenimientos;
 
 import java.awt.Color;
 import javax.swing.JFrame;
-import modelo.modeloUsuario;
+import modelo.mantenimiento.modeloUsuario;
 
 /**
  *
