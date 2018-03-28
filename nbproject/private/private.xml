@@ -12,10 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/vistaGama.java</file>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/controlador/modificar.java</file>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/database/gama.txt</file>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/modelo/modeloGama.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/consultas/cliente/ID.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/modelo/mantenimiento/modeloUsuario.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/inicio.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/consultas/Ofertas.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/consultas/vehiculo/Vehiculo.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/consultas/cliente/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
