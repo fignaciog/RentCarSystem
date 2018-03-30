@@ -1,7 +1,7 @@
 
 package principal;
-import vista.mantenimientos.vistaUsuario;
-import modelo.mantenimiento.modeloUsuario;
+import vista.mantenimientos.formularioUsuario;
+import modelo.mantenimiento.mUsuario;
 import vista.*;
 
 /**
@@ -9,13 +9,15 @@ import vista.*;
  * @author Ignacio
  */
 public class login extends javax.swing.JFrame {
-
+    protected mUsuario ml;
+    
     /**
      * Creates new form login
      */
     public login() {
         
         initComponents();
+        ml = new mUsuario();
         setTitle("Iniciar Seccion");
         setLocationRelativeTo(null);
         setVisible(true);
@@ -24,9 +26,11 @@ public class login extends javax.swing.JFrame {
         btnRegistrar.setEnabled(false);
         txtPass.setEnabled(false);
         
+        
+        
     }
     
-    protected modeloUsuario ml;
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,6 +51,8 @@ public class login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setResizable(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Usuario:");
@@ -155,7 +161,7 @@ public class login extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lock.png"))); // NOI18N
         jLabel3.setText(" Acceso");
 
-        msg.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         msg.setForeground(new java.awt.Color(255, 51, 51));
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -197,7 +203,7 @@ public class login extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        vistaUsuario r = new vistaUsuario();
+        formularioUsuario r = new formularioUsuario();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -207,7 +213,7 @@ public class login extends javax.swing.JFrame {
 
     private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
         // TODO add your handling code here:
-        ml = new modeloUsuario();
+        ml = new mUsuario();
         
         String user = txtUser.getText();
         
@@ -227,7 +233,7 @@ public class login extends javax.swing.JFrame {
 
     private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
         // TODO add your handling code here:
-        ml = new modeloUsuario();
+        ml = new mUsuario();
         String pass = txtPass.getText();
         
         if(txtPass.getText().equals(ml.verificarPass(txtPass.getText())) && pass.length() > 5)

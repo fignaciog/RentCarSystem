@@ -7,12 +7,12 @@ import javax.swing.JFrame;
  *
  * @author Ignacio
  */
-public class vistaReservaClientes extends javax.swing.JFrame {
+public class formReservaClientes extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaReservaClientes
      */
-    public vistaReservaClientes() {
+    public formReservaClientes() {
         initComponents();
         setTitle("Reserva Cliente");
         setLocationRelativeTo(null);

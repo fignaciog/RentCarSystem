@@ -1,36 +1,33 @@
 
 package modelo.mantenimiento;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.StringTokenizer;
 import controlador.modificar;
+import vista.mantenimientos.formularioGama;
 
 /**
  *
  * @author Ignacio
  */
-public class modeloGama {
+public class mGama {
     
     public int idGama = 0;
     public String descGama = "";
     public Double precioGama = 0.0;
     
-    private File gama;
+    public File gama;
+    
     private FileReader fr = null;
     private FileWriter fw = null;
     private BufferedReader br = null;
     private PrintWriter pw = null;
-    modificar m = new modificar();
-    public String oldLinea = "";
     
-    void abrir()
+    modificar m = new modificar();
+    
+    public void abrir()
     {
-        gama = new File("C:\\ProjectsJava\\RentCarSystem\\src\\database\\gama.txt");
+        gama = new File("C:\\RentCarSystem\\database\\mantenimiento\\gama.txt");
     }
     
     public void setDatos(String idGama, String descGama, String precioGama)
@@ -40,10 +37,9 @@ public class modeloGama {
         this.precioGama = Double.valueOf(precioGama);
     }
     
-    public boolean crear(){
-        
+    public boolean crear()
+    {
         boolean ver;
-        
         abrir();
         
         try{
@@ -51,8 +47,9 @@ public class modeloGama {
             fw = new FileWriter(gama, true);
             pw = new PrintWriter(fw);
             
-            pw.write("\n");
+            
             pw.write(idGama+","+descGama+","+precioGama);
+            pw.write("\n");
             
             fw.close();
             ver = true;
@@ -65,13 +62,11 @@ public class modeloGama {
         return ver;
     }
     
-    public boolean verificarID(String dato){
+    public boolean verificarID(String dato)
+    {
         
         boolean ver = false;
         abrir();
-        String d;
-        int i;
-        double p;
         
         try{
             
@@ -83,37 +78,27 @@ public class modeloGama {
             
             while((linea = br.readLine()) != null)
             {
-                s = new StringTokenizer(linea, ",");
-                
-                i = Integer.valueOf(s.nextToken());
-                d = s.nextToken();
-                p = Double.valueOf(s.nextToken());
-                
-                if(dato.equals(String.valueOf(i)))
+                if(gama.length() != 0)
                 {
-                    idGama = i;
-                    descGama = d;
-                    precioGama = p;
-                    ver = true;
-                    oldLinea = idGama+","+descGama+","+precioGama;
+                    s = new StringTokenizer(linea, ",");
+                    
+                    if(dato.equals(String.valueOf(s.nextToken())))
+                    {
+                        formularioGama.txtDescripcion.setText(s.nextToken());
+                        formularioGama.txtPrecio.setText(s.nextToken());
+                        ver = true;
+                    }
+                    
                 }
-                
             }
+            
+            fr.close();
             
         }catch(IOException ioe){
             ver = false;
         }
+        
         return ver;
     }
-    
-    public void getDatos(String l)
-    {
-        abrir();
-        m.setFile(gama.getPath());
-        m.editar(oldLinea, l);
-        //m.reset();
-    }
-    
-    
     
 }

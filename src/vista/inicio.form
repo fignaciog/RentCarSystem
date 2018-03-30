@@ -105,17 +105,23 @@
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
+                <MenuItem class="javax.swing.JMenuItem" name="mcCliente">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Clientes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mcClienteActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
+                <MenuItem class="javax.swing.JMenuItem" name="mcClienteID">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Por ID"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mcClienteIDActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
+                <MenuItem class="javax.swing.JMenuItem" name="mcClienteRangoID">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Por Rango ID"/>
                   </Properties>

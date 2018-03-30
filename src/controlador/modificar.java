@@ -9,76 +9,112 @@ import java.io.*;
  */
 public class modificar {
     
-    private File file;
-    private File auxfile;
+    public File file_A;
+    public File file_B;
+    private String path_A;
+    private String linea_A, linea_B;
     
-    FileReader fr = null;
-    FileWriter fw = null;
-    BufferedReader br = null;
-    PrintWriter pw = null;
-    String ruta;
+    FileReader fr;
+    FileWriter fw;
+    BufferedReader br;
+    PrintWriter pw;
     
-    public modificar(){
+    public modificar()
+    {
         
     }
     
-    public void setFile(String file)
+    public modificar(String linea_A, String linea_B, String path_A)
     {
-        ruta = file;
-        this.file = new File(file);
-        this.auxfile = new File (file);
+        this.linea_A = linea_A;
+        this.linea_B = linea_B;
+        this.path_A = path_A;
+        
+        file_A = new File(path_A);
+        file_B = new File(path_A+"_");
+    }
+    
+    public void datos(String path_A)
+    {
+        
+        
     }
     
     void escribir(String linea)
     {
         try{
             
-            fw = new FileWriter(auxfile, true);
+            fw = new FileWriter(file_B, true);
             pw = new PrintWriter(fw);
             
-            pw.print("\n");
             pw.print(linea);
+            pw.print("\n");
             
-            fw.close();
+            //fw.close();
             
         }catch(IOException ioe){
-            
+            ioe.printStackTrace();
+        }finally{
+            try{
+                if(null!=fw)
+                {
+                    fw.close();
+                }
+            }catch(IOException ioe1)
+            {
+                ioe1.printStackTrace();
+            }
         }
     }
     
-    public void editar(String linea, String nlinea)
+    public void editar()
     {
         try{
             
-            fr = new FileReader(file);
+            fr = new FileReader(file_A);
             br = new BufferedReader(fr);
             
-            String Linea;
+            String linea_file;
             
-            while((Linea = br.readLine()) != null)
+            while((linea_file = br.readLine()) != null)
             {
-                if(Linea.equals(linea))
+                if(linea_file.equals(linea_A))
                 {
-                    escribir(nlinea);
+                    escribir(linea_B);
                 }else{
-                    escribir(Linea);
+                    escribir(linea_file);
                 }
             }
             
-            fr.close();
-            
         }catch(IOException ioe){
-            
+            ioe.printStackTrace();
+        }finally{
+            try{
+                if(null != fr)
+                {
+                    fr.close();
+                }
+            }catch(IOException ioe1){
+                ioe1.printStackTrace();
+            }
         }
     }
     
-    public void reset()
+    public boolean reenombrar()
     {
-        if(file.exists())
+        boolean set = false;
+        
+        //System.out.println(file_A.getPath());
+       
+        if(file_A.exists())
         {
-            file.delete();
+            file_A.delete();
+            set = true;
         }
-        auxfile.renameTo(file = new File(ruta));
+        
+        file_B.renameTo(file_A = new File(path_A));
+        
+        return set;
     }
     
 }

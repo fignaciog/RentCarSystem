@@ -3,18 +3,18 @@ package vista.mantenimientos;
 
 import java.awt.Color;
 import javax.swing.JFrame;
-import modelo.mantenimiento.modeloGama;
-
+import modelo.mantenimiento.mGama;
+import controlador.modificar;
 /**
  *
  * @author Ignacio
  */
-public class vistaGama extends javax.swing.JFrame {
+public class formularioGama extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaGama
      */
-    public vistaGama() {
+    public formularioGama() {
         initComponents();
         setTitle("Gama");
         setLocationRelativeTo(null);
@@ -22,12 +22,10 @@ public class vistaGama extends javax.swing.JFrame {
         setVisible(true);
     }
     
-    private String idGama = "";
-    private String descGama = "";
-    private String precioGama = "";
-    String linea;
+    String linea_A, linea_B;
     
-    modeloGama mg = new modeloGama();;
+    mGama mg = new mGama();
+    modificar editar;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,7 +34,6 @@ public class vistaGama extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
@@ -48,6 +45,7 @@ public class vistaGama extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cars.png"))); // NOI18N
@@ -67,13 +65,6 @@ public class vistaGama extends javax.swing.JFrame {
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
-            }
-        });
-
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
             }
         });
 
@@ -101,28 +92,8 @@ public class vistaGama extends javax.swing.JFrame {
         jLabel4.setText("Precio");
 
         txtPrecio.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPrecioMouseClicked(evt);
-            }
-        });
-        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyReleased(evt);
-            }
-        });
 
         txtDescripcion.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtDescripcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDescripcionMouseClicked(evt);
-            }
-        });
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyReleased(evt);
-            }
-        });
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtID, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -142,10 +113,10 @@ public class vistaGama extends javax.swing.JFrame {
                         .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel4)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,18 +125,20 @@ public class vistaGama extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
                 .addGap(9, 9, 9)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        msg.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msg.setForeground(new java.awt.Color(51, 204, 0));
+        msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,8 +158,7 @@ public class vistaGama extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -201,13 +173,10 @@ public class vistaGama extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLayeredPane1))
+                .addContainerGap())
         );
 
         pack();
@@ -215,29 +184,21 @@ public class vistaGama extends javax.swing.JFrame {
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
-        idGama = txtID.getText();
         
-        if(mg.verificarID(idGama))
+        if(mg.verificarID(txtID.getText()))
         {
             msg.setText("Modificando");
-            txtID.setText(String.valueOf(mg.idGama));
-            txtDescripcion.setText(mg.descGama);
-            txtPrecio.setText(String.valueOf(mg.precioGama));
+            
+            // Crando linea vieja
+            linea_A = txtID.getText()+","+txtDescripcion.getText()+","+txtPrecio.getText();
+            
         }else{
             msg.setText("Creando");
+            txtDescripcion.setText("");
+            txtPrecio.setText("");
         }
         
     }//GEN-LAST:event_txtIDKeyReleased
-
-    private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
-        // TODO add your handling code here:
-        descGama = txtDescripcion.getText();
-    }//GEN-LAST:event_txtDescripcionKeyReleased
-
-    private void txtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyReleased
-        // TODO add your handling code here:
-        precioGama = txtPrecio.getText();
-    }//GEN-LAST:event_txtPrecioKeyReleased
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
@@ -249,24 +210,32 @@ public class vistaGama extends javax.swing.JFrame {
         txtID.setBackground(Color.white);
     }//GEN-LAST:event_txtIDMouseClicked
 
-    private void txtDescripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescripcionMouseClicked
-        // TODO add your handling code here:
-        txtDescripcion.setBackground(Color.white);
-        descGama = txtDescripcion.getText();
-    }//GEN-LAST:event_txtDescripcionMouseClicked
-
-    private void txtPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioMouseClicked
-        // TODO add your handling code here:
-        txtPrecio.setBackground(Color.white);
-        precioGama = txtPrecio.getText();
-    }//GEN-LAST:event_txtPrecioMouseClicked
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-       
-        if(datos())
+        
+        if(msg.getText().equals("Modificando"))
         {
-            mg.setDatos(idGama, descGama, precioGama);
+            
+            // Linea para crear los nuevos datos a guardar
+            linea_B = txtID.getText()+","+txtDescripcion.getText()+","+txtPrecio.getText();
+            
+            /*Constructor de la clase modificar con las lineas
+            ya creadas, la linea vieja:(linea_A) y la nueva:(linea_B)*/
+            editar = new modificar(linea_A, linea_B,mg.gama.getPath());
+
+            // Ejecuto el metodo para modifcar el fichero de la Clase:(modificar)
+            editar.editar();
+            
+            if(editar.reenombrar())
+            {
+                msg.setText("Datos Modificados");
+                clear();
+            }
+            
+        }else{
+            
+            mg.setDatos(txtID.getText(), txtDescripcion.getText(), txtPrecio.getText());
+            
             if(mg.crear())
             {
                 msg.setText("Datos guardados");
@@ -275,45 +244,13 @@ public class vistaGama extends javax.swing.JFrame {
                 msg.setText("Datos no guardados");
             }
             
-        }else{
-            msg.setText("Datos incompletos");
         }
+        
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-         
-         linea = idGama+","+descGama+","+precioGama;
-         mg.getDatos(linea);
-         
-    }//GEN-LAST:event_btnModificarActionPerformed
-    
-    boolean datos()
-    {
-        boolean v = true;
-        if(idGama.equals(""))
-        {
-            txtID.setBackground(Color.red);
-            v = false;
-        }else if(descGama.equals(""))
-        {
-            txtDescripcion.setBackground(Color.red);
-            v = false;
-        }else if(precioGama.equals(""))
-        {
-            txtPrecio.setBackground(Color.red);
-            v = false;
-        }
-        return v;
-    }
-    
     void clear()
     {
-        idGama = "";
-        descGama = "";
-        precioGama = "";
-        
         txtID.setText("");
         txtDescripcion.setText("");
         txtPrecio.setText("");
@@ -323,7 +260,6 @@ public class vistaGama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

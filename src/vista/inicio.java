@@ -1,15 +1,16 @@
 
 package vista;
-import vista.movimiento.vistaReservaClientes;
-import vista.movimiento.vistaRecepcionVehiculo;
-import vista.mantenimientos.vistaCliente;
-import vista.mantenimientos.vistaVehiculo;
-import vista.mantenimientos.vistaGama;
-import vista.mantenimientos.vistaOferta;
-import vista.mantenimientos.vistaUsuario;
+import vista.movimiento.formReservaClientes;
+import vista.movimiento.formRecepcionVehiculo;
+import vista.mantenimientos.formularioCliente;
+import vista.mantenimientos.formularioVehiculo;
+import vista.mantenimientos.formularioGama;
+import vista.mantenimientos.formularioOferta;
+import vista.mantenimientos.formularioUsuario;
 import principal.login;
 import vista.*;
-import modelo.mantenimiento.modeloUsuario;
+import modelo.mantenimiento.mUsuario;
+import vista.consultas.cliente.*;
 
 /**
  *
@@ -17,7 +18,7 @@ import modelo.mantenimiento.modeloUsuario;
  */
 public class inicio extends javax.swing.JFrame {
     
-    modeloUsuario ml = new modeloUsuario();
+    mUsuario ml = new mUsuario();
     /**
      * Creates new form inicio
      */
@@ -65,9 +66,9 @@ public class inicio extends javax.swing.JFrame {
         mRecepcionVehiculo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        mcCliente = new javax.swing.JMenuItem();
+        mcClienteID = new javax.swing.JMenuItem();
+        mcClienteRangoID = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -164,14 +165,24 @@ public class inicio extends javax.swing.JFrame {
 
         jMenu5.setText("Clientes");
 
-        jMenuItem16.setText("Clientes");
-        jMenu5.add(jMenuItem16);
+        mcCliente.setText("Clientes");
+        mcCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcClienteActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mcCliente);
 
-        jMenuItem12.setText("Por ID");
-        jMenu5.add(jMenuItem12);
+        mcClienteID.setText("Por ID");
+        mcClienteID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcClienteIDActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mcClienteID);
 
-        jMenuItem13.setText("Por Rango ID");
-        jMenu5.add(jMenuItem13);
+        mcClienteRangoID.setText("Por Rango ID");
+        jMenu5.add(mcClienteRangoID);
 
         jMenu3.add(jMenu5);
 
@@ -265,38 +276,48 @@ public class inicio extends javax.swing.JFrame {
 
     private void mUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mUsuarioActionPerformed
         // TODO add your handling code here:
-        vistaUsuario vu = new vistaUsuario();
+        formularioUsuario vu = new formularioUsuario();
     }//GEN-LAST:event_mUsuarioActionPerformed
 
     private void mVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVehiculoActionPerformed
         // TODO add your handling code here:
-        vistaVehiculo vv = new vistaVehiculo();
+        formularioVehiculo vv = new formularioVehiculo();
     }//GEN-LAST:event_mVehiculoActionPerformed
 
     private void mGamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGamaActionPerformed
         // TODO add your handling code here:
-        vistaGama vg = new vistaGama();
+        formularioGama vg = new formularioGama();
     }//GEN-LAST:event_mGamaActionPerformed
 
     private void mClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClienteActionPerformed
         // TODO add your handling code here:
-        vistaCliente vc = new vistaCliente();
+        formularioCliente vc = new formularioCliente();
     }//GEN-LAST:event_mClienteActionPerformed
 
     private void mOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOfertasActionPerformed
         // TODO add your handling code here:
-        vistaOferta vo = new vistaOferta();
+        formularioOferta vo = new formularioOferta();
     }//GEN-LAST:event_mOfertasActionPerformed
 
     private void mReservaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaClienteActionPerformed
         // TODO add your handling code here:
-        vistaReservaClientes vrc = new vistaReservaClientes();
+        formReservaClientes vrc = new formReservaClientes();
     }//GEN-LAST:event_mReservaClienteActionPerformed
 
     private void mRecepcionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRecepcionVehiculoActionPerformed
         // TODO add your handling code here:
-        vistaRecepcionVehiculo vrv = new vistaRecepcionVehiculo();
+        formRecepcionVehiculo vrv = new formRecepcionVehiculo();
     }//GEN-LAST:event_mRecepcionVehiculoActionPerformed
+
+    private void mcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteActionPerformed
+        // TODO add your handling code here:
+        Cliente cC = new Cliente();
+    }//GEN-LAST:event_mcClienteActionPerformed
+
+    private void mcClienteIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteIDActionPerformed
+        // TODO add your handling code here:
+        ID cID = new ID();
+    }//GEN-LAST:event_mcClienteIDActionPerformed
 
     
 
@@ -312,10 +333,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
@@ -331,5 +349,8 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mSalir;
     private javax.swing.JMenuItem mUsuario;
     private javax.swing.JMenuItem mVehiculo;
+    private javax.swing.JMenuItem mcCliente;
+    private javax.swing.JMenuItem mcClienteID;
+    private javax.swing.JMenuItem mcClienteRangoID;
     // End of variables declaration//GEN-END:variables
 }

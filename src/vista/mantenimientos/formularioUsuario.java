@@ -3,13 +3,14 @@ package vista.mantenimientos;
 
 import java.awt.Color;
 import javax.swing.JFrame;
-import modelo.mantenimiento.modeloUsuario;
+import modelo.mantenimiento.mUsuario;
+import controlador.modificar;
 
 /**
  *
  * @author Ignacio
  */
-public class vistaUsuario extends javax.swing.JFrame {
+public class formularioUsuario extends javax.swing.JFrame {
     
     private String idUsuario = "";
     private String loginUsuario = "";
@@ -20,11 +21,13 @@ public class vistaUsuario extends javax.swing.JFrame {
     private String apellidos = "";
     private String emailUsuario = "";
     
+    private String linea_A, linea_B;
+    
     
     private int i = 0;
-    modeloUsuario ml = null;
+    mUsuario ml = null;
     
-    public vistaUsuario() {
+    public formularioUsuario() {
         initComponents();
         setTitle("Usuarios");
         setLocationRelativeTo(null);
@@ -37,6 +40,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        acceso = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
@@ -45,14 +49,13 @@ public class vistaUsuario extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
         txtRpass = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        cnivelAcceso = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        admin = new javax.swing.JRadioButton();
+        user = new javax.swing.JRadioButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -119,6 +122,9 @@ public class vistaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("Nivel de Acceso");
+
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Contraseña");
 
@@ -134,13 +140,6 @@ public class vistaUsuario extends javax.swing.JFrame {
             }
         });
 
-        jSeparator1.setBackground(new java.awt.Color(238, 238, 238));
-        jSeparator1.setForeground(new java.awt.Color(238, 238, 238));
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setText("Repita la contraseña");
-
         txtRpass.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         txtRpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -153,75 +152,38 @@ public class vistaUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtRpass, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setText("Repita la contraseña");
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtRpass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        acceso.add(admin);
+        admin.setText("Administrador");
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setText("Nivel de Acceso");
-
-        cnivelAcceso.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        cnivelAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
-        cnivelAcceso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cnivelAccesoActionPerformed(evt);
-            }
-        });
+        acceso.add(user);
+        user.setText("Usuario");
 
         jLayeredPane2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(txtID, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(txtUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLayeredPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(cnivelAcceso, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(txtPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(txtRpass, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(admin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(user, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(admin)
+                        .addGap(18, 18, 18)
+                        .addComponent(user))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,8 +193,15 @@ public class vistaUsuario extends javax.swing.JFrame {
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addComponent(jLabel5)
-                    .addComponent(cnivelAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtRpass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,13 +214,21 @@ public class vistaUsuario extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cnivelAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(admin)
+                    .addComponent(user))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -315,15 +292,15 @@ public class vistaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         msg.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -337,20 +314,17 @@ public class vistaUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -377,7 +351,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
         // TODO add your handling code here:
-        ml = new modeloUsuario();
+        ml = new mUsuario();
         i++;
         
         if(i>5)
@@ -407,7 +381,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
         // TODO add your handling code here:
         
-        ml = new modeloUsuario();
+        ml = new mUsuario();
         i++;
         
         if(i>5)
@@ -454,17 +428,42 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
-        ml = new modeloUsuario();
+        ml = new mUsuario();
         
-        if(verificarDatos())
+        if(msg.getText().equals("Modificando"))
         {
-            if(ml.Crear(idUsuario, loginUsuario, passUsuario, nivelAcceso, nombre, apellidos, emailUsuario))
+            
+            linea_B = txtID.getText()+","+txtUser.getText()+","+
+                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
+                        +","+txtApellidos.getText()+","+txtEmail.getText();
+            ml.abrir();
+            
+            modificar editar = new modificar(linea_A, linea_B, ml.login.getPath());
+            editar.editar();
+            
+            if(editar.reenombrar())
             {
-                msg.setForeground(Color.blue);
-                msg.setText("Datos guardados");
-                limpiar();
+                msg.setText("Datos Modificados");
+            }else{
+                msg.setText("Datos no modificados");
             }
+            
+        }else{
+            
+            if(verificarDatos())
+            {
+                if(ml.Crear(txtID.getText(), txtUser.getText(),
+                        txtPass.getText(), Integer.valueOf(Acceso()), txtNombre.getText(),
+                        txtApellidos.getText(), txtEmail.getText()))
+                {
+                    msg.setForeground(Color.blue);
+                    msg.setText("Datos guardados");
+                    clear();
+                }
+            }
+            
         }
+        
         
     }//GEN-LAST:event_btnCrearActionPerformed
 
@@ -476,15 +475,25 @@ public class vistaUsuario extends javax.swing.JFrame {
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
         msg.setText("");
-        ml = new modeloUsuario();
+        ml = new mUsuario();
+        
         idUsuario = txtID.getText();
         
-        if(idUsuario.equals(ml.verificarID(idUsuario)))
+        if(!txtID.getText().equals(""))
         {
-            msg.setText("No puedes utilizar este ID");
+            if(txtID.getText().equals(ml.verificarID(txtID.getText())))
+            {
+                msg.setText("Modificando");
+                linea_A = txtID.getText()+","+txtUser.getText()+","+
+                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
+                        +","+txtApellidos.getText()+","+txtEmail.getText();
+            }else{
+                msg.setText("Creando");
+            }
         }else{
-            msg.setText("");
+            clear();
         }
+        
     }//GEN-LAST:event_txtIDKeyReleased
 
     // Eventos Click del Mouse
@@ -510,11 +519,6 @@ public class vistaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtRpass.setBackground(Color.white);
     }//GEN-LAST:event_txtRpassMouseClicked
-
-    private void cnivelAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnivelAccesoActionPerformed
-        // TODO add your handling code here:
-        nivelAcceso = cnivelAcceso.getSelectedIndex();
-    }//GEN-LAST:event_cnivelAccesoActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
@@ -569,7 +573,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         return datos;
     }
     
-    void limpiar(){
+    void clear(){
         
         txtID.setText("");
         txtUser.setText("");
@@ -578,6 +582,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellidos.setText("");
         txtEmail.setText("");
+        acceso.clearSelection();
         
         idUsuario = "";
         loginUsuario = "";
@@ -588,11 +593,24 @@ public class vistaUsuario extends javax.swing.JFrame {
         emailUsuario = "";
         
     }
+    
+    String Acceso()
+    {
+        String a = "";
+        if(admin.isSelected())
+        {
+            a = "0";
+        }else if(user.isSelected()){
+            a = "1";
+        }
+        return a;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.ButtonGroup acceso;
+    public static javax.swing.JRadioButton admin;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JComboBox<String> cnivelAcceso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -602,17 +620,16 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel msg;
-    private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtApellidos;
+    public static javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JPasswordField txtRpass;
-    private javax.swing.JTextField txtUser;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JPasswordField txtPass;
+    public static javax.swing.JPasswordField txtRpass;
+    public static javax.swing.JTextField txtUser;
+    public static javax.swing.JRadioButton user;
     // End of variables declaration//GEN-END:variables
 }
