@@ -1,4 +1,4 @@
-
+    
 package controlador;
 
 import java.io.*;
@@ -32,12 +32,6 @@ public class modificar {
         
         file_A = new File(path_A);
         file_B = new File(path_A+"_");
-    }
-    
-    public void datos(String path_A)
-    {
-        
-        
     }
     
     void escribir(String linea)

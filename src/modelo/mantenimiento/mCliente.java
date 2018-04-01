@@ -3,6 +3,7 @@ package modelo.mantenimiento;
 
 import java.io.*;
 import java.util.StringTokenizer;
+import vista.mantenimientos.formularioCliente;
 
 /**
  *
@@ -10,13 +11,13 @@ import java.util.StringTokenizer;
  */
 public class mCliente {
     
-    private int ID_cedula;
+    private String ID_cedula;
     private String Nombre_Cte;
     private String Apellidos_Cte;
     private String Direccion_Cte;
     private String Email_Cte;
-    private int Telefono;
-    String path;
+    private String Telefono;
+    public String path;
     
     File cliente;
     FileWriter fw;
@@ -47,15 +48,20 @@ public class mCliente {
                 {
                     s = new StringTokenizer(linea, ",");
                     
-                    ID_cedula = Integer.valueOf(s.nextToken());
+                    ID_cedula = s.nextToken();
                     Nombre_Cte = s.nextToken();
                     Apellidos_Cte = s.nextToken();
                     Direccion_Cte = s.nextToken();
                     Email_Cte = s.nextToken();
-                    Telefono = Integer.valueOf(s.nextToken());
+                    Telefono = s.nextToken();
                     
                     if(dato.equals(ID_cedula))
                     {
+                        formularioCliente.txtNombre.setText(Nombre_Cte);
+                        formularioCliente.txtApellidos.setText(Apellidos_Cte);
+                        formularioCliente.txtDireccion.setText(Direccion_Cte);
+                        formularioCliente.txtEmail.setText(Email_Cte);
+                        formularioCliente.txtTelefono.setText(Telefono);
                         isIt = true;
                     }
                     
@@ -72,9 +78,24 @@ public class mCliente {
         return isIt;
     }
     
-    void crear()
+    public boolean crear(String linea)
     {
-        
+        boolean its = false;
+        try{
+            
+            fw = new FileWriter(cliente);
+            pw = new PrintWriter(fw);
+            
+            pw.write(linea+"\n");
+            
+            fw.close();
+            
+            its = true;
+            
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
+        return its;
     }
     
 }

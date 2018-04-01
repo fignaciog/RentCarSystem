@@ -1,12 +1,7 @@
 
 package vista;
-import vista.movimiento.formReservaClientes;
-import vista.movimiento.formRecepcionVehiculo;
-import vista.mantenimientos.formularioCliente;
-import vista.mantenimientos.formularioVehiculo;
-import vista.mantenimientos.formularioGama;
-import vista.mantenimientos.formularioOferta;
-import vista.mantenimientos.formularioUsuario;
+import vista.movimiento.*;
+import vista.mantenimientos.*;
 import principal.login;
 import vista.*;
 import modelo.mantenimiento.mUsuario;
@@ -296,7 +291,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOfertasActionPerformed
         // TODO add your handling code here:
-        formularioOferta vo = new formularioOferta();
+        formOfertas vo = new formOfertas();
     }//GEN-LAST:event_mOfertasActionPerformed
 
     private void mReservaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaClienteActionPerformed

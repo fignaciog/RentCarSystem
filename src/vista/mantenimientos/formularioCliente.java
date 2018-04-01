@@ -4,6 +4,7 @@ package vista.mantenimientos;
 import java.awt.Color;
 import javax.swing.JFrame;
 import modelo.mantenimiento.mCliente;
+import controlador.modificar;
 
 /**
  *
@@ -11,7 +12,8 @@ import modelo.mantenimiento.mCliente;
  */
 public class formularioCliente extends javax.swing.JFrame {
 
-    mCliente mc;
+    
+    String get, linea_A, linea_B;
     
     /**
      * Creates new form vistaCliente
@@ -41,8 +43,8 @@ public class formularioCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JFormattedTextField();
         txtTelefono = new javax.swing.JFormattedTextField();
+        txtCedula = new javax.swing.JFormattedTextField();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
 
@@ -103,18 +105,6 @@ public class formularioCliente extends javax.swing.JFrame {
         jLabel7.setText("Telefono");
 
         try {
-            txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#######-#")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCedula.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCedulaKeyReleased(evt);
-            }
-        });
-
-        try {
             txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
@@ -123,6 +113,23 @@ public class formularioCliente extends javax.swing.JFrame {
         txtTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtTelefonoMouseClicked(evt);
+            }
+        });
+
+        try {
+            txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#######-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCedula.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtCedula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCedulaMouseClicked(evt);
+            }
+        });
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyReleased(evt);
             }
         });
 
@@ -136,8 +143,8 @@ public class formularioCliente extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtCedula, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtTelefono, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtCedula, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -153,11 +160,11 @@ public class formularioCliente extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -165,9 +172,9 @@ public class formularioCliente extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,11 +255,47 @@ public class formularioCliente extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if(verificar())
+        if(msg.getText().equals("Modificando"))
         {
             
-        }else{
+            mCliente mc = new mCliente();
             
+            linea_B = get+","+txtNombre.getText()+
+                        ","+txtApellidos.getText()+","+txtDireccion.getText()+
+                        ","+txtEmail.getText()+","+txtTelefono.getText();
+            
+            
+            modificar m = new modificar(linea_A, linea_B, mc.path);
+            m.editar();
+            
+            if(m.reenombrar())
+            {
+                msg.setForeground(Color.green);
+                msg.setText("Datos Modificados");
+                clear();
+            }
+            
+        }else if(msg.getText().equals("Creando")){ 
+            mCliente mc = new mCliente();
+            if(verificar())
+            {
+                
+                linea_B = get+","+txtNombre.getText()+
+                        ","+txtApellidos.getText()+","+txtDireccion.getText()+
+                        ","+txtEmail.getText()+","+txtTelefono.getText();
+                
+                
+                if(mc.crear(linea_B))
+                {
+                    msg.setForeground(Color.green);
+                    msg.setText("Datos Guardados");
+                    clear();
+                }else{
+                    msg.setForeground(Color.red);
+                    msg.setText("Error al Guardar Datos");
+                }
+                
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -260,29 +303,6 @@ public class formularioCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-        // TODO add your handling code here:
-        mc = new mCliente();
-        
-        String get;
-        get = txtCedula.getText();
-        
-        if(get.length()>10)
-        {
-            get = get.replace("-", "");
-            if(mc.verificarID(get))
-            {
-                msg.setText("Modificando");
-                
-            }else{
-                msg.setText("Creando");
-                
-            }
-        }
-        
-        
-    }//GEN-LAST:event_txtCedulaKeyReleased
 
     private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked
         // TODO add your handling code here:
@@ -312,6 +332,29 @@ public class formularioCliente extends javax.swing.JFrame {
             txtTelefono.setForeground(Color.black);
             txtTelefono.setText("");
     }//GEN-LAST:event_txtTelefonoMouseClicked
+
+    private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
+        // TODO add your handling code here:
+        get = txtCedula.getText();
+        mCliente mc = new mCliente();
+        if(mc.verificarID(get))
+        {
+            msg.setForeground(Color.red);
+            msg.setText("Modificando");
+            linea_A = txtCedula.getText()+","+txtNombre.getText()+","
+                    +txtApellidos.getText()+","+txtDireccion.getText()+","
+                    +txtEmail.getText()+","+txtTelefono.getText();
+        }else{
+            msg.setForeground(Color.blue);
+            msg.setText("Creando");
+        }
+    }//GEN-LAST:event_txtCedulaKeyReleased
+
+    private void txtCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCedulaMouseClicked
+        // TODO add your handling code here:
+        msg.setForeground(Color.black);
+        msg.setText("");
+    }//GEN-LAST:event_txtCedulaMouseClicked
 
     boolean verificar()
     {
@@ -346,6 +389,16 @@ public class formularioCliente extends javax.swing.JFrame {
         return its;
     }
     
+    void clear()
+    {
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtDireccion.setText("");
+        txtEmail.setText("");
+        txtTelefono.setText("");
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
@@ -359,11 +412,11 @@ public class formularioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel msg;
-    private javax.swing.JTextField txtApellidos;
+    public static javax.swing.JTextField txtApellidos;
     private javax.swing.JFormattedTextField txtCedula;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JFormattedTextField txtTelefono;
+    public static javax.swing.JTextField txtDireccion;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JFormattedTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
