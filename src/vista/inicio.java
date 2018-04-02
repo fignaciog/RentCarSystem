@@ -271,7 +271,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mUsuarioActionPerformed
         // TODO add your handling code here:
-        formularioUsuario vu = new formularioUsuario();
+        formUsuario vu = new formUsuario();
     }//GEN-LAST:event_mUsuarioActionPerformed
 
     private void mVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVehiculoActionPerformed
@@ -281,12 +281,12 @@ public class inicio extends javax.swing.JFrame {
 
     private void mGamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGamaActionPerformed
         // TODO add your handling code here:
-        formularioGama vg = new formularioGama();
+        formGama vg = new formGama();
     }//GEN-LAST:event_mGamaActionPerformed
 
     private void mClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mClienteActionPerformed
         // TODO add your handling code here:
-        formularioCliente vc = new formularioCliente();
+        formCliente vc = new formCliente();
     }//GEN-LAST:event_mClienteActionPerformed
 
     private void mOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mOfertasActionPerformed

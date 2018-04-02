@@ -3,7 +3,7 @@ package modelo.mantenimiento;
 
 import java.io.*;
 import java.util.StringTokenizer;
-import vista.mantenimientos.formularioCliente;
+import vista.mantenimientos.formCliente;
 
 /**
  *
@@ -57,11 +57,11 @@ public class mCliente {
                     
                     if(dato.equals(ID_cedula))
                     {
-                        formularioCliente.txtNombre.setText(Nombre_Cte);
-                        formularioCliente.txtApellidos.setText(Apellidos_Cte);
-                        formularioCliente.txtDireccion.setText(Direccion_Cte);
-                        formularioCliente.txtEmail.setText(Email_Cte);
-                        formularioCliente.txtTelefono.setText(Telefono);
+                        formCliente.txtNombre.setText(Nombre_Cte);
+                        formCliente.txtApellidos.setText(Apellidos_Cte);
+                        formCliente.txtDireccion.setText(Direccion_Cte);
+                        formCliente.txtEmail.setText(Email_Cte);
+                        formCliente.txtTelefono.setText(Telefono);
                         isIt = true;
                     }
                     

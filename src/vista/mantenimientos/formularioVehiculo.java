@@ -1,7 +1,10 @@
 
 package vista.mantenimientos;
 
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.mantenimiento.mVehiculo;
 
 /**
  *
@@ -9,6 +12,10 @@ import javax.swing.JFrame;
  */
 public class formularioVehiculo extends javax.swing.JFrame {
 
+    String linea_A, linea_B;
+    
+    mVehiculo mv;
+    
     /**
      * Creates new form vistaVehiculo
      */
@@ -27,31 +34,31 @@ public class formularioVehiculo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Formulario = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMatricula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtGama = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtDescrip = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        sTipoTrans = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
+        sEstado = new javax.swing.JComboBox<>();
+        sAire = new javax.swing.JComboBox<>();
+        sTecho = new javax.swing.JComboBox<>();
+        sInterior = new javax.swing.JComboBox<>();
+        sTipoVehiculo = new javax.swing.JComboBox<>();
+        sTipoMotor = new javax.swing.JComboBox<>();
+        txtColor = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         msg = new javax.swing.JLabel();
@@ -69,14 +76,19 @@ public class formularioVehiculo extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Matricula");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtMatricula.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Marca");
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtMarca.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtModelo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Modelo");
@@ -90,12 +102,17 @@ public class formularioVehiculo extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setText("Gama");
 
-        jTextField6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtGama.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtGama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGamaKeyReleased(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Descripcion");
 
-        jTextField7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtDescrip.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Techo");
@@ -112,58 +129,58 @@ public class formularioVehiculo extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Transmisión");
 
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automatica", "Mecanica" }));
+        sTipoTrans.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sTipoTrans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automatica", "Mecanica" }));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel14.setText("Estado");
 
-        jComboBox3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponible", "Rentado" }));
+        sEstado.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponible", "Rentado" }));
 
-        jComboBox4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
+        sAire.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sAire.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
 
-        jComboBox5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Electrico", "Normal" }));
+        sTecho.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sTecho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Electrico", "Normal" }));
 
-        jComboBox6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Cuero", "Tela", "Vinilo" }));
+        sInterior.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sInterior.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Cuero", "Tela", "Vinilo" }));
 
-        jComboBox7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
+        sTipoVehiculo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
 
-        jComboBox8.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Gasolina", "Disel" }));
+        sTipoMotor.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        sTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Gasolina", "Disel" }));
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtColor.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         Formulario.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtMatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtMarca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtModelo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtGama, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtDescrip, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sTipoTrans, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jComboBox8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        Formulario.setLayer(jTextField4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sAire, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sTecho, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sInterior, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sTipoVehiculo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(sTipoMotor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(txtColor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout FormularioLayout = new javax.swing.GroupLayout(Formulario);
         Formulario.setLayout(FormularioLayout);
@@ -174,58 +191,59 @@ public class formularioVehiculo extends javax.swing.JFrame {
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FormularioLayout.createSequentialGroup()
                         .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(0, 28, Short.MAX_VALUE))
-                            .addComponent(jTextField6)))
+                                .addGap(0, 58, Short.MAX_VALUE))
+                            .addGroup(FormularioLayout.createSequentialGroup()
+                                .addComponent(txtGama)
+                                .addContainerGap())))
                     .addGroup(FormularioLayout.createSequentialGroup()
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13)))
                             .addComponent(jLabel14)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))
+                                    .addComponent(jLabel12)
+                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(sInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))
+                            .addComponent(txtDescrip)
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 107, Short.MAX_VALUE))))
         );
         FormularioLayout.setVerticalGroup(
             FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,10 +256,10 @@ public class formularioVehiculo extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -249,33 +267,33 @@ public class formularioVehiculo extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -295,7 +313,7 @@ public class formularioVehiculo extends javax.swing.JFrame {
             }
         });
 
-        msg.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
@@ -341,6 +359,8 @@ public class formularioVehiculo extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
+        verifyData();
+        
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -348,19 +368,142 @@ public class formularioVehiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    private void txtMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyReleased
+        // TODO add your handling code here:
+        
+        mv = new mVehiculo();
+        
+        if(!txtMatricula.getText().equals(""))
+        {
+            
+            if(!mv.check(txtMatricula.getText()))
+            {
+                msg.setText("Creando");
+                clear();
+            }else{
+                msg.setText("Modificando");
+            }
+            
+        }else{
+            clear();
+            msg.setText("");
+        }
+        
+    }//GEN-LAST:event_txtMatriculaKeyReleased
+
+    private void txtGamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGamaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGamaKeyReleased
+    
+    void clear()
+    {
+        
+    }
+    
+    boolean verifyData()
+    {
+        boolean its = true;
+        
+        if(txtMatricula.getText().equals(""))
+        {
+            txtMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe ingresar la Matricula", 
+                    "Campo Oblogatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
+            its = false;
+        }else if(txtMarca.getText().equals("")){
+            txtMarca.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe ingresar la Marca", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtMarca.setBackground(Color.white);
+            its = false;
+        }else if(txtModelo.getText().equals(""))
+        {
+            txtModelo.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Modelo", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtModelo.setBackground(Color.white);
+            its = false;
+        }else if(txtGama.getText().equals(""))
+        {
+            txtGama.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Gama", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtGama.setBackground(Color.white);
+            its = false;   
+        }else if(sTipoVehiculo.getSelectedIndex() == 0)
+        {
+            sTipoVehiculo.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un Tipo de Vehiculo", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sTipoVehiculo.setBackground(Color.white);
+            its = false;
+        }else if(sTipoMotor.getSelectedIndex() == 0)
+        {
+            sTipoMotor.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un Tipo de Motor", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sTipoMotor.setBackground(Color.white);
+            its = false;
+        }else if(sTipoTrans.getSelectedIndex() == 0)
+        {
+            sTipoTrans.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un Tipo de Transmision", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sTipoTrans.setBackground(Color.white);
+            its = false;
+        }else if(txtDescrip.getText().equals(""))
+        {
+            txtDescrip.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar una Descripcion", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtDescrip.setBackground(Color.white);
+            its = false;
+        }else if(sTecho.getSelectedIndex() == 0)
+        {
+            sTecho.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un Tipo de Techo", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sTecho.setBackground(Color.white);
+            its = false;
+        }else if(sAire.getSelectedIndex() == 0)
+        {
+            sAire.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar el Estado del Aire Acondicionado", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sAire.setBackground(Color.white);
+            its = false;
+        }else if(txtColor.getText().equals(""))
+        {
+            txtColor.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe ingresar un Color", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtColor.setBackground(Color.white);
+            its = false;
+        }else if(sInterior.getSelectedIndex() == 0)
+        {
+            sInterior.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un Tipo de Interior del Vehiculo", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sInterior.setBackground(Color.white);
+            its = false;
+        }else if(sEstado.getSelectedIndex() == 0)
+        {
+            sEstado.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar el Estado del Vehiculo", 
+                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            sEstado.setBackground(Color.white);
+            its = false;
+        }
+            
+        return its;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane Formulario;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnguardar;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -375,12 +518,19 @@ public class formularioVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel msg;
+    private javax.swing.JComboBox<String> sAire;
+    private javax.swing.JComboBox<String> sEstado;
+    private javax.swing.JComboBox<String> sInterior;
+    private javax.swing.JComboBox<String> sTecho;
+    private javax.swing.JComboBox<String> sTipoMotor;
+    private javax.swing.JComboBox<String> sTipoTrans;
+    private javax.swing.JComboBox<String> sTipoVehiculo;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtDescrip;
+    private javax.swing.JTextField txtGama;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtMatricula;
+    private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,12 +9,12 @@ import controlador.modificar;
  *
  * @author Ignacio
  */
-public class formularioGama extends javax.swing.JFrame {
+public class formGama extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaGama
      */
-    public formularioGama() {
+    public formGama() {
         initComponents();
         setTitle("Gama");
         setLocationRelativeTo(null);
@@ -137,7 +137,6 @@ public class formularioGama extends javax.swing.JFrame {
         );
 
         msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        msg.setForeground(new java.awt.Color(51, 204, 0));
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
@@ -187,12 +186,14 @@ public class formularioGama extends javax.swing.JFrame {
         
         if(mg.verificarID(txtID.getText()))
         {
+            msg.setForeground(Color.red);
             msg.setText("Modificando");
             
             // Crando linea vieja
             linea_A = txtID.getText()+","+txtDescripcion.getText()+","+txtPrecio.getText();
             
         }else{
+            msg.setForeground(Color.blue);
             msg.setText("Creando");
             txtDescripcion.setText("");
             txtPrecio.setText("");
@@ -228,6 +229,7 @@ public class formularioGama extends javax.swing.JFrame {
             
             if(editar.reenombrar())
             {
+                msg.setForeground(Color.blue);
                 msg.setText("Datos Modificados");
                 clear();
             }
@@ -238,9 +240,11 @@ public class formularioGama extends javax.swing.JFrame {
             
             if(mg.crear())
             {
+                msg.setForeground(Color.blue);
                 msg.setText("Datos guardados");
                 clear();
             }else{
+                msg.setForeground(Color.red);
                 msg.setText("Datos no guardados");
             }
             

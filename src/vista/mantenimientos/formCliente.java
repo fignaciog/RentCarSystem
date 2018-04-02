@@ -10,7 +10,7 @@ import controlador.modificar;
  *
  * @author Ignacio
  */
-public class formularioCliente extends javax.swing.JFrame {
+public class formCliente extends javax.swing.JFrame {
 
     
     String get, linea_A, linea_B;
@@ -18,7 +18,7 @@ public class formularioCliente extends javax.swing.JFrame {
     /**
      * Creates new form vistaCliente
      */
-    public formularioCliente() {
+    public formCliente() {
         initComponents();
         setTitle("Cliente");
         setLocationRelativeTo(null);

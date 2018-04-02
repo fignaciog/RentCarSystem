@@ -2,7 +2,7 @@
 package modelo.mantenimiento;
 
 import java.io.*;
-import vista.mantenimientos.formularioUsuario;
+import vista.mantenimientos.formUsuario;
 import java.util.StringTokenizer;
 
 /**
@@ -19,6 +19,8 @@ public class mUsuario {
     private BufferedReader br = null;
     private PrintWriter pw = null;
     
+    private boolean its = false;
+    
     public mUsuario()
     {
         login = new File("C:\\RentCarSystem\\database\\mantenimiento\\usuario.txt");
@@ -34,7 +36,7 @@ public class mUsuario {
     }
 
 // Usuario Nuevo ============================================================================
-    public boolean Crear(String i, String u, String p, int n, String no, String a, String e)
+    public boolean Crear(String linea_A)
     {
         abrir();
         boolean intro = true;
@@ -44,9 +46,7 @@ public class mUsuario {
             fw = new FileWriter(login, true);
             pw = new PrintWriter(fw);
             
-            
-            pw.write(i+","+u+","+p+","+n+","+no+","+a+","+e);
-            pw.write("\n");
+            pw.println(linea_A);
             
             fw.close();
             
@@ -106,18 +106,19 @@ public class mUsuario {
                 
                 if(d.equals(i.trim()))
                 {
-                    formularioUsuario.txtUser.setText(u);
-                    formularioUsuario.txtPass.setText(p);
+                    formUsuario.txtUser.setText(u);
+                    formUsuario.txtPass.setText(p);
                     if(n == 0)
                     {
-                        formularioUsuario.admin.setSelected(true);
+                        formUsuario.admin.setSelected(true);
                     }else if(n == 1)
                     {
-                        formularioUsuario.user.setSelected(true);
+                        formUsuario.user.setSelected(true);
                     }
-                    formularioUsuario.txtNombre.setText(no);
-                    formularioUsuario.txtApellidos.setText(a);
-                    formularioUsuario.txtEmail.setText(e);
+                    formUsuario.txtNombre.setText(no);
+                    formUsuario.txtApellidos.setText(a);
+                    formUsuario.txtEmail.setText(e);
+                    
                     salida = i.trim();
                 }
                 
@@ -200,6 +201,7 @@ public class mUsuario {
                 {
                     
                     salida = p.trim();
+                    
                 }
                 
             }

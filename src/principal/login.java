@@ -1,6 +1,6 @@
 
 package principal;
-import vista.mantenimientos.formularioUsuario;
+import vista.mantenimientos.formUsuario;
 import modelo.mantenimiento.mUsuario;
 import vista.*;
 
@@ -221,7 +221,7 @@ public class login extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        formularioUsuario r = new formularioUsuario();
+        formUsuario r = new formUsuario();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

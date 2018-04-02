@@ -4,7 +4,7 @@ package modelo.mantenimiento;
 import java.io.*;
 import java.util.StringTokenizer;
 import controlador.modificar;
-import vista.mantenimientos.formularioGama;
+import vista.mantenimientos.formGama;
 
 /**
  *
@@ -84,8 +84,8 @@ public class mGama {
                     
                     if(dato.equals(String.valueOf(s.nextToken())))
                     {
-                        formularioGama.txtDescripcion.setText(s.nextToken());
-                        formularioGama.txtPrecio.setText(s.nextToken());
+                        formGama.txtDescripcion.setText(s.nextToken());
+                        formGama.txtPrecio.setText(s.nextToken());
                         ver = true;
                     }
                     

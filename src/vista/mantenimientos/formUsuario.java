@@ -10,24 +10,14 @@ import controlador.modificar;
  *
  * @author Ignacio
  */
-public class formularioUsuario extends javax.swing.JFrame {
-    
-    private String idUsuario = "";
-    private String loginUsuario = "";
-    private String passUsuario = "";
-    private String passRusuario = "";
-    private int nivelAcceso;
-    private String nombre = "";
-    private String apellidos = "";
-    private String emailUsuario = "";
+public class formUsuario extends javax.swing.JFrame {
     
     private String linea_A, linea_B;
-    
-    
+        
     private int i = 0;
     mUsuario ml = null;
     
-    public formularioUsuario() {
+    public formUsuario() {
         initComponents();
         setTitle("Usuarios");
         setLocationRelativeTo(null);
@@ -237,31 +227,16 @@ public class formularioUsuario extends javax.swing.JFrame {
         jLabel7.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNombreKeyReleased(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Apellidos");
 
         txtApellidos.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtApellidosKeyReleased(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Email");
 
         txtEmail.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtEmailKeyReleased(evt);
-            }
-        });
 
         jLayeredPane3.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(txtNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -303,7 +278,7 @@ public class formularioUsuario extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        msg.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
@@ -359,8 +334,7 @@ public class formularioUsuario extends javax.swing.JFrame {
             
             try{
                 
-                loginUsuario = txtUser.getText();
-                if(loginUsuario.equals(ml.verificarUser(loginUsuario)))
+                if(txtUser.getText().equals(ml.verificarUser(txtUser.getText())))
                 {
                    msg.setText("El Usuario ya esta registrado");
                 }else{
@@ -388,8 +362,7 @@ public class formularioUsuario extends javax.swing.JFrame {
         {
             try{
                 
-                passUsuario = txtPass.getText();
-                if(passUsuario.equals(ml.verificarUser(passUsuario)))
+                if(txtPass.getText().equals(ml.verificarUser(txtPass.getText())))
                 {
                    msg.setText("Contraseña no recomendada");
                 }else{
@@ -412,13 +385,11 @@ public class formularioUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         i++;
-        
         if(i>5)
         {
-            if(txtRpass.getText().equals(passUsuario))
+            if(txtRpass.getText().equals(txtPass.getText()))
             {
                 msg.setText("");
-                passRusuario = txtRpass.getText();
             }else{
                 msg.setText("Las contraseñas no coinciden");
             }
@@ -439,26 +410,32 @@ public class formularioUsuario extends javax.swing.JFrame {
             ml.abrir();
             
             modificar editar = new modificar(linea_A, linea_B, ml.login.getPath());
+            
             editar.editar();
             
             if(editar.reenombrar())
             {
                 msg.setText("Datos Modificados");
+                txtID.setText("");
+                clear();
             }else{
                 msg.setText("Datos no modificados");
+                clear();
             }
             
         }else{
             
             if(verificarDatos())
             {
-                if(ml.Crear(txtID.getText(), txtUser.getText(),
-                        txtPass.getText(), Integer.valueOf(Acceso()), txtNombre.getText(),
-                        txtApellidos.getText(), txtEmail.getText()))
+                linea_A = txtID.getText()+","+txtUser.getText()+","+
+                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
+                        +","+txtApellidos.getText()+","+txtEmail.getText();
+                if(ml.Crear(linea_A))
                 {
                     msg.setForeground(Color.blue);
                     msg.setText("Datos guardados");
                     clear();
+                    txtID.setText("");
                 }
             }
             
@@ -475,23 +452,28 @@ public class formularioUsuario extends javax.swing.JFrame {
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
         msg.setText("");
+        
         ml = new mUsuario();
-        
-        idUsuario = txtID.getText();
-        
+
         if(!txtID.getText().equals(""))
         {
-            if(txtID.getText().equals(ml.verificarID(txtID.getText())))
+            if(!txtID.getText().equals(ml.verificarID(txtID.getText())))
             {
+                msg.setForeground(Color.blue);
+                msg.setText("Creando");
+                clear();
+                
+            }else{
+                msg.setForeground(Color.red);
                 msg.setText("Modificando");
+                
                 linea_A = txtID.getText()+","+txtUser.getText()+","+
                         txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
                         +","+txtApellidos.getText()+","+txtEmail.getText();
-            }else{
-                msg.setText("Creando");
             }
         }else{
             clear();
+            msg.setText("");
         }
         
     }//GEN-LAST:event_txtIDKeyReleased
@@ -502,7 +484,7 @@ public class formularioUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtID.setBackground(Color.white);
         msg.setText("");
-        msg.setForeground(Color.red);
+        msg.setForeground(Color.black);
     }//GEN-LAST:event_txtIDMouseClicked
 
     private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
@@ -520,54 +502,34 @@ public class formularioUsuario extends javax.swing.JFrame {
         txtRpass.setBackground(Color.white);
     }//GEN-LAST:event_txtRpassMouseClicked
 
-    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-        // TODO add your handling code here:
-        nombre = txtNombre.getText();
-    }//GEN-LAST:event_txtNombreKeyReleased
-
-    private void txtApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyReleased
-        // TODO add your handling code here:
-        apellidos = txtApellidos.getText();
-    }//GEN-LAST:event_txtApellidosKeyReleased
-
-    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-        // TODO add your handling code here:
-        emailUsuario = txtEmail.getText();
-    }//GEN-LAST:event_txtEmailKeyReleased
-
-    
     boolean verificarDatos()
     {
         boolean datos = true;
         
-        if(idUsuario.equals(""))
+        if(txtID.getText().equals(""))
         {
             datos = false;
             txtID.setBackground(Color.red);
-        }else if(loginUsuario.equals(""))
+        }else if(txtUser.getText().equals(""))
         {
             datos = false;
             txtUser.setBackground(Color.red);
-        }else if(passUsuario.equals(""))
+        }else if(txtPass.getText().equals(""))
         {
             datos = false;
             txtPass.setBackground(Color.red);
-        }else if(passRusuario.equals(""))
+        }else if(txtRpass.getText().equals(""))
         {
             datos = false;
             txtRpass.setBackground(Color.red);
-        }else if(nombre.equals(""))
+        }else if(txtNombre.getText().equals(""))
         {
             datos = false;
             msg.setText("Ingrese el Nombre del usuario");
-        }else if(apellidos.equals(""))
+        }else if(txtApellidos.getText().equals(""))
         {
             datos = false;
             msg.setText("Ingrese los Apellidos");
-        }else if(emailUsuario.equals(""))
-        {
-            datos = false;
-            msg.setText("Ingrese el Correo Electronico");
         }
         
         return datos;
@@ -575,7 +537,7 @@ public class formularioUsuario extends javax.swing.JFrame {
     
     void clear(){
         
-        txtID.setText("");
+        //txtID.setText("");
         txtUser.setText("");
         txtPass.setText("");
         txtRpass.setText("");
@@ -583,14 +545,6 @@ public class formularioUsuario extends javax.swing.JFrame {
         txtApellidos.setText("");
         txtEmail.setText("");
         acceso.clearSelection();
-        
-        idUsuario = "";
-        loginUsuario = "";
-        passUsuario = "";
-        passRusuario = "";
-        nombre = "";
-        apellidos = "";
-        emailUsuario = "";
         
     }
     
