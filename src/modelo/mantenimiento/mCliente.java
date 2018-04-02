@@ -11,12 +11,6 @@ import vista.mantenimientos.formCliente;
  */
 public class mCliente {
     
-    private String ID_cedula;
-    private String Nombre_Cte;
-    private String Apellidos_Cte;
-    private String Direccion_Cte;
-    private String Email_Cte;
-    private String Telefono;
     public String path;
     
     File cliente;
@@ -32,7 +26,7 @@ public class mCliente {
         path = cliente.getPath();
     }
     
-    public boolean verificarID(String dato)
+    public boolean verify(String dato)
     {
         boolean isIt = false;
         if(cliente.length() != 0)
@@ -46,22 +40,14 @@ public class mCliente {
                 
                 while((linea = br.readLine()) != null)
                 {
-                    s = new StringTokenizer(linea, ",");
-                    
-                    ID_cedula = s.nextToken();
-                    Nombre_Cte = s.nextToken();
-                    Apellidos_Cte = s.nextToken();
-                    Direccion_Cte = s.nextToken();
-                    Email_Cte = s.nextToken();
-                    Telefono = s.nextToken();
-                    
-                    if(dato.equals(ID_cedula))
+                    s = new StringTokenizer(linea, "_");
+                    if(dato.equals(s.nextToken()))
                     {
-                        formCliente.txtNombre.setText(Nombre_Cte);
-                        formCliente.txtApellidos.setText(Apellidos_Cte);
-                        formCliente.txtDireccion.setText(Direccion_Cte);
-                        formCliente.txtEmail.setText(Email_Cte);
-                        formCliente.txtTelefono.setText(Telefono);
+                        formCliente.txtNombre.setText(s.nextToken());
+                        formCliente.txtApellidos.setText(s.nextToken());
+                        formCliente.txtDireccion.setText(s.nextToken());
+                        formCliente.txtEmail.setText(s.nextToken());
+                        formCliente.txtTelefono.setText(s.nextToken());
                         isIt = true;
                     }
                     
@@ -71,29 +57,29 @@ public class mCliente {
                 
             }catch(IOException ioe)
             {
-                ioe.printStackTrace();
+                
             }
         }
         
         return isIt;
     }
     
-    public boolean crear(String linea)
+    public boolean add(String linea_A)
     {
         boolean its = false;
         try{
             
-            fw = new FileWriter(cliente);
+            fw = new FileWriter(cliente, true);
             pw = new PrintWriter(fw);
             
-            pw.write(linea+"\n");
+            pw.println(linea_A);
             
             fw.close();
             
             its = true;
             
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            
         }
         return its;
     }

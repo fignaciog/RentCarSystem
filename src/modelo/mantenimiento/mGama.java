@@ -3,8 +3,9 @@ package modelo.mantenimiento;
 
 import java.io.*;
 import java.util.StringTokenizer;
-import controlador.modificar;
+import java.awt.Color;
 import vista.mantenimientos.formGama;
+import vista.mantenimientos.formVehiculo;
 
 /**
  *
@@ -12,46 +13,32 @@ import vista.mantenimientos.formGama;
  */
 public class mGama {
     
-    public int idGama = 0;
-    public String descGama = "";
-    public Double precioGama = 0.0;
-    
     public File gama;
+    public String path;
     
-    private FileReader fr = null;
-    private FileWriter fw = null;
-    private BufferedReader br = null;
-    private PrintWriter pw = null;
+    private FileReader fr;
+    private FileWriter fw;
+    private BufferedReader br;
+    private PrintWriter pw;
     
-    modificar m = new modificar();
-    
-    public void abrir()
+    public mGama()
     {
         gama = new File("C:\\RentCarSystem\\database\\mantenimiento\\gama.txt");
+        path = gama.getPath();
     }
     
-    public void setDatos(String idGama, String descGama, String precioGama)
+    public boolean add(String linea_A)
     {
-        this.idGama = Integer.valueOf(idGama);
-        this.descGama = descGama;
-        this.precioGama = Double.valueOf(precioGama);
-    }
-    
-    public boolean crear()
-    {
-        boolean ver;
-        abrir();
-        
+        boolean ver;        
         try{
             
             fw = new FileWriter(gama, true);
             pw = new PrintWriter(fw);
             
-            
-            pw.write(idGama+","+descGama+","+precioGama);
-            pw.write("\n");
+            pw.println(linea_A);
             
             fw.close();
+            
             ver = true;
             
         }catch(IOException ioe)
@@ -62,12 +49,10 @@ public class mGama {
         return ver;
     }
     
-    public boolean verificarID(String dato)
+    public boolean verify(String dato)
     {
         
         boolean ver = false;
-        abrir();
-        
         try{
             
             fr = new FileReader(gama);
@@ -80,12 +65,49 @@ public class mGama {
             {
                 if(gama.length() != 0)
                 {
-                    s = new StringTokenizer(linea, ",");
+                    s = new StringTokenizer(linea, "_");
                     
-                    if(dato.equals(String.valueOf(s.nextToken())))
+                    if(dato.equals(s.nextToken()))
                     {
                         formGama.txtDescripcion.setText(s.nextToken());
                         formGama.txtPrecio.setText(s.nextToken());
+                        ver = true;
+                    }
+                    
+                }
+            }
+            
+            fr.close();
+            
+        }catch(IOException ioe){
+            ver = false;
+        }
+        
+        return ver;
+    }
+    
+    public boolean externVerify(String dato)
+    {
+        
+        boolean ver = false;
+        try{
+            
+            fr = new FileReader(gama);
+            br = new BufferedReader(fr);
+            
+            String linea;
+            StringTokenizer s;
+            
+            while((linea = br.readLine()) != null)
+            {
+                if(gama.length() != 0)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    
+                    if(dato.equals(s.nextToken()))
+                    {
+                        formVehiculo.mensajes.setForeground(Color.blue);
+                        formVehiculo.mensajes.setText("Tipo de Gama: "+s.nextToken()+" | Precio: RD$ "+s.nextToken());
                         ver = true;
                     }
                     

@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import modelo.mantenimiento.mUsuario;
 import controlador.modificar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +16,7 @@ public class formUsuario extends javax.swing.JFrame {
     private String linea_A, linea_B;
         
     private int i = 0;
-    mUsuario ml = null;
+    mUsuario mu;
     
     public formUsuario() {
         initComponents();
@@ -30,7 +31,6 @@ public class formUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        acceso = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
@@ -44,8 +44,7 @@ public class formUsuario extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         txtRpass = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        admin = new javax.swing.JRadioButton();
-        user = new javax.swing.JRadioButton();
+        sAcceso = new javax.swing.JComboBox<>();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -54,6 +53,7 @@ public class formUsuario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         msg = new javax.swing.JLabel();
+        estados = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -86,11 +86,6 @@ public class formUsuario extends javax.swing.JFrame {
         jLabel6.setText("ID");
 
         txtID.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtID.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtIDMouseClicked(evt);
-            }
-        });
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDKeyReleased(evt);
@@ -101,11 +96,6 @@ public class formUsuario extends javax.swing.JFrame {
         jLabel2.setText("Usuario");
 
         txtUser.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtUserMouseClicked(evt);
-            }
-        });
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUserKeyReleased(evt);
@@ -119,11 +109,6 @@ public class formUsuario extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         txtPass.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPassMouseClicked(evt);
-            }
-        });
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPassKeyReleased(evt);
@@ -131,11 +116,6 @@ public class formUsuario extends javax.swing.JFrame {
         });
 
         txtRpass.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtRpass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtRpassMouseClicked(evt);
-            }
-        });
         txtRpass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtRpassKeyReleased(evt);
@@ -145,11 +125,8 @@ public class formUsuario extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Repita la contraseña");
 
-        acceso.add(admin);
-        admin.setText("Administrador");
-
-        acceso.add(user);
-        user.setText("Usuario");
+        sAcceso.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
 
         jLayeredPane2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(txtID, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -160,8 +137,7 @@ public class formUsuario extends javax.swing.JFrame {
         jLayeredPane2.setLayer(txtPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(txtRpass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(admin, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(user, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(sAcceso, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -170,10 +146,6 @@ public class formUsuario extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(admin)
-                        .addGap(18, 18, 18)
-                        .addComponent(user))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,9 +156,10 @@ public class formUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel2)))
                     .addComponent(jLabel5)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(sAcceso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -214,11 +187,9 @@ public class formUsuario extends javax.swing.JFrame {
                     .addComponent(txtRpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(admin)
-                    .addComponent(user))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -282,6 +253,9 @@ public class formUsuario extends javax.swing.JFrame {
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
+        estados.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        estados.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,6 +263,7 @@ public class formUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,7 +293,9 @@ public class formUsuario extends javax.swing.JFrame {
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -326,7 +303,7 @@ public class formUsuario extends javax.swing.JFrame {
 
     private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
         // TODO add your handling code here:
-        ml = new mUsuario();
+        mu = new mUsuario();
         i++;
         
         if(i>5)
@@ -334,20 +311,20 @@ public class formUsuario extends javax.swing.JFrame {
             
             try{
                 
-                if(txtUser.getText().equals(ml.verificarUser(txtUser.getText())))
+                if(mu.verify_User(txtUser.getText()))
                 {
-                   msg.setText("El Usuario ya esta registrado");
+                   estados.setText("El Usuario ya esta registrado");
                 }else{
-                   msg.setText("");
+                   estados.setText("");
                 }
                 
             }catch(Exception e)
             {
-                msg.setText("Error al ingresar usuario");
+                estados.setText("Error al ingresar usuario");
             }
             
         }else{
-            msg.setText("Debe contener mas de 6 caracteres");
+            estados.setText("Debe contener mas de 6 caracteres");
         }
         
     }//GEN-LAST:event_txtUserKeyReleased
@@ -355,28 +332,28 @@ public class formUsuario extends javax.swing.JFrame {
     private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
         // TODO add your handling code here:
         
-        ml = new mUsuario();
+        mu = new mUsuario();
         i++;
         
         if(i>5)
         {
             try{
                 
-                if(txtPass.getText().equals(ml.verificarUser(txtPass.getText())))
+                if(mu.verify_Pass(txtPass.getText()))
                 {
-                   msg.setText("Contraseña no recomendada");
+                   estados.setText("Contraseña no recomendada");
                 }else{
-                   msg.setText("");
+                   estados.setText("");
                 }
                 
             }catch(Exception e)
             {
-                msg.setText("Error al ingresar contraseña");
+                estados.setText("Error al ingresar contraseña");
             }
             
             
         }else{
-            msg.setText("Debe contener mas de 6 caracteres");
+            estados.setText("Debe contener mas de 6 caracteres");
         }
         
     }//GEN-LAST:event_txtPassKeyReleased
@@ -389,9 +366,9 @@ public class formUsuario extends javax.swing.JFrame {
         {
             if(txtRpass.getText().equals(txtPass.getText()))
             {
-                msg.setText("");
+                estados.setText("");
             }else{
-                msg.setText("Las contraseñas no coinciden");
+                estados.setText("Las contraseñas no coinciden");
             }
         }
         
@@ -399,49 +376,47 @@ public class formUsuario extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
-        ml = new mUsuario();
         
-        if(msg.getText().equals("Modificando"))
+        
+        if(verificar())
         {
-            
-            linea_B = txtID.getText()+","+txtUser.getText()+","+
-                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
-                        +","+txtApellidos.getText()+","+txtEmail.getText();
-            ml.abrir();
-            
-            modificar editar = new modificar(linea_A, linea_B, ml.login.getPath());
-            
-            editar.editar();
-            
-            if(editar.reenombrar())
+            if(msg.getText().equals("Modificando"))
             {
-                msg.setText("Datos Modificados");
-                txtID.setText("");
-                clear();
-            }else{
-                msg.setText("Datos no modificados");
-                clear();
-            }
-            
-        }else{
-            
-            if(verificarDatos())
-            {
-                linea_A = txtID.getText()+","+txtUser.getText()+","+
-                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
-                        +","+txtApellidos.getText()+","+txtEmail.getText();
-                if(ml.Crear(linea_A))
+                mu = new mUsuario();
+                linea_B = txtID.getText()+"_"+txtUser.getText()+"_"+
+                            txtPass.getText()+"_"+sAcceso.getSelectedIndex()+"_"+txtNombre.getText()
+                            +"_"+txtApellidos.getText()+"_"+txtEmail.getText();
+                
+                modificar editar = new modificar(linea_A, linea_B, mu.path);
+                editar.editar();
+                if(editar.reenombrar())
+                {
+                    msg.setText("Datos Modificados");
+                    txtID.setText("");
+                    clear();
+                }else{
+                    msg.setText("Datos no modificados");
+                    clear();
+                }
+
+            }else if(msg.getText().equals("Creando")){
+                
+                mu = new mUsuario();
+                
+                linea_A = txtID.getText()+"_"+txtUser.getText()+"_"+
+                            txtPass.getText()+"_"+sAcceso.getSelectedIndex()+"_"+txtNombre.getText()
+                            +"_"+txtApellidos.getText()+"_"+txtEmail.getText();
+
+                if(mu.add(linea_A))
                 {
                     msg.setForeground(Color.blue);
                     msg.setText("Datos guardados");
                     clear();
                     txtID.setText("");
                 }
+
             }
-            
         }
-        
-        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -451,13 +426,11 @@ public class formUsuario extends javax.swing.JFrame {
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
-        msg.setText("");
         
-        ml = new mUsuario();
-
         if(!txtID.getText().equals(""))
         {
-            if(!txtID.getText().equals(ml.verificarID(txtID.getText())))
+            mu = new mUsuario();
+            if(!mu.verify_ID(txtID.getText()))
             {
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");
@@ -467,9 +440,9 @@ public class formUsuario extends javax.swing.JFrame {
                 msg.setForeground(Color.red);
                 msg.setText("Modificando");
                 
-                linea_A = txtID.getText()+","+txtUser.getText()+","+
-                        txtPass.getText()+","+Integer.valueOf(Acceso())+","+txtNombre.getText()
-                        +","+txtApellidos.getText()+","+txtEmail.getText();
+                linea_A = txtID.getText()+"_"+txtUser.getText()+"_"+
+                            txtPass.getText()+"_"+sAcceso.getSelectedIndex()+"_"+txtNombre.getText()
+                            +"_"+txtApellidos.getText()+"_"+txtEmail.getText();
             }
         }else{
             clear();
@@ -478,31 +451,7 @@ public class formUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtIDKeyReleased
 
-    // Eventos Click del Mouse
-    
-    private void txtIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIDMouseClicked
-        // TODO add your handling code here:
-        txtID.setBackground(Color.white);
-        msg.setText("");
-        msg.setForeground(Color.black);
-    }//GEN-LAST:event_txtIDMouseClicked
-
-    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
-        // TODO add your handling code here:
-        txtUser.setBackground(Color.white);
-    }//GEN-LAST:event_txtUserMouseClicked
-
-    private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
-        // TODO add your handling code here:
-        txtPass.setBackground(Color.white);
-    }//GEN-LAST:event_txtPassMouseClicked
-
-    private void txtRpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRpassMouseClicked
-        // TODO add your handling code here:
-        txtRpass.setBackground(Color.white);
-    }//GEN-LAST:event_txtRpassMouseClicked
-
-    boolean verificarDatos()
+    boolean verificar()
     {
         boolean datos = true;
         
@@ -510,32 +459,45 @@ public class formUsuario extends javax.swing.JFrame {
         {
             datos = false;
             txtID.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el ID", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtID.setBackground(Color.white);
         }else if(txtUser.getText().equals(""))
         {
             datos = false;
             txtUser.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Usuario", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtID.setBackground(Color.white);
         }else if(txtPass.getText().equals(""))
         {
             datos = false;
             txtPass.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Contraseña", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtPass.setBackground(Color.white);
         }else if(txtRpass.getText().equals(""))
         {
             datos = false;
             txtRpass.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Confirmar la Contraseña", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtRpass.setBackground(Color.white);
         }else if(txtNombre.getText().equals(""))
         {
             datos = false;
-            msg.setText("Ingrese el Nombre del usuario");
+            txtNombre.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Nombre", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtNombre.setBackground(Color.white);
         }else if(txtApellidos.getText().equals(""))
         {
             datos = false;
-            msg.setText("Ingrese los Apellidos");
+            txtApellidos.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar los Apellidos", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtApellidos.setBackground(Color.white);
         }
         
         return datos;
     }
     
-    void clear(){
+    void clear()
+    {
         
         //txtID.setText("");
         txtUser.setText("");
@@ -544,27 +506,16 @@ public class formUsuario extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellidos.setText("");
         txtEmail.setText("");
-        acceso.clearSelection();
+        sAcceso.setSelectedIndex(0);
+        linea_A = "";
+        linea_B = "";
         
     }
     
-    String Acceso()
-    {
-        String a = "";
-        if(admin.isSelected())
-        {
-            a = "0";
-        }else if(user.isSelected()){
-            a = "1";
-        }
-        return a;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.ButtonGroup acceso;
-    public static javax.swing.JRadioButton admin;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnCrear;
+    private javax.swing.JLabel estados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -577,6 +528,7 @@ public class formUsuario extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLabel msg;
+    public static javax.swing.JComboBox<String> sAcceso;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
@@ -584,6 +536,5 @@ public class formUsuario extends javax.swing.JFrame {
     public static javax.swing.JPasswordField txtPass;
     public static javax.swing.JPasswordField txtRpass;
     public static javax.swing.JTextField txtUser;
-    public static javax.swing.JRadioButton user;
     // End of variables declaration//GEN-END:variables
 }

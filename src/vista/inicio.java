@@ -33,7 +33,7 @@ public class inicio extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
         
-        if("0".equals(ml.verificarAcceso(u, p)))
+        if("0".equals(ml.verify_Acceso(u, p)))
         {
             mUsuario.setEnabled(true);
             lmVehiculo.setEnabled(true);
@@ -276,7 +276,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVehiculoActionPerformed
         // TODO add your handling code here:
-        formularioVehiculo vv = new formularioVehiculo();
+        formVehiculo vv = new formVehiculo();
     }//GEN-LAST:event_mVehiculoActionPerformed
 
     private void mGamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGamaActionPerformed

@@ -11,13 +11,13 @@ import java.util.StringTokenizer;
  */
 public class mUsuario {
     
-    private String i = "", u = "", p = "", no = "", a = "", e = "", salida = "";
-    private int n;
     public File login;
     private FileReader fr = null;
     private FileWriter fw = null;
     private BufferedReader br = null;
     private PrintWriter pw = null;
+    
+    public String path;
     
     private boolean its = false;
     
@@ -26,21 +26,15 @@ public class mUsuario {
         login = new File("C:\\RentCarSystem\\database\\mantenimiento\\usuario.txt");
         if(login.length() == 0)
         {
-            admin();
+            root();
         }
+        path = login.getPath();
     }
     
-    public void abrir()
-    {
-        login = new File("C:\\RentCarSystem\\database\\mantenimiento\\usuario.txt");
-    }
 
 // Usuario Nuevo ============================================================================
-    public boolean Crear(String linea_A)
+    public boolean add(String linea_A)
     {
-        abrir();
-        boolean intro = true;
-        
         try{
             
             fw = new FileWriter(login, true);
@@ -50,39 +44,38 @@ public class mUsuario {
             
             fw.close();
             
+            its = true;
+            
         }catch(IOException ioe)
         {
-            intro = false;
+            its = false;
         }
-        return intro;
+        return its;
     }
     
     
-    final void admin(){
+    final void root(){
     
         try{
             
-            fw = new FileWriter(login, true);
+            fw = new FileWriter(login);
             pw = new PrintWriter(fw);
             
-            
-            pw.write(0+","+"administrator"+","+"123456"+","+0+","+"root"+","+"user root"+","+"RentCarSystem@email.com");
-            pw.write("\n");
+            pw.println(0+"_"+"administrator"+"_"+"123456"+"_"+0+"_"+"root"+"_"+
+                    "user root"+"_"+"RentCarSystem@email.com");
             
             fw.close();
             
         }catch(IOException ioe)
         {
-            ioe.printStackTrace();
+            
         }
         
     }
 
 // Varificar ID ============================================================================
-    public String verificarID(String d)
+    public boolean verify_ID(String dato)
     {
-        abrir();
-        
         try{
             
             fr = new FileReader(login);
@@ -94,32 +87,18 @@ public class mUsuario {
             while((linea = br.readLine()) != null)
             {
                 
-                s = new StringTokenizer(linea,",");
+                s = new StringTokenizer(linea,"_");
                 
-                i = s.nextToken();
-                u = s.nextToken();
-                p = s.nextToken();
-                n = Integer.valueOf(s.nextToken());
-                no = s.nextToken();
-                a = s.nextToken();
-                e = s.nextToken();
-                
-                if(d.equals(i.trim()))
+                if(dato.equals(s.nextToken()))
                 {
-                    formUsuario.txtUser.setText(u);
-                    formUsuario.txtPass.setText(p);
-                    if(n == 0)
-                    {
-                        formUsuario.admin.setSelected(true);
-                    }else if(n == 1)
-                    {
-                        formUsuario.user.setSelected(true);
-                    }
-                    formUsuario.txtNombre.setText(no);
-                    formUsuario.txtApellidos.setText(a);
-                    formUsuario.txtEmail.setText(e);
+                    formUsuario.txtUser.setText(s.nextToken());
+                    formUsuario.txtPass.setText(s.nextToken());
+                    formUsuario.sAcceso.setSelectedIndex(Integer.valueOf(s.nextToken()));
+                    formUsuario.txtNombre.setText(s.nextToken());
+                    formUsuario.txtApellidos.setText(s.nextToken());
+                    formUsuario.txtEmail.setText(s.nextToken());
                     
-                    salida = i.trim();
+                    its = true;
                 }
                 
             }
@@ -129,14 +108,12 @@ public class mUsuario {
         }catch(IOException ioe){
             //Main.msg.setText("Error de db");
         }
-        return salida;
+        return its;
     }  
 
 // Verificar Usuario ============================================================================
-    public String verificarUser(String d)
+    public boolean verify_User(String d)
     {
-        abrir();
-        
         try{
             
             fr = new FileReader(login);
@@ -147,36 +124,28 @@ public class mUsuario {
             
             while((linea = br.readLine()) != null)
             {
-                s = new StringTokenizer(linea,",");
+                s = new StringTokenizer(linea,"_");
                 
-                i = s.nextToken();
-                u = s.nextToken();
-                p = s.nextToken();
-                n = Integer.valueOf(s.nextToken());
-                no = s.nextToken();
-                a = s.nextToken();
-                e = s.nextToken();
-                
-                if(d.equals(u.trim()))
+                s.nextToken();
+                if(d.equals(s.nextToken()))
                 {
-                    salida = u.trim();
+                    its = true;
                 }
                 
             }
             
             fr.close();
             
-        }catch(IOException ioe){
-            //Main.msg.setText("Error de db");
+        }catch(IOException ioe)
+        {
+            
         }
-        return salida;
+        return its;
     }  
 
 // Verificar Password ============================================================================
-    public String verificarPass(String d)
+    public boolean verify_Pass(String d)
     {
-        abrir();
-        
         try{
             
             fr = new FileReader(login);
@@ -187,20 +156,15 @@ public class mUsuario {
             
             while((linea = br.readLine()) != null)
             {
-                s = new StringTokenizer(linea,",");
+                s = new StringTokenizer(linea,"_");
                 
-                i = s.nextToken();
-                u = s.nextToken();
-                p = s.nextToken();
-                n = Integer.valueOf(s.nextToken());
-                no = s.nextToken();
-                a = s.nextToken();
-                e = s.nextToken();
+                s.nextToken();
+                s.nextToken();
                 
-                if(d.equals(p.trim()))
+                if(d.equals(s.nextToken()))
                 {
                     
-                    salida = p.trim();
+                    its = true;
                     
                 }
                 
@@ -211,14 +175,13 @@ public class mUsuario {
         }catch(IOException ioe){
             //Main.msg.setText("Error de db");
         }
-        return salida;
+        return its;
     }
 
 // Verificar Acceso ============================================================================
-     public String verificarAcceso(String u, String p)
+     public String verify_Acceso(String u, String p)
     {
-        abrir();
-        
+        String set = "";
         try{
             
             fr = new FileReader(login);
@@ -229,19 +192,11 @@ public class mUsuario {
             
             while((linea = br.readLine()) != null)
             {
-                s = new StringTokenizer(linea,",");
-                
-                i = s.nextToken();
-                this.u = s.nextToken();
-                this.p = s.nextToken();
-                n = Integer.valueOf(s.nextToken());
-                no = s.nextToken();
-                a = s.nextToken();
-                e = s.nextToken();
-                
-                if(u.equals(this.u.trim()) && p.equals(this.p.trim()))
+                s = new StringTokenizer(linea,"_");
+                s.nextElement();
+                if(u.equals(s.nextElement()) && p.equals(s.nextElement()))
                 {
-                    salida = String.valueOf(this.n);
+                    set = String.valueOf(s.nextElement());
                 }
                 
             }
@@ -251,7 +206,7 @@ public class mUsuario {
         }catch(IOException ioe){
             //Main.msg.setText("Error de db");
         }
-        return salida;
+        return set;
     }
      
      

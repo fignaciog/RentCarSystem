@@ -237,7 +237,7 @@ public class login extends javax.swing.JFrame {
         
         if(user.length() > 6)
         {
-            if(user.equals(ml.verificarUser(user)))
+            if(ml.verify_User(user))
             {
                 txtPass.setEnabled(true);
                 msg.setText("");
@@ -254,13 +254,13 @@ public class login extends javax.swing.JFrame {
         ml = new mUsuario();
         String pass = txtPass.getText();
         
-        if(txtPass.getText().equals(ml.verificarPass(txtPass.getText())) && pass.length() > 5)
+        if(ml.verify_Pass(txtPass.getText()) && pass.length() > 5)
         {
             msg.setText("");
             btnEntrar.setEnabled(true);
             txtPass.setEnabled(false);
 
-            if(ml.verificarAcceso(txtUser.getText(), txtPass.getText()).equals("0"))
+            if(ml.verify_Acceso(txtUser.getText(), txtPass.getText()).equals("0"))
             {
                 btnRegistrar.setEnabled(true);
             }

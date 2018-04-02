@@ -3,6 +3,7 @@ package modelo.mantenimiento;
 
 import java.io.*;
 import java.util.StringTokenizer;
+import vista.mantenimientos.formVehiculo;
 
 /**
  *
@@ -40,10 +41,22 @@ public class mVehiculo {
                 while((linea = br.readLine()) != null)
                 {
                     
-                    s = new StringTokenizer(linea, ",");
+                    s = new StringTokenizer(linea, "_");
                     
                     if(dato.equals(s.nextToken()))
                     {
+                        formVehiculo.txtMarca.setText(s.nextToken());
+                        formVehiculo.txtModelo.setText(s.nextToken());
+                        formVehiculo.txtGama.setText(s.nextToken());
+                        formVehiculo.sTipoVehiculo.setSelectedItem(s.nextToken());
+                        formVehiculo.sTipoMotor.setSelectedItem(s.nextToken());
+                        formVehiculo.sTipoTrans.setSelectedItem(s.nextToken());
+                        formVehiculo.txtDescrip.setText(s.nextToken());
+                        formVehiculo.sTecho.setSelectedItem(s.nextToken());
+                        formVehiculo.sAire.setSelectedItem(s.nextToken());
+                        formVehiculo.txtColor.setText(s.nextToken());
+                        formVehiculo.sInterior.setSelectedItem(s.nextToken());
+                        formVehiculo.sEstado.setSelectedItem(s.nextToken());
                         its = true;
                     }
                     
@@ -61,7 +74,20 @@ public class mVehiculo {
     
     public boolean add(String linea_A)
     {
-        
+        try{
+            
+            fw = new FileWriter(vehiculos);
+            pw = new PrintWriter(fw);
+            
+            pw.println(linea_A);
+            
+            fw.close();
+            
+            its = true;
+            
+        }catch(IOException ioe){
+            
+        }
         return its;
     }
     

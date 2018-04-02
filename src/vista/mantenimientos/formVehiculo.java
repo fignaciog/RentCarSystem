@@ -5,21 +5,25 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.mantenimiento.mVehiculo;
+import modelo.mantenimiento.mGama;
+import controlador.modificar;
 
 /**
  *
  * @author Ignacio
  */
-public class formularioVehiculo extends javax.swing.JFrame {
+public class formVehiculo extends javax.swing.JFrame {
 
     String linea_A, linea_B;
     
     mVehiculo mv;
+    modificar editor;
+    mGama mg;
     
     /**
      * Creates new form vistaVehiculo
      */
-    public formularioVehiculo() {
+    public formVehiculo() {
         initComponents();
         setTitle("Vehiculo");
         setLocationRelativeTo(null);
@@ -62,6 +66,7 @@ public class formularioVehiculo extends javax.swing.JFrame {
         btnguardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         msg = new javax.swing.JLabel();
+        mensajes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -317,6 +322,9 @@ public class formularioVehiculo extends javax.swing.JFrame {
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
+        mensajes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        mensajes.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -325,6 +333,10 @@ public class formularioVehiculo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,9 +344,8 @@ public class formularioVehiculo extends javax.swing.JFrame {
                             .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -351,7 +362,9 @@ public class formularioVehiculo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -359,7 +372,71 @@ public class formularioVehiculo extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        verifyData();
+        mv = new mVehiculo();
+        
+        if(txtMatricula.getText().equals(""))
+        {
+            txtMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe ingresar la Matricula", 
+                    "Campo Oblogatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
+        }else{
+            
+            if(msg.getText().equals("Modificando"))
+            {
+                if(verifyData())
+                {
+                    
+                    
+                    linea_B = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
+                         txtModelo.getText()+"_"+txtGama.getText()+"_"+
+                         sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
+                         +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
+                         +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
+                         +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
+                         +"_"+sEstado.getSelectedItem();
+                    
+                    editor = new modificar(linea_A, linea_B, mv.path);
+                    editor.editar();
+                    if(editor.reenombrar())
+                    {
+                        msg.setForeground(Color.blue);
+                        msg.setText("Datos Modificados");
+                        clear();
+                    }else{
+                        msg.setForeground(Color.red);
+                        msg.setText("Datos No modificados");
+                        clear();
+                    }
+                }
+            }else if(msg.getText().equals("Creando")){
+
+                if(verifyData())
+                {
+                    linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
+                            txtModelo.getText()+"_"+txtGama.getText()+"_"+
+                            sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
+                            +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
+                            +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
+                            +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
+                            +"_"+sEstado.getSelectedItem();
+
+                    if(mv.add(linea_A))
+                    {
+                        msg.setForeground(Color.blue);
+                        msg.setText("Datos Guardados");
+                        clear();
+                    }else{
+                        msg.setForeground(Color.red);
+                        msg.setText("Datos No guardados");
+                        clear();
+                    }
+                }else{
+
+                }
+
+            }
+        }
         
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -378,10 +455,19 @@ public class formularioVehiculo extends javax.swing.JFrame {
             
             if(!mv.check(txtMatricula.getText()))
             {
+                msg.setForeground(Color.blue);
                 msg.setText("Creando");
                 clear();
             }else{
+                msg.setForeground(Color.red);
                 msg.setText("Modificando");
+                linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
+                         txtModelo.getText()+"_"+txtGama.getText()+"_"+
+                         sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
+                         +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
+                         +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
+                         +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
+                         +"_"+sEstado.getSelectedItem();
             }
             
         }else{
@@ -393,11 +479,45 @@ public class formularioVehiculo extends javax.swing.JFrame {
 
     private void txtGamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGamaKeyReleased
         // TODO add your handling code here:
+        mg = new mGama();
+        String l = txtGama.getText();
+        if(!txtGama.getText().equals(""))
+        {
+            if(!mg.externVerify(l))
+            {
+                mensajes.setText("El ID de la Gama no Existe");
+                txtGama.setBackground(Color.red);
+                txtGama.setForeground(Color.white);
+            }else{
+                
+                txtGama.setBackground(Color.white);
+                txtGama.setForeground(Color.black);
+            }
+        }else{
+            mensajes.setText("");
+        }
+        
+        
+        
     }//GEN-LAST:event_txtGamaKeyReleased
     
     void clear()
     {
-        
+        //txtMatricula.setText("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtGama.setText("");
+        sTipoVehiculo.setSelectedIndex(0);
+        sTipoMotor.setSelectedIndex(0);
+        sTipoTrans.setSelectedIndex(0);
+        txtDescrip.setText("");
+        sTecho.setSelectedIndex(0);
+        sAire.setSelectedIndex(0);
+        txtColor.setText("");
+        sInterior.setSelectedIndex(0);
+        sEstado.setSelectedIndex(0);
+        linea_A = "";
+        linea_B = "";
     }
     
     boolean verifyData()
@@ -518,19 +638,20 @@ public class formularioVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    public static javax.swing.JLabel mensajes;
     private javax.swing.JLabel msg;
-    private javax.swing.JComboBox<String> sAire;
-    private javax.swing.JComboBox<String> sEstado;
-    private javax.swing.JComboBox<String> sInterior;
-    private javax.swing.JComboBox<String> sTecho;
-    private javax.swing.JComboBox<String> sTipoMotor;
-    private javax.swing.JComboBox<String> sTipoTrans;
-    private javax.swing.JComboBox<String> sTipoVehiculo;
-    private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtDescrip;
-    private javax.swing.JTextField txtGama;
-    private javax.swing.JTextField txtMarca;
+    public static javax.swing.JComboBox<String> sAire;
+    public static javax.swing.JComboBox<String> sEstado;
+    public static javax.swing.JComboBox<String> sInterior;
+    public static javax.swing.JComboBox<String> sTecho;
+    public static javax.swing.JComboBox<String> sTipoMotor;
+    public static javax.swing.JComboBox<String> sTipoTrans;
+    public static javax.swing.JComboBox<String> sTipoVehiculo;
+    public static javax.swing.JTextField txtColor;
+    public static javax.swing.JTextField txtDescrip;
+    public static javax.swing.JTextField txtGama;
+    public static javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMatricula;
-    private javax.swing.JTextField txtModelo;
+    public static javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 }

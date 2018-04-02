@@ -5,12 +5,17 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import modelo.mantenimiento.mGama;
 import controlador.modificar;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Ignacio
  */
 public class formGama extends javax.swing.JFrame {
 
+    String linea_A, linea_B;
+    mGama mg;
+    modificar editar;
+    
     /**
      * Creates new form vistaGama
      */
@@ -22,11 +27,6 @@ public class formGama extends javax.swing.JFrame {
         setVisible(true);
     }
     
-    String linea_A, linea_B;
-    
-    mGama mg = new mGama();
-    modificar editar;
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,11 +74,6 @@ public class formGama extends javax.swing.JFrame {
         jLabel2.setText("ID");
 
         txtID.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtID.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtIDMouseClicked(evt);
-            }
-        });
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDKeyReleased(evt);
@@ -183,8 +178,8 @@ public class formGama extends javax.swing.JFrame {
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
-        
-        if(mg.verificarID(txtID.getText()))
+        mg = new mGama();
+        if(mg.verify(txtID.getText()))
         {
             msg.setForeground(Color.red);
             msg.setText("Modificando");
@@ -195,8 +190,7 @@ public class formGama extends javax.swing.JFrame {
         }else{
             msg.setForeground(Color.blue);
             msg.setText("Creando");
-            txtDescripcion.setText("");
-            txtPrecio.setText("");
+            clear();
         }
         
     }//GEN-LAST:event_txtIDKeyReleased
@@ -206,58 +200,84 @@ public class formGama extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void txtIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIDMouseClicked
-        // TODO add your handling code here:
-        txtID.setBackground(Color.white);
-    }//GEN-LAST:event_txtIDMouseClicked
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         
-        if(msg.getText().equals("Modificando"))
+        
+        if(verifyData())
         {
-            
-            // Linea para crear los nuevos datos a guardar
-            linea_B = txtID.getText()+","+txtDescripcion.getText()+","+txtPrecio.getText();
-            
-            /*Constructor de la clase modificar con las lineas
-            ya creadas, la linea vieja:(linea_A) y la nueva:(linea_B)*/
-            editar = new modificar(linea_A, linea_B,mg.gama.getPath());
+            if(msg.getText().equals("Modificando"))
+            {
+                mg = new mGama();
+                // Linea para crear los nuevos datos a guardar
+                linea_B = txtID.getText()+","+txtDescripcion.getText()+","+txtPrecio.getText();
 
-            // Ejecuto el metodo para modifcar el fichero de la Clase:(modificar)
-            editar.editar();
-            
-            if(editar.reenombrar())
+                /*Constructor de la clase modificar con las lineas
+                ya creadas, la linea vieja:(linea_A) y la nueva:(linea_B)*/
+                editar = new modificar(linea_A, linea_B,mg.path);
+
+                // Ejecuto el metodo para modifcar el fichero de la Clase:(modificar)
+                editar.editar();
+
+                if(editar.reenombrar())
+                {
+                    msg.setForeground(Color.blue);
+                    msg.setText("Datos Modificados");
+                    clear();
+                    txtID.setText("");
+                }
+
+            }else if(msg.getText().equals("Creando"))
             {
-                msg.setForeground(Color.blue);
-                msg.setText("Datos Modificados");
-                clear();
+                
+                linea_A = txtID.getText()+"_"+txtDescripcion.getText()+"_"
+                        +txtPrecio.getText();
+                
+                mg = new mGama();
+                
+                if(mg.add(linea_A))
+                {
+                    msg.setText("Datos Guardados");
+                    clear();
+                    txtID.setText("");
+                }else{
+                    msg.setText("Datos No guardados");
+                }
+
             }
-            
-        }else{
-            
-            mg.setDatos(txtID.getText(), txtDescripcion.getText(), txtPrecio.getText());
-            
-            if(mg.crear())
-            {
-                msg.setForeground(Color.blue);
-                msg.setText("Datos guardados");
-                clear();
-            }else{
-                msg.setForeground(Color.red);
-                msg.setText("Datos no guardados");
-            }
-            
         }
-        
-        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     void clear()
     {
-        txtID.setText("");
+        //txtID.setText("");
         txtDescripcion.setText("");
         txtPrecio.setText("");
+        linea_A = "";
+        linea_B = "";
+    }
+    
+    boolean verifyData()
+    {
+        
+        if(txtID.getText().equals(""))
+        {
+            txtID.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el ID", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtID.setBackground(Color.white);
+        }else if(txtDescripcion.getText().equals(""))
+        {
+            txtDescripcion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar una Descripcion", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtDescripcion.setBackground(Color.white);
+        }else if(txtPrecio.getText().equals(""))
+        {
+            txtPrecio.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Precio", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.setBackground(Color.white);
+        }
+        
+        return true;
     }
 
 

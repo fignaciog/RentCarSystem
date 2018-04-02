@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import modelo.mantenimiento.mCliente;
 import controlador.modificar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +14,8 @@ import controlador.modificar;
 public class formCliente extends javax.swing.JFrame {
 
     
-    String get, linea_A, linea_B;
-    
+    String linea_A, linea_B;
+    mCliente mc;
     /**
      * Creates new form vistaCliente
      */
@@ -70,31 +71,16 @@ public class formCliente extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtNombreMouseClicked(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Apellidos");
 
         txtApellidos.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtApellidos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtApellidosMouseClicked(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Direccion");
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDireccionMouseClicked(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Email");
@@ -110,11 +96,6 @@ public class formCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtTelefono.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtTelefonoMouseClicked(evt);
-            }
-        });
 
         try {
             txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#######-#")));
@@ -122,11 +103,6 @@ public class formCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCedula.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtCedula.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCedulaMouseClicked(evt);
-            }
-        });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyReleased(evt);
@@ -255,48 +231,53 @@ public class formCliente extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if(msg.getText().equals("Modificando"))
+        
+        if(verificar())
         {
-            
-            mCliente mc = new mCliente();
-            
-            linea_B = get+","+txtNombre.getText()+
-                        ","+txtApellidos.getText()+","+txtDireccion.getText()+
-                        ","+txtEmail.getText()+","+txtTelefono.getText();
-            
-            
-            modificar m = new modificar(linea_A, linea_B, mc.path);
-            m.editar();
-            
-            if(m.reenombrar())
+            if(msg.getText().equals("Modificando"))
             {
-                msg.setForeground(Color.green);
-                msg.setText("Datos Modificados");
-                clear();
-            }
-            
-        }else if(msg.getText().equals("Creando")){ 
-            mCliente mc = new mCliente();
-            if(verificar())
-            {
-                
-                linea_B = get+","+txtNombre.getText()+
-                        ","+txtApellidos.getText()+","+txtDireccion.getText()+
-                        ","+txtEmail.getText()+","+txtTelefono.getText();
-                
-                
-                if(mc.crear(linea_B))
+                mc = new mCliente();
+
+                linea_B = txtCedula.getText()+"_"+txtNombre.getText()+
+                            "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
+                            "_"+txtEmail.getText()+"_"+txtTelefono.getText();
+
+
+                modificar m = new modificar(linea_A, linea_B, mc.path);
+                m.editar();
+
+                if(m.reenombrar())
                 {
                     msg.setForeground(Color.green);
-                    msg.setText("Datos Guardados");
+                    msg.setText("Datos Modificados");
                     clear();
-                }else{
-                    msg.setForeground(Color.red);
-                    msg.setText("Error al Guardar Datos");
                 }
-                
+
+            }else if(msg.getText().equals("Creando")){ 
+                mCliente mc = new mCliente();
+                if(verificar())
+                {
+
+                    linea_B = txtCedula.getText()+"_"+txtNombre.getText()+
+                            "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
+                            "_"+txtEmail.getText()+"_"+txtTelefono.getText();
+
+
+                    if(mc.add(linea_B))
+                    {
+                        msg.setForeground(Color.blue);
+                        msg.setText("Datos Guardados");
+                        clear();
+                    }else{
+                        msg.setForeground(Color.red);
+                        msg.setText("Error al Guardar Datos");
+                    }
+
+                }
             }
         }
+        // </verificar>
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -304,86 +285,56 @@ public class formCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked
-        // TODO add your handling code here:
-        txtNombre.setBackground(Color.white);
-        txtNombre.setForeground(Color.black);
-        txtNombre.setText("");
-        
-    }//GEN-LAST:event_txtNombreMouseClicked
-
-    private void txtApellidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidosMouseClicked
-        // TODO add your handling code here:
-        txtApellidos.setBackground(Color.white);
-            txtApellidos.setForeground(Color.black);
-            txtApellidos.setText("");
-    }//GEN-LAST:event_txtApellidosMouseClicked
-
-    private void txtDireccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionMouseClicked
-        // TODO add your handling code here:
-        txtDireccion.setBackground(Color.white);
-            txtDireccion.setForeground(Color.black);
-            txtDireccion.setText("");
-    }//GEN-LAST:event_txtDireccionMouseClicked
-
-    private void txtTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefonoMouseClicked
-        // TODO add your handling code here:
-        txtTelefono.setBackground(Color.white);
-            txtTelefono.setForeground(Color.black);
-            txtTelefono.setText("");
-    }//GEN-LAST:event_txtTelefonoMouseClicked
-
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
         // TODO add your handling code here:
-        get = txtCedula.getText();
-        mCliente mc = new mCliente();
-        if(mc.verificarID(get))
+        mc = new mCliente();
+        if(mc.verify(txtCedula.getText()))
         {
             msg.setForeground(Color.red);
             msg.setText("Modificando");
-            linea_A = txtCedula.getText()+","+txtNombre.getText()+","
-                    +txtApellidos.getText()+","+txtDireccion.getText()+","
-                    +txtEmail.getText()+","+txtTelefono.getText();
+            
+            linea_A = txtCedula.getText()+"_"+txtNombre.getText()+
+                        "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
+                        "_"+txtEmail.getText()+"_"+txtTelefono.getText();
         }else{
             msg.setForeground(Color.blue);
             msg.setText("Creando");
         }
     }//GEN-LAST:event_txtCedulaKeyReleased
 
-    private void txtCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCedulaMouseClicked
-        // TODO add your handling code here:
-        msg.setForeground(Color.black);
-        msg.setText("");
-    }//GEN-LAST:event_txtCedulaMouseClicked
-
     boolean verificar()
     {
         boolean its = true;
         
-        if(txtNombre.getText().equals(""))
+        if(txtCedula.getText().equals("   -       - "))
+        {
+            txtCedula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Cedula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtCedula.setBackground(Color.white);
+            its = false;
+        }else if(txtNombre.getText().equals(""))
         {
             txtNombre.setBackground(Color.red);
-            txtNombre.setForeground(Color.white);
-            txtNombre.setText("Obligatorio");
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Nombre", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtNombre.setBackground(Color.white);
             its = false;
         }else if(txtApellidos.getText().equals(""))
         {
             txtApellidos.setBackground(Color.red);
-            txtApellidos.setForeground(Color.white);
-            txtApellidos.setText("Obligatorio");
+            JOptionPane.showMessageDialog(this, "Debe Ingresar los Apellidos", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtApellidos.setBackground(Color.white);
             its = false;
         }else if(txtDireccion.getText().equals(""))
         {
             txtDireccion.setBackground(Color.red);
-            txtDireccion.setForeground(Color.white);
-            txtDireccion.setText("Obligatorio");
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Direccion", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtDireccion.setBackground(Color.white);
             its = false;
         }else if(txtTelefono.getText().equals(""))
         {
             txtTelefono.setBackground(Color.red);
-            txtTelefono.setForeground(Color.white);
-            txtTelefono.setText("Obligatorio");
-            its = false;
+            JOptionPane.showMessageDialog(this, "Debe Ingresar el Telefono", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.setBackground(Color.white);
         }
         
         return its;
