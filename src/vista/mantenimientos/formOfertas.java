@@ -304,7 +304,7 @@ public class formOfertas extends javax.swing.JFrame {
         // TODO add your handling code here:
         mv = new mVehiculo();
         
-        if(!mv.verify_Extern(txtMatricula.getText()))
+        if(!mv.verify_Oferta(txtMatricula.getText()))
         {
             estados.setText("La Matricula no existe");
         }

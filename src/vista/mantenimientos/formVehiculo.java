@@ -156,7 +156,7 @@ public class formVehiculo extends javax.swing.JFrame {
         sTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
 
         sTipoMotor.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        sTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Gasolina", "Disel" }));
+        sTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Gasolina", "Disel", "Gas" }));
 
         txtColor.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
@@ -210,45 +210,48 @@ public class formVehiculo extends javax.swing.JFrame {
                         .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(0, 58, Short.MAX_VALUE))
+                                .addGap(0, 73, Short.MAX_VALUE))
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addComponent(txtGama)
                                 .addContainerGap())))
                     .addGroup(FormularioLayout.createSequentialGroup()
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8)
-                            .addGroup(FormularioLayout.createSequentialGroup()
-                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13)))
-                            .addComponent(jLabel14)
-                            .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(FormularioLayout.createSequentialGroup()
-                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11)))
-                            .addComponent(txtDescrip)
+                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel8)
+                                .addGroup(FormularioLayout.createSequentialGroup()
+                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel13)))
+                                .addComponent(txtDescrip)
+                                .addGroup(FormularioLayout.createSequentialGroup()
+                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel14)
+                                        .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 107, Short.MAX_VALUE))))
+                                    .addComponent(sInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addGap(18, 18, 18)
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         FormularioLayout.setVerticalGroup(
             FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,24 +285,22 @@ public class formVehiculo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
+                    .addComponent(jLabel10)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
@@ -329,23 +330,21 @@ public class formVehiculo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -363,7 +362,7 @@ public class formVehiculo extends javax.swing.JFrame {
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -374,67 +373,49 @@ public class formVehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
         mv = new mVehiculo();
         
-        if(txtMatricula.getText().equals(""))
+        if(verifyData())
         {
-            txtMatricula.setBackground(Color.red);
-            JOptionPane.showMessageDialog(this, "Debe ingresar la Matricula", 
-                    "Campo Oblogatorio", JOptionPane.ERROR_MESSAGE);
-            txtMatricula.setBackground(Color.white);
-        }else{
-            
             if(msg.getText().equals("Modificando"))
             {
-                if(verifyData())
-                {
-                    
-                    
                     linea_B = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
-                         txtModelo.getText()+"_"+txtGama.getText()+"_"+
-                         sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
-                         +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
-                         +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
-                         +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
-                         +"_"+sEstado.getSelectedItem();
-                    
-                    editor = new modificar(linea_A, linea_B, mv.path);
-                    editor.editar();
-                    if(editor.reenombrar())
-                    {
-                        msg.setForeground(Color.blue);
-                        msg.setText("Datos Modificados");
-                        clear();
-                    }else{
-                        msg.setForeground(Color.red);
-                        msg.setText("Datos No modificados");
-                        clear();
-                    }
-                }
+                        txtModelo.getText()+"_"+txtGama.getText()+"_"+
+                        sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
+                        +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
+                        +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
+                        +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
+                        +"_"+sEstado.getSelectedItem();
+
+                   editor = new modificar(linea_A, linea_B, mv.path);
+                   editor.editar();
+                   if(editor.reenombrar())
+                   {
+                       msg.setForeground(Color.blue);
+                       msg.setText("Datos Modificados");
+                       clear();
+                   }else{
+                       msg.setForeground(Color.red);
+                       msg.setText("Datos No modificados");
+                       clear();
+                   }
             }else if(msg.getText().equals("Creando")){
+                linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
+                                txtModelo.getText()+"_"+txtGama.getText()+"_"+
+                                sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
+                                +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
+                                +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
+                                +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
+                                +"_"+sEstado.getSelectedItem();
 
-                if(verifyData())
-                {
-                    linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
-                            txtModelo.getText()+"_"+txtGama.getText()+"_"+
-                            sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
-                            +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
-                            +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
-                            +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
-                            +"_"+sEstado.getSelectedItem();
-
-                    if(mv.add(linea_A))
-                    {
-                        msg.setForeground(Color.blue);
-                        msg.setText("Datos Guardados");
-                        clear();
-                    }else{
-                        msg.setForeground(Color.red);
-                        msg.setText("Datos No guardados");
-                        clear();
-                    }
-                }else{
-
-                }
-
+                        if(mv.add(linea_A))
+                        {
+                            msg.setForeground(Color.blue);
+                            msg.setText("Datos Guardados");
+                            clear();
+                        }else{
+                            msg.setForeground(Color.red);
+                            msg.setText("Datos No guardados");
+                            clear();
+                        }
             }
         }
         
@@ -450,10 +431,9 @@ public class formVehiculo extends javax.swing.JFrame {
         
         mv = new mVehiculo();
         
-        if(!txtMatricula.getText().equals(""))
+        if(!txtMatricula.getText().equals("") && txtMatricula.getText().length() > 3)
         {
-            
-            if(!mv.add(txtMatricula.getText()))
+            if(!mv.verify(txtMatricula.getText()))
             {
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");

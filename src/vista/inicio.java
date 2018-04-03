@@ -76,7 +76,7 @@ public class inicio extends javax.swing.JFrame {
         mCerrarS = new javax.swing.JMenuItem();
         mSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Edwardian Script ITC", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -295,7 +295,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mReservaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaClienteActionPerformed
         // TODO add your handling code here:
-        //formReservaClientes vrc = new formReservaClientes();
+        formReservaCliente vrc = new formReservaCliente();
     }//GEN-LAST:event_mReservaClienteActionPerformed
 
     private void mRecepcionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRecepcionVehiculoActionPerformed

@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 import vista.mantenimientos.formVehiculo;
 import vista.mantenimientos.formOfertas;
+import vista.movimiento.formReservaCliente;
 
 /**
  *
@@ -73,7 +74,7 @@ public class mVehiculo {
         return its;
     }
     
-    public boolean verify_Extern(String dato)
+    public boolean verify_Oferta(String dato)
     {
         if(vehiculos.length() != 0)
         {
@@ -108,11 +109,51 @@ public class mVehiculo {
         return its;
     }
     
+    public boolean verify_Reserva(String dato)
+    {
+        if(vehiculos.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(vehiculos);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    
+                    s = new StringTokenizer(linea, "_");
+                    
+                    if(dato.equals(s.nextToken()))
+                    {
+                        formReservaCliente.getMarca.setText(s.nextToken());
+                        s.nextToken();
+                        formReservaCliente.getGama.setText(s.nextToken());
+                        s.nextToken();s.nextToken();s.nextToken();
+                        formReservaCliente.getDesc.setText(s.nextToken());
+                        its = true;
+                    }
+                    
+                }
+                
+                fr.close();
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        return its;
+    }
+    
+    
+    
     public boolean add(String linea_A)
     {
         try{
             
-            fw = new FileWriter(vehiculos);
+            fw = new FileWriter(vehiculos,true);
             pw = new PrintWriter(fw);
             
             pw.println(linea_A);

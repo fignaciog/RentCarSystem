@@ -4,6 +4,7 @@ package modelo.mantenimiento;
 import java.io.*;
 import java.util.StringTokenizer;
 import vista.mantenimientos.formCliente;
+import vista.movimiento.formReservaCliente;
 
 /**
  *
@@ -48,6 +49,44 @@ public class mCliente {
                         formCliente.txtDireccion.setText(s.nextToken());
                         formCliente.txtEmail.setText(s.nextToken());
                         formCliente.txtTelefono.setText(s.nextToken());
+                        isIt = true;
+                    }
+                    
+                }
+                
+                fr.close();
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        
+        return isIt;
+    }
+    
+    public boolean verify_Reserva(String dato)
+    {
+        boolean isIt = false;
+        if(cliente.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(cliente);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    if(dato.equals(s.nextToken()))
+                    {
+                        formReservaCliente.getFullname.setText(s.nextToken()+" "+s.nextToken());
+                        formReservaCliente.getDirec.setText(s.nextToken());
+                        s.nextToken();
+                        formReservaCliente.getPhone.setText(s.nextToken());
+                        
                         isIt = true;
                     }
                     
