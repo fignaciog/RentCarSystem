@@ -453,7 +453,7 @@ public class formVehiculo extends javax.swing.JFrame {
         if(!txtMatricula.getText().equals(""))
         {
             
-            if(!mv.check(txtMatricula.getText()))
+            if(!mv.add(txtMatricula.getText()))
             {
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");

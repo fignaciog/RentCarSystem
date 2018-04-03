@@ -21,18 +21,13 @@ public class mOferta {
     public String path;
     boolean its = false;
     
-    String id_Ofertas;
-    String id_Matricula;
-    String Descripcion_Ofertas;
-    String Precio_Oferta;
-    
     public mOferta()
     {
         Ofertas = new File("C:\\RentCarSystem\\database\\mantenimiento\\ofertas.txt");
         path = Ofertas.getPath();
     }
     
-    public boolean verificar(String dato)
+    public boolean verify(String dato)
     {
         if(Ofertas.length() != 0)
         {
@@ -45,18 +40,13 @@ public class mOferta {
 
                 while((linea = br.readLine()) != null)
                 {
-                    s = new StringTokenizer(linea, ",");
+                    s = new StringTokenizer(linea, "_");
                     
-                    id_Ofertas = s.nextToken();
-                    id_Matricula = s.nextToken();
-                    Descripcion_Ofertas = s.nextToken();
-                    Precio_Oferta = s.nextToken();
-                    
-                    if(dato.equals(id_Ofertas))
+                    if(dato.equals(s.nextToken()))
                     {
-                        formOfertas.txtMatricula.setText(id_Matricula);
-                        formOfertas.txtDescrip.setText(Descripcion_Ofertas);
-                        formOfertas.txtPrecio.setText(Precio_Oferta);
+                        formOfertas.txtMatricula.setText(s.nextToken());
+                        formOfertas.txtDescrip.setText(s.nextToken());
+                        formOfertas.txtPrecio.setText(s.nextToken());
                         its = true;
                     }
                     
@@ -72,7 +62,7 @@ public class mOferta {
         return its;
     }
     
-    public boolean crear(String linea_A)
+    public boolean add(String linea_A)
     {
         try{
             

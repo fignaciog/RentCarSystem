@@ -4,6 +4,7 @@ package modelo.mantenimiento;
 import java.io.*;
 import java.util.StringTokenizer;
 import vista.mantenimientos.formVehiculo;
+import vista.mantenimientos.formOfertas;
 
 /**
  *
@@ -27,7 +28,7 @@ public class mVehiculo {
         path = vehiculos.getPath();
     }
     
-    public boolean check(String dato)
+    public boolean verify(String dato)
     {
         if(vehiculos.length() != 0)
         {
@@ -57,6 +58,41 @@ public class mVehiculo {
                         formVehiculo.txtColor.setText(s.nextToken());
                         formVehiculo.sInterior.setSelectedItem(s.nextToken());
                         formVehiculo.sEstado.setSelectedItem(s.nextToken());
+                        its = true;
+                    }
+                    
+                }
+                
+                fr.close();
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        return its;
+    }
+    
+    public boolean verify_Extern(String dato)
+    {
+        if(vehiculos.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(vehiculos);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    
+                    s = new StringTokenizer(linea, "_");
+                    
+                    if(dato.equals(s.nextToken()))
+                    {
+                        formOfertas.estados.setText("Marca: "+s.nextToken()+" | Modelo: "
+                        +s.nextToken()+" | Gama: "+s.nextToken());
                         its = true;
                     }
                     

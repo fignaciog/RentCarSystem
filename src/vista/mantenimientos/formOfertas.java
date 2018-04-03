@@ -4,7 +4,9 @@ package vista.mantenimientos;
 import java.awt.Color;
 import javax.swing.JFrame;
 import modelo.mantenimiento.mOferta;
+import modelo.mantenimiento.mVehiculo;
 import controlador.modificar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +17,7 @@ public class formOfertas extends javax.swing.JFrame {
     private String linea_A, linea_B;
     
     mOferta mo = new mOferta();
+    mVehiculo mv;
     modificar editor;
     
     /**
@@ -45,6 +48,7 @@ public class formOfertas extends javax.swing.JFrame {
         txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        estados = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -65,11 +69,6 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel3.setText("ID Oferta");
 
         txtID.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtID.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtIDMouseClicked(evt);
-            }
-        });
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDKeyReleased(evt);
@@ -77,11 +76,6 @@ public class formOfertas extends javax.swing.JFrame {
         });
 
         txtMatricula.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtMatriculaMouseClicked(evt);
-            }
-        });
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMatriculaKeyReleased(evt);
@@ -95,21 +89,11 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel5.setText("Descripcion");
 
         txtDescrip.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        txtDescrip.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDescripMouseClicked(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Precio");
 
         txtPrecio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPrecioMouseClicked(evt);
-            }
-        });
 
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtID, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -182,23 +166,30 @@ public class formOfertas extends javax.swing.JFrame {
             }
         });
 
+        estados.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(22, 22, 22)
+                        .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -215,7 +206,9 @@ public class formOfertas extends javax.swing.JFrame {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -227,22 +220,21 @@ public class formOfertas extends javax.swing.JFrame {
         // inicializar el objeto siempre es impresindible
         mo  = new mOferta();
         
-        // deposito mi confianza en que el mesaje va a guiar el sistema XD
-        if(msg.getText().equals("Modificando"))
+        if(verificar())
         {
-            // verifico que no hay celdas vacias
-            if(verificar())
+            // deposito mi confianza en que el mesaje va a guiar el sistema XD
+            if(msg.getText().equals("Modificando"))
             {
                 // almaceno la nueva linea en una variable
-                linea_B = txtID.getText()+","+txtMatricula.getText()
-                                 +","+txtDescrip.getText()+","+txtPrecio.getText();
-                
+                linea_B = txtID.getText()+"_"+txtMatricula.getText()
+                                 +"_"+txtDescrip.getText()+"_"+txtPrecio.getText();
+
                 // inicializo el objeto de mi clase modificar
                 editor = new modificar(linea_A, linea_B, mo.path);
-                
+
                 // ejecuto mi segundo paso de la clase
                 editor.editar();
-                
+
                 // finalizo comprovabando que el archivo de almacenamiento fue modificado 
                 if(editor.reenombrar())
                 {
@@ -251,29 +243,24 @@ public class formOfertas extends javax.swing.JFrame {
                     clear();
                     txtID.setText("");
                 }
-                
-            }
-            
-        }else
-        {
-            // verifico que no hay celdas vacias
-            if(verificar())
+
+            }else if(msg.getText().equals("Creando"))
             {
                 // almaceno la nueva linea en una variable
-                linea_A = txtID.getText()+","+txtMatricula.getText()
-                                 +","+txtDescrip.getText()+","+txtPrecio.getText();
-                
+                linea_A = txtID.getText()+"_"+txtMatricula.getText()
+                                 +"_"+txtDescrip.getText()+"_"+txtPrecio.getText();
+
                 // finalizo verificando que los datos se guardaron en el archivo
                 // correctamente.
-                if(mo.crear(linea_A))
+                if(mo.add(linea_A))
                 {
                     msg.setText("Datos Guardados");
                     clear();
                     txtID.setText("");
                 }
-
             }
         }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -284,9 +271,6 @@ public class formOfertas extends javax.swing.JFrame {
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
         // TODO add your handling code here:
         
-        txtID.setBackground(Color.white);
-        txtID.setForeground(Color.black);
-        
         // Inicializo el objeto para una verificacion diferente
         mo = new mOferta();
         
@@ -294,7 +278,7 @@ public class formOfertas extends javax.swing.JFrame {
         if(!txtID.getText().equals(""))
         {
             // Verifico si existe 
-            if(!mo.verificar(txtID.getText()))
+            if(!mo.verify(txtID.getText()))
             {
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");
@@ -305,8 +289,8 @@ public class formOfertas extends javax.swing.JFrame {
                 msg.setText("Modificando");
                 
                 // si existe capturo los datos en una variable
-                linea_A = txtID.getText()+","+txtMatricula.getText()
-                                     +","+txtDescrip.getText()+","+txtPrecio.getText();
+                linea_A = txtID.getText()+"_"+txtMatricula.getText()
+                                 +"_"+txtDescrip.getText()+"_"+txtPrecio.getText();
                 
             }
         }else{
@@ -318,35 +302,14 @@ public class formOfertas extends javax.swing.JFrame {
 
     private void txtMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyReleased
         // TODO add your handling code here:
-        txtMatricula.setBackground(Color.white);
-        txtMatricula.setForeground(Color.black);
-    }//GEN-LAST:event_txtMatriculaKeyReleased
-
-    private void txtIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIDMouseClicked
-        // TODO add your handling code here:
-        msg.setText("");
-    }//GEN-LAST:event_txtIDMouseClicked
-
-    private void txtMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMatriculaMouseClicked
-        // TODO add your handling code here:
-        txtMatricula.setBackground(Color.white);
-        txtMatricula.setForeground(Color.black);
+        mv = new mVehiculo();
         
-    }//GEN-LAST:event_txtMatriculaMouseClicked
-
-    private void txtDescripMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescripMouseClicked
-        // TODO add your handling code here:
-        txtDescrip.setBackground(Color.white);
-        txtDescrip.setForeground(Color.black);
-        txtDescrip.setText("");
-    }//GEN-LAST:event_txtDescripMouseClicked
-
-    private void txtPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioMouseClicked
-        // TODO add your handling code here:
-        txtPrecio.setBackground(Color.white);
-        txtPrecio.setForeground(Color.black);
-        txtPrecio.setText("");
-    }//GEN-LAST:event_txtPrecioMouseClicked
+        if(!mv.verify_Extern(txtMatricula.getText()))
+        {
+            estados.setText("La Matricula no existe");
+        }
+        
+    }//GEN-LAST:event_txtMatriculaKeyReleased
 
     boolean verificar()
     {
@@ -354,24 +317,32 @@ public class formOfertas extends javax.swing.JFrame {
         if(txtID.getText().equals(""))
         {
             txtID.setBackground(Color.red);
-            msg.setText("Ingresa el ID");
+            JOptionPane.showMessageDialog(this, "Ingrese el ID", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtID.setBackground(Color.white);
             v = false;
         }else if(txtMatricula.getText().equals(""))
         {
             txtMatricula.setBackground(Color.red);
-            msg.setText("Ingresa la Matricula");
+            JOptionPane.showMessageDialog(this, "Ingrese la Matricula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
+            v = false;
+        }else if(estados.getText().equals("La Matricula no existe"))
+        {
+            txtMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "La Matricula no existe", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
             v = false;
         }else if(txtDescrip.getText().equals(""))
         {
             txtDescrip.setBackground(Color.red);
-            txtDescrip.setForeground(Color.white);
-            txtDescrip.setText("Obligatorio");
+            JOptionPane.showMessageDialog(this, "Ingrese una Descripcion", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtDescrip.setBackground(Color.white);
             v = false;
         }else if(txtPrecio.getText().equals(""))
         {
             txtPrecio.setBackground(Color.red);
-            txtPrecio.setForeground(Color.white);
-            txtPrecio.setText("Obligatorio");
+            JOptionPane.showMessageDialog(this, "Ingrese el Precio", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.setBackground(Color.white);
             v = false;
         }
         
@@ -386,11 +357,13 @@ public class formOfertas extends javax.swing.JFrame {
         txtPrecio.setText("");
         linea_A = "";
         linea_B = "";
+        estados.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar;
+    public static javax.swing.JLabel estados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
