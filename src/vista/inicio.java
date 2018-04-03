@@ -3,7 +3,6 @@ package vista;
 import vista.movimiento.*;
 import vista.mantenimientos.*;
 import principal.login;
-import vista.*;
 import modelo.mantenimiento.mUsuario;
 import vista.consultas.cliente.*;
 
@@ -296,7 +295,7 @@ public class inicio extends javax.swing.JFrame {
 
     private void mReservaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaClienteActionPerformed
         // TODO add your handling code here:
-        formReservaClientes vrc = new formReservaClientes();
+        //formReservaClientes vrc = new formReservaClientes();
     }//GEN-LAST:event_mReservaClienteActionPerformed
 
     private void mRecepcionVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRecepcionVehiculoActionPerformed
