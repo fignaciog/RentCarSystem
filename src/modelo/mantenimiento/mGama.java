@@ -123,4 +123,38 @@ public class mGama {
         return ver;
     }
     
+    public String getPrecio(String dato)
+    {
+        String ver = "";
+        try{
+            
+            fr = new FileReader(gama);
+            br = new BufferedReader(fr);
+            
+            String linea;
+            StringTokenizer s;
+            
+            while((linea = br.readLine()) != null)
+            {
+                if(gama.length() != 0)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    
+                    if(dato.equals(s.nextToken()))
+                    {
+                        s.nextToken();
+                        ver = s.nextToken();
+                    }
+                    
+                }
+            }
+            
+            fr.close();
+            
+        }catch(IOException ioe){
+            ver = "0";
+        }
+        return ver;
+    }
+    
 }

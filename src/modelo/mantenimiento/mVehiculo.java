@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 import vista.mantenimientos.formVehiculo;
 import vista.mantenimientos.formOfertas;
+import modelo.mantenimiento.mGama;
 import vista.movimiento.formReservaCliente;
 
 /**
@@ -147,7 +148,42 @@ public class mVehiculo {
         return its;
     }
     
-    
+  public String getGama(String dato)
+    {
+        String g = "";
+        if(vehiculos.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(vehiculos);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    
+                    s = new StringTokenizer(linea, "_");
+                    
+                    if(dato.equals(s.nextToken()))
+                    {
+                        s.nextToken();s.nextToken();
+                        g = s.nextToken();
+                        fr.close();
+                        return g;
+                    }
+                    
+                }
+                
+                fr.close();
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        return g;
+    }
     
     public boolean add(String linea_A)
     {

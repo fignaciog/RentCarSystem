@@ -52,5 +52,13 @@ public class reservas {
         return true;
     }
     
+    public String getPrecio(String dato)
+    {
+        mGama mg = new mGama();
+        mv = new mVehiculo();
+        
+        return mg.getPrecio(mv.getGama(dato));
+    }
+    
     
 }
