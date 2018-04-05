@@ -125,15 +125,55 @@ public class mVehiculo {
                 {
                     
                     s = new StringTokenizer(linea, "_");
+                    if(!linea.contains("Rentado"))
+                    {
+                        if(dato.equals(s.nextToken()))
+                        {
+                            formReservaCliente.getMarca.setText(s.nextToken());
+                            s.nextToken();
+                            formReservaCliente.getGama.setText(s.nextToken());
+                            s.nextToken();s.nextToken();s.nextToken();
+                            formReservaCliente.getDesc.setText(s.nextToken());
+                            formReservaCliente.estados.setText("");
+                            its = true;
+                        }
+                    }else{
+                        formReservaCliente.estados.setText("El Vehiculo no esta Disponible");
+                    }
+                }
+                
+                fr.close();
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        return its;
+    }
+    
+    public String verify_toStatus(String dato)
+    {
+        String status = "";
+        if(vehiculos.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(vehiculos);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    
+                    s = new StringTokenizer(linea, "_");
                     
                     if(dato.equals(s.nextToken()))
                     {
-                        formReservaCliente.getMarca.setText(s.nextToken());
-                        s.nextToken();
-                        formReservaCliente.getGama.setText(s.nextToken());
-                        s.nextToken();s.nextToken();s.nextToken();
-                        formReservaCliente.getDesc.setText(s.nextToken());
-                        its = true;
+                        status = linea;
+                        fr.close();
+                        return status;
                     }
                     
                 }
@@ -145,7 +185,7 @@ public class mVehiculo {
                 
             }
         }
-        return its;
+        return status;
     }
     
   public String getGama(String dato)

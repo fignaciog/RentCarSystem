@@ -44,12 +44,11 @@ public class reservas {
     public boolean model_C(String ID)
     {
         mo = new mOferta();
-        
         if(mo.verify_Reserva(ID))
         {
             its = true;
         }
-        return true;
+        return its;
     }
     
     public Double getPrecio(String matricula)

@@ -6,17 +6,15 @@
 package vista.movimiento;
 
 import javax.swing.JFrame;
-import java.util.Date;
-import modelo.movimiento.mReservaCliente;
-import modelo.mantenimiento.*;
-import controlador.reservas;
-import java.awt.Color;
-import java.awt.Cursor;
+import java.util.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
+
+import modelo.movimiento.mReservaCliente;
+import modelo.mantenimiento.*;
+import controlador.*;
 /**
  *
  * @author Ignacio
@@ -26,6 +24,10 @@ public class formReservaCliente extends javax.swing.JFrame {
     
     mReservaCliente mrc;
     reservas r;
+    String linea_A, change_status;
+    mVehiculo mv;
+    modificar m;
+    
     Date factual = new Date();
     Calendar fecha = new GregorianCalendar();
     SimpleDateFormat s = new SimpleDateFormat("dd / MM / YYYY");
@@ -147,11 +149,6 @@ public class formReservaCliente extends javax.swing.JFrame {
 
         txtOferta.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtOferta.setEnabled(false);
-        txtOferta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtOfertaKeyReleased(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("ID Oferta");
@@ -173,14 +170,6 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLabel9.setText("Observacion");
 
         txtObservacion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtObservacion.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtObservacionFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtObservacionFocusLost(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Dias Reserva");
@@ -657,8 +646,30 @@ public class formReservaCliente extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
-
+        mrc = new mReservaCliente();
+        if(verify())
+        {
+            linea_A = txtMatricula.getText()+"_"+txtCliente.getText()+"_"
+                    +txtOferta.getText()+"_"+getFechaReserva.getText()+"_"
+                    +s.format(dateSalida.getDate())+"_"+s.format(dateEntrada.getDate())
+                    +"_"+txtObservacion.getText()+"_"+getDiasReservas.getText()+"_"
+                    +getPrecioRecerva.getText();
+            
+            mv = new mVehiculo();
+            m = new modificar(mv.path);
+            if(m.change_status(mv.verify_toStatus(txtMatricula.getText())))
+            {
+                m.editar();
+                if(m.reenombrar())
+                {
+                    estados.setText("Estado del Vehiculo Cambiado");
+                }
+            }
+            mrc.add(linea_A);
+            clear();
+            dateSalida.setCalendar(null);
+            dateEntrada.setCalendar(null);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -671,7 +682,6 @@ public class formReservaCliente extends javax.swing.JFrame {
         if(!txtMatricula.getText().equals(""))
         {
             r = new reservas();
-            
             if(!r.model_A(txtMatricula.getText()))
             {
                 // mensaje;
@@ -697,43 +707,22 @@ public class formReservaCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtClienteKeyReleased
 
-    private void txtOfertaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOfertaKeyReleased
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtOfertaKeyReleased
-
     private void txtMatriculaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatriculaFocusLost
         // TODO add your handling code here:
-        if(!txtMatricula.getText().equals(""))
-        {
+        if(!txtMatricula.getText().equals("")){
             r = new reservas();
-            
-            if(!r.model_C(txtMatricula.getText()))
-            {
+            if(!r.model_C(txtMatricula.getText())){
                 // mensaje;
-                
-                estados.setText("La Matricula no tiene Ofertas");
+                txtOferta.setText("No tiene");
             }else{
                 estados.setText("");
             }
-            
         }else{
            txtMatricula.setBackground(Color.red);
             JOptionPane.showMessageDialog(this, "Debe Ingresar la Matricula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
             txtMatricula.setBackground(Color.white);
         }
     }//GEN-LAST:event_txtMatriculaFocusLost
-
-    private void txtObservacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusGained
-        // TODO add your handling code here:
-           
-    }//GEN-LAST:event_txtObservacionFocusGained
-
-    private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
-        // TODO add your handling code here:
-        //estados.setText(String.valueOf(d));
-        
-    }//GEN-LAST:event_txtObservacionFocusLost
 
     private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
         // TODO add your handling code here:
@@ -753,71 +742,79 @@ public class formReservaCliente extends javax.swing.JFrame {
 
     private void dateEntradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateEntradaPropertyChange
         // TODO add your handling code here:
-        if(!getGama.getText().equals(""))
-        {
-            //Captura: Dia, Mes, Año de la fecha de salida
-            X = dateSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
-            Y = dateSalida.getCalendar().get(Calendar.MONTH);
-            Z = dateSalida.getCalendar().get(Calendar.YEAR);
-            //Captura: Dia, Mes, Año de la fecha de entrada
-            I = dateEntrada.getCalendar().get(Calendar.DAY_OF_MONTH);
-            J = dateEntrada.getCalendar().get(Calendar.MONTH);
-            K = dateEntrada.getCalendar().get(Calendar.YEAR);
-            //Comprovando que la fecha de entrada no sea menor que la salida
-            if(K >= Z){
-                if(J >= Y){
-                    if(I > (X+1)){
-                        for(int i = X; i<I;i++)
-                        {
-                            d++;
-                        }
-                        getDiasReservas.setText(String.valueOf(d)+" Dias");
-                        //Verifico si la el tiempo de Reserva esta Vacio
-                        if(!getDiasReservas.getText().equals("")){
-                            //Objeto para utilizar el controlador utilizado para adquirir la 
-                            //informacion del Vehiculo, Usuario y la Oferta.
-                            r = new reservas();
-                            //Almaceno el precio en una variable Double
-                            Double Precio = ((r.getPrecio(txtMatricula.getText()))*d);
-                            //estados.setText(String.valueOf(Precio));
-                            //Si la vista del Precio no esta en Blanco Ejecuto la oferta
-                            if(!getPrecio.getText().equals("")){
-                                //Almaceno el porciento a descontar en una vareable Double.
-                                double D = ((Double.valueOf(getPrecio.getText())*Precio)/100);
-                                //Le doy salida al resultado del calculo en el label getPrecioReserva
-                                getPrecioRecerva.setText("RD$ "+String.valueOf( (Precio-D) ));
-                                //Si la vista del Precio si esta en Blanco no ejecuto la oferta
-                            }else{
-                                //Le doy salida al resultado del calculo en el label getPrecioReserva
-                                getPrecioRecerva.setText("RD$ "+String.valueOf(Precio* (double) d));
+        
+        try{
+          if(!getGama.getText().equals(""))
+            {
+                //Captura: Dia, Mes, Año de la fecha de salida
+                X = dateSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
+                Y = dateSalida.getCalendar().get(Calendar.MONTH);
+                Z = dateSalida.getCalendar().get(Calendar.YEAR);
+                //Captura: Dia, Mes, Año de la fecha de entrada
+                I = dateEntrada.getCalendar().get(Calendar.DAY_OF_MONTH);
+                J = dateEntrada.getCalendar().get(Calendar.MONTH);
+                K = dateEntrada.getCalendar().get(Calendar.YEAR);
+                //Comprovando que la fecha de entrada no sea menor que la salida
+                if(K >= Z){
+                    if(J >= Y){
+                        if(I > (X+1)){
+                            for(int i = X; i<I;i++)
+                            {
+                                d++;
                             }
+                            getDiasReservas.setText(String.valueOf(d)+" Dias");
+                            //Verifico si la el tiempo de Reserva esta Vacio
+                            if(!getDiasReservas.getText().equals("")){
+                                //Objeto para utilizar el controlador utilizado para adquirir la 
+                                //informacion del Vehiculo, Usuario y la Oferta.
+                                r = new reservas();
+                                //Almaceno el precio en una variable Double
+                                Double Precio = ((r.getPrecio(txtMatricula.getText()))*d);
+                                //estados.setText(String.valueOf(Precio));
+                                //Si la vista del Precio no esta en Blanco Ejecuto la oferta
+                                if(!getPrecio.getText().equals("")){
+                                    //Almaceno el porciento a descontar en una vareable Double.
+                                    double D = ((Double.valueOf(getPrecio.getText())*Precio)/100);
+                                    //Le doy salida al resultado del calculo en el label getPrecioReserva
+                                    getPrecioRecerva.setText("RD$ "+String.valueOf( (Precio-D) ));
+                                    //Si la vista del Precio si esta en Blanco no ejecuto la oferta
+                                }else{
+                                    //Le doy salida al resultado del calculo en el label getPrecioReserva
+                                    getPrecioRecerva.setText("RD$ "+String.valueOf(Precio* (double) d));
+                                }
+                            }
+                            d = 0;
+
+                        }else{
+                            estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
                         }
-                        d = 0;
-                        
                     }else{
                         estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
                     }
                 }else{
                     estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
                 }
-            }else{
-                estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
-            }
+            }  
+        }catch(NullPointerException n)
+        {
+            
         }
     }//GEN-LAST:event_dateEntradaPropertyChange
 
     private void dateSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateSalidaPropertyChange
         // TODO add your handling code here:
         //Captura: Dia, Mes, Año de la fecha de salida
-        dateEntrada.setMinSelectableDate(dateSalida.getDate());
-        
+        try{
+            dateEntrada.setMinSelectableDate(dateSalida.getDate());
+        }catch(NullPointerException n)
+        {
+            
+        }
     }//GEN-LAST:event_dateSalidaPropertyChange
 
     
-    boolean verify()
-    {
+    boolean verify(){
         boolean its = true;
-        
         if(txtMatricula.getText().equals(""))
         {
             txtMatricula.setBackground(Color.red);
@@ -852,6 +849,26 @@ public class formReservaCliente extends javax.swing.JFrame {
         return its;
     }
 
+    void clear()
+    {
+        txtMatricula.setText("");
+        txtCliente.setText("");
+        txtOferta.setText("");
+        getDiasReservas.setText("");
+        getPrecioRecerva.setText("");
+        
+        getMarca.setText("");
+        getGama.setText("");
+        getDesc.setText("");
+        getEstado.setText("");
+        
+        getFullname.setText("");
+        getDirec.setText("");
+        getPhone.setText("");
+        
+        getOdesc.setText("");
+        getPrecio.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar;

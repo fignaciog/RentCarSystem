@@ -254,15 +254,14 @@ public class formCliente extends javax.swing.JFrame {
                 }
 
             }else if(msg.getText().equals("Creando")){ 
-                mCliente mc = new mCliente();
+                mc = new mCliente();
                 if(verificar())
                 {
 
                     linea_B = txtCedula.getText()+"_"+txtNombre.getText()+
                             "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
                             "_"+txtEmail.getText()+"_"+txtTelefono.getText();
-
-
+                    
                     if(mc.add(linea_B))
                     {
                         msg.setForeground(Color.blue);
@@ -288,18 +287,25 @@ public class formCliente extends javax.swing.JFrame {
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
         // TODO add your handling code here:
         mc = new mCliente();
-        if(mc.verify(txtCedula.getText()))
+        if(!txtCedula.getText().equals("   -       - "))
         {
-            msg.setForeground(Color.red);
-            msg.setText("Modificando");
-            
-            linea_A = txtCedula.getText()+"_"+txtNombre.getText()+
-                        "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
-                        "_"+txtEmail.getText()+"_"+txtTelefono.getText();
+            if(mc.verify(txtCedula.getText()))
+            {
+                msg.setForeground(Color.red);
+                msg.setText("Modificando");
+
+                linea_A = txtCedula.getText()+"_"+txtNombre.getText()+
+                            "_"+txtApellidos.getText()+"_"+txtDireccion.getText()+
+                            "_"+txtEmail.getText()+"_"+txtTelefono.getText();
+            }else{
+                msg.setForeground(Color.blue);
+                msg.setText("Creando");
+            }
         }else{
-            msg.setForeground(Color.blue);
-            msg.setText("Creando");
+            clear();
+            msg.setText("");
         }
+        
     }//GEN-LAST:event_txtCedulaKeyReleased
 
     boolean verificar()

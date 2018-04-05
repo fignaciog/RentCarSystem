@@ -13,6 +13,7 @@ public class modificar {
     public File file_B;
     private String path_A;
     private String linea_A, linea_B;
+    private boolean its = false;
     
     FileReader fr;
     FileWriter fw;
@@ -34,6 +35,13 @@ public class modificar {
         file_B = new File(path_A+"_");
     }
     
+    public modificar(String path_A)
+    {
+        this.path_A = path_A;
+        file_A = new File(path_A);
+        file_B = new File(path_A+"_");
+    }
+    
     void escribir(String linea)
     {
         try{
@@ -41,23 +49,12 @@ public class modificar {
             fw = new FileWriter(file_B, true);
             pw = new PrintWriter(fw);
             
-            pw.print(linea);
-            pw.print("\n");
+            pw.println(linea);
             
-            //fw.close();
+            fw.close();
             
         }catch(IOException ioe){
-            ioe.printStackTrace();
-        }finally{
-            try{
-                if(null!=fw)
-                {
-                    fw.close();
-                }
-            }catch(IOException ioe1)
-            {
-                ioe1.printStackTrace();
-            }
+            //ioe.printStackTrace();
         }
     }
     
@@ -79,18 +76,9 @@ public class modificar {
                     escribir(linea_file);
                 }
             }
-            
+            fr.close();            
         }catch(IOException ioe){
-            ioe.printStackTrace();
-        }finally{
-            try{
-                if(null != fr)
-                {
-                    fr.close();
-                }
-            }catch(IOException ioe1){
-                ioe1.printStackTrace();
-            }
+            //ioe.printStackTrace();
         }
     }
     
@@ -109,6 +97,17 @@ public class modificar {
         file_B.renameTo(file_A = new File(path_A));
         
         return set;
+    }
+    
+    public boolean change_status(String linea_A)
+    {
+        this.linea_A = linea_A;
+        linea_B = linea_A.replaceFirst("Disponible", "Rentado");
+        if(linea_B.contains("Rentado"))
+        {
+            its = true;
+        }
+        return its;
     }
     
 }

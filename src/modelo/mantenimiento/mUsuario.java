@@ -52,8 +52,7 @@ public class mUsuario {
         }
         return its;
     }
-    
-    
+
     final void root(){
     
         try{
