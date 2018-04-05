@@ -123,7 +123,7 @@ public class mGama {
         return ver;
     }
     
-    public String getPrecio(String dato)
+    public double getPrecio(String dato)
     {
         String ver = "";
         try{
@@ -154,7 +154,7 @@ public class mGama {
         }catch(IOException ioe){
             ver = "0";
         }
-        return ver;
+        return Double.valueOf(ver);
     }
     
 }

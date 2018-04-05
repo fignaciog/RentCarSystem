@@ -14,9 +14,11 @@
         <group>
             <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/movimiento/formReservaCliente.java</file>
             <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/mantenimientos/formGama.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/mantenimientos/formOfertas.java</file>
             <file>file:/C:/ProjectsJava/RentCarSystem/src/modelo/mantenimiento/mVehiculo.java</file>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/modelo/mantenimiento/mGama.java</file>
-            <file>file:/C:/ProjectsJava/RentCarSystem/src/controlador/reservas.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/movimiento/formRecepcionVehiculo.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/modelo/mantenimiento/mOferta.java</file>
+            <file>file:/C:/ProjectsJava/RentCarSystem/src/vista/movimiento/NewJFrame.java</file>
         </group>
     </open-files>
 </project-private>

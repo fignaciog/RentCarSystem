@@ -52,12 +52,11 @@ public class reservas {
         return true;
     }
     
-    public String getPrecio(String dato)
+    public Double getPrecio(String matricula)
     {
         mGama mg = new mGama();
         mv = new mVehiculo();
-        
-        return mg.getPrecio(mv.getGama(dato));
+        return mg.getPrecio(mv.getGama(matricula));
     }
     
     

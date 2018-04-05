@@ -10,9 +10,13 @@ import java.util.Date;
 import modelo.movimiento.mReservaCliente;
 import modelo.mantenimiento.*;
 import controlador.reservas;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Ignacio
@@ -27,7 +31,9 @@ public class formReservaCliente extends javax.swing.JFrame {
     SimpleDateFormat s = new SimpleDateFormat("dd / MM / YYYY");
     int dia = factual.getDay(), mes = factual.getMonth(), Year = factual.getYear();
     String day, month, year;
-    int d = 0, x = 0, y = 0;
+    int d = 0;
+    int X = 0, Y = 0, Z = 0;
+    int I = 0, J = 0, K = 0;
     
     /**
      * Creates new form formReservaCliente
@@ -88,6 +94,8 @@ public class formReservaCliente extends javax.swing.JFrame {
         getMarca = new javax.swing.JLabel();
         getGama = new javax.swing.JLabel();
         getDesc = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        getEstado = new javax.swing.JLabel();
         jLayeredPane5 = new javax.swing.JLayeredPane();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -100,8 +108,10 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         getOdesc = new javax.swing.JLabel();
         getPrecio = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/important-day.png"))); // NOI18N
@@ -124,6 +134,9 @@ public class formReservaCliente extends javax.swing.JFrame {
             }
         });
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMatriculaKeyReleased(evt);
             }
@@ -133,6 +146,7 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLabel3.setText("ID Cliente");
 
         txtOferta.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtOferta.setEnabled(false);
         txtOferta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtOfertaKeyReleased(evt);
@@ -173,18 +187,31 @@ public class formReservaCliente extends javax.swing.JFrame {
 
         getDiasReservas.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         getDiasReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getDiasReservas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getDiasReservas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Total Reserva");
 
         getPrecioRecerva.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         getPrecioRecerva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getPrecioRecerva.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getPrecioRecerva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
 
+        dateSalida.setFocusTraversalPolicyProvider(true);
+        dateSalida.setFocusable(false);
         dateSalida.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        dateSalida.setNextFocusableComponent(dateEntrada);
+        dateSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateSalidaPropertyChange(evt);
+            }
+        });
 
         dateEntrada.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        dateEntrada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateEntradaPropertyChange(evt);
+            }
+        });
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText(" Guardar");
@@ -233,6 +260,9 @@ public class formReservaCliente extends javax.swing.JFrame {
         }
         txtCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClienteKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtClienteKeyReleased(evt);
             }
@@ -268,10 +298,13 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addComponent(txtObservacion)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(getPrecioRecerva, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(getDiasReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12)
+                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(getPrecioRecerva, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
+                            .addComponent(getDiasReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLayeredPane2))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -334,25 +367,23 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLayeredPane2)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(getDiasReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(getPrecioRecerva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLayeredPane2))
+                        .addGap(18, 18, 18)
+                        .addComponent(getPrecioRecerva, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         estados.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         estados.setForeground(new java.awt.Color(255, 0, 0));
-        estados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLayeredPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLayeredPane4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehiculo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jLayeredPane4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Vehiculo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setText("Marca:");
@@ -372,12 +403,20 @@ public class formReservaCliente extends javax.swing.JFrame {
         getDesc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         getDesc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel14.setText("Estado:");
+
+        getEstado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        getEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
         jLayeredPane4.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(getMarca, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(getGama, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(getDesc, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane4.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane4.setLayer(getEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane4Layout = new javax.swing.GroupLayout(jLayeredPane4);
         jLayeredPane4.setLayout(jLayeredPane4Layout);
@@ -397,7 +436,11 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addGroup(jLayeredPane4Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(getDesc)))
+                        .addComponent(getDesc))
+                    .addGroup(jLayeredPane4Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(getEstado)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane4Layout.setVerticalGroup(
@@ -415,13 +458,17 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(getDesc))
+                .addGap(18, 18, 18)
+                .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(getEstado))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel17.setText("Nombre completo:");
+        jLabel17.setText("Nombre:");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel18.setText("Direccion:");
@@ -464,7 +511,7 @@ public class formReservaCliente extends javax.swing.JFrame {
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(getPhone)))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         jLayeredPane5Layout.setVerticalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,7 +531,7 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLayeredPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Oferta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jLayeredPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Oferta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel23.setText("Descripcion:");
@@ -562,6 +609,8 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel15.setText("Norificaciones:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -573,11 +622,14 @@ public class formReservaCliente extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane3)))
+                        .addComponent(jLayeredPane3))
+                    .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -593,6 +645,8 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLayeredPane3)
                     .addComponent(jLayeredPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -664,41 +718,139 @@ public class formReservaCliente extends javax.swing.JFrame {
             }
             
         }else{
-           //clear_vehiculo();
+           txtMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Matricula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
         }
     }//GEN-LAST:event_txtMatriculaFocusLost
 
     private void txtObservacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusGained
         // TODO add your handling code here:
-        
-        x = dateSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
-        y = dateEntrada.getCalendar().get(Calendar.DAY_OF_MONTH);
-        
-        for(int i = x; i<y;i++)
-        {
-            d++;
-        }
-        getDiasReservas.setText(String.valueOf(d)+" Dias");
-        
+           
     }//GEN-LAST:event_txtObservacionFocusGained
 
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         // TODO add your handling code here:
-        mVehiculo mv = new mVehiculo();
-        mGama mg = new mGama();
-        if(!getDiasReservas.getText().equals(""))
-        {
-            r = new reservas();
-            String gama = mv.getGama(txtMatricula.getText());
-            String Precio;
-            Precio = mg.getPrecio(gama);
-            //getPrecioRecerva.setText(Precio);
-            float p = Float.valueOf(Precio);
-            getPrecioRecerva.setText("RD$ "+String.valueOf((float)p*d));
-        }
-        d = 0;
+        //estados.setText(String.valueOf(d));
+        
     }//GEN-LAST:event_txtObservacionFocusLost
 
+    private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            txtMatricula.transferFocus();
+        }
+    }//GEN-LAST:event_txtMatriculaKeyPressed
+
+    private void txtClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            dateSalida.setFocusable(true);
+        }
+    }//GEN-LAST:event_txtClienteKeyPressed
+
+    private void dateEntradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateEntradaPropertyChange
+        // TODO add your handling code here:
+        if(!getGama.getText().equals(""))
+        {
+            //Captura: Dia, Mes, Año de la fecha de salida
+            X = dateSalida.getCalendar().get(Calendar.DAY_OF_MONTH);
+            Y = dateSalida.getCalendar().get(Calendar.MONTH);
+            Z = dateSalida.getCalendar().get(Calendar.YEAR);
+            //Captura: Dia, Mes, Año de la fecha de entrada
+            I = dateEntrada.getCalendar().get(Calendar.DAY_OF_MONTH);
+            J = dateEntrada.getCalendar().get(Calendar.MONTH);
+            K = dateEntrada.getCalendar().get(Calendar.YEAR);
+            //Comprovando que la fecha de entrada no sea menor que la salida
+            if(K >= Z){
+                if(J >= Y){
+                    if(I > (X+1)){
+                        for(int i = X; i<I;i++)
+                        {
+                            d++;
+                        }
+                        getDiasReservas.setText(String.valueOf(d)+" Dias");
+                        //Verifico si la el tiempo de Reserva esta Vacio
+                        if(!getDiasReservas.getText().equals("")){
+                            //Objeto para utilizar el controlador utilizado para adquirir la 
+                            //informacion del Vehiculo, Usuario y la Oferta.
+                            r = new reservas();
+                            //Almaceno el precio en una variable Double
+                            Double Precio = ((r.getPrecio(txtMatricula.getText()))*d);
+                            //estados.setText(String.valueOf(Precio));
+                            //Si la vista del Precio no esta en Blanco Ejecuto la oferta
+                            if(!getPrecio.getText().equals("")){
+                                //Almaceno el porciento a descontar en una vareable Double.
+                                double D = ((Double.valueOf(getPrecio.getText())*Precio)/100);
+                                //Le doy salida al resultado del calculo en el label getPrecioReserva
+                                getPrecioRecerva.setText("RD$ "+String.valueOf( (Precio-D) ));
+                                //Si la vista del Precio si esta en Blanco no ejecuto la oferta
+                            }else{
+                                //Le doy salida al resultado del calculo en el label getPrecioReserva
+                                getPrecioRecerva.setText("RD$ "+String.valueOf(Precio* (double) d));
+                            }
+                        }
+                        d = 0;
+                        
+                    }else{
+                        estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
+                    }
+                }else{
+                    estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
+                }
+            }else{
+                estados.setText("La fecha de Entrada no puede ser menor que la de Salida");
+            }
+        }
+    }//GEN-LAST:event_dateEntradaPropertyChange
+
+    private void dateSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateSalidaPropertyChange
+        // TODO add your handling code here:
+        //Captura: Dia, Mes, Año de la fecha de salida
+        dateEntrada.setMinSelectableDate(dateSalida.getDate());
+        
+    }//GEN-LAST:event_dateSalidaPropertyChange
+
+    
+    boolean verify()
+    {
+        boolean its = true;
+        
+        if(txtMatricula.getText().equals(""))
+        {
+            txtMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Matricula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtMatricula.setBackground(Color.white);
+            its = false;
+        }else if(txtCliente.getText().equals(""))
+        {
+            txtCliente.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la Cedula del Cliente", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtCliente.setBackground(Color.white);
+            its = false;
+        }else if(dateSalida.getCalendar().get(Calendar.DATE) == 0)
+        {
+            dateSalida.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la fecha de Salida", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            dateSalida.setBackground(Color.white);
+            its = false;
+        }else if(dateEntrada.getCalendar().get(Calendar.DATE) == 0)
+        {
+            dateSalida.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Debe Ingresar la fecha de Entrada", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            dateSalida.setBackground(Color.white);
+            its = false;
+        }else if(txtObservacion.getText().equals(""))
+        {
+            txtObservacion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Si el vehiculo no tiene defecto escribe: sin problemas", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtObservacion.setBackground(Color.white);
+            its = false;
+        }
+        return its;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
@@ -709,6 +861,7 @@ public class formReservaCliente extends javax.swing.JFrame {
     public static javax.swing.JLabel getDesc;
     private javax.swing.JLabel getDiasReservas;
     public static javax.swing.JLabel getDirec;
+    private javax.swing.JLabel getEstado;
     private javax.swing.JLabel getFechaReserva;
     public static javax.swing.JLabel getFullname;
     public static javax.swing.JLabel getGama;
@@ -722,6 +875,8 @@ public class formReservaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
