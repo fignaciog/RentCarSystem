@@ -2,7 +2,11 @@
 package modelo.movimiento;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.StringTokenizer;
+import vista.movimiento.formRecepcionVehiculo;
 
 /**
  *
@@ -11,7 +15,7 @@ import java.util.StringTokenizer;
 public class mRecepcionVehiculo {
     
     boolean its = false;
-    String path;
+    public String path;
     
     File recepcionvehiculo;
     FileReader fr;
@@ -19,11 +23,13 @@ public class mRecepcionVehiculo {
     BufferedReader br;
     PrintWriter pw;
     StringTokenizer s;
+    SimpleDateFormat sf = new SimpleDateFormat("dd / MM / yyyy");
+    Date fechar;
     
     public mRecepcionVehiculo()
     {
         recepcionvehiculo = new File("C:\\RentCarSystem\\database\\movimiento\\recepcionvehiculo.txt");
-        path = recepcionvehiculo.getPath();
+        this.path = recepcionvehiculo.getPath();
     }
     
     public boolean verify(String dato)
@@ -34,14 +40,19 @@ public class mRecepcionVehiculo {
                 fr = new FileReader(recepcionvehiculo);
                 br = new BufferedReader(fr);
                 
-                String linea;
+                String linea, d;
                 
                 while((linea = br.readLine()) != null)
                 {
                     s = new StringTokenizer(linea, "_");
                     if(dato.equals(s.nextToken()))
                     {
-                        
+                        formRecepcionVehiculo.txtIDReserva.setText(s.nextToken());
+                        formRecepcionVehiculo.txtIDMatricula.setText(s.nextToken());
+                        d = s.nextToken();
+                        formRecepcionVehiculo.dateRecepcion.setDate(setDate(d));
+                        formRecepcionVehiculo.dateRecepcion.setMinSelectableDate(setDate(d));
+                        formRecepcionVehiculo.txtOb.setText(s.nextToken());
                         fr.close();
                         return (its = true);
                     }
@@ -59,7 +70,7 @@ public class mRecepcionVehiculo {
     {
         try{
             
-            fw = new FileWriter(recepcionvehiculo);
+            fw = new FileWriter(recepcionvehiculo,true);
             pw = new PrintWriter(fw);
             
             pw.println(linea_A);
@@ -71,6 +82,17 @@ public class mRecepcionVehiculo {
         {
         }
         return its;
+    }
+    
+    Date setDate(String f)
+    {
+        try{
+            fechar = sf.parse(f);
+        }catch(ParseException p)
+        {
+            
+        }
+        return fechar;
     }
     
 }

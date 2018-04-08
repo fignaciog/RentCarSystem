@@ -2,6 +2,7 @@
 package vista;
 import vista.movimiento.*;
 import vista.mantenimientos.*;
+import vista.consultas.vehiculo.*;
 import principal.login;
 import modelo.mantenimiento.mUsuario;
 import vista.consultas.cliente.*;
@@ -64,8 +65,8 @@ public class inicio extends javax.swing.JFrame {
         mcClienteID = new javax.swing.JMenuItem();
         mcClienteRangoID = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        vccVehiculo = new javax.swing.JMenuItem();
+        btnMatricula = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
@@ -182,11 +183,21 @@ public class inicio extends javax.swing.JFrame {
 
         jMenu6.setText("Vehiculos");
 
-        jMenuItem15.setText("Vehiculos");
-        jMenu6.add(jMenuItem15);
+        vccVehiculo.setText("Vehiculos");
+        vccVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vccVehiculoActionPerformed(evt);
+            }
+        });
+        jMenu6.add(vccVehiculo);
 
-        jMenuItem8.setText("Por Matricula");
-        jMenu6.add(jMenuItem8);
+        btnMatricula.setText("Por Matricula");
+        btnMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatriculaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(btnMatricula);
 
         jMenu3.add(jMenu6);
 
@@ -305,17 +316,28 @@ public class inicio extends javax.swing.JFrame {
 
     private void mcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteActionPerformed
         // TODO add your handling code here:
-        Cliente cC = new Cliente();
+        vcCliente cC = new vcCliente();
     }//GEN-LAST:event_mcClienteActionPerformed
 
     private void mcClienteIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteIDActionPerformed
         // TODO add your handling code here:
-        ID cID = new ID();
+        vcID cID = new vcID();
     }//GEN-LAST:event_mcClienteIDActionPerformed
+
+    private void vccVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vccVehiculoActionPerformed
+        // TODO add your handling code here:
+        vccVehiculo vccV = new vccVehiculo();
+    }//GEN-LAST:event_vccVehiculoActionPerformed
+
+    private void btnMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriculaActionPerformed
+        // TODO add your handling code here:
+        vccMatricula vccM = new vccMatricula();
+    }//GEN-LAST:event_btnMatriculaActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnMatricula;
     private javax.swing.JPopupMenu clickMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -327,12 +349,10 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenu lmVehiculo;
     private javax.swing.JMenuItem mCerrarS;
     private javax.swing.JMenuItem mCliente;
@@ -346,5 +366,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mcCliente;
     private javax.swing.JMenuItem mcClienteID;
     private javax.swing.JMenuItem mcClienteRangoID;
+    private javax.swing.JMenuItem vccVehiculo;
     // End of variables declaration//GEN-END:variables
 }

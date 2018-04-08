@@ -14,12 +14,12 @@ public class mCliente {
     
     public String path;
     
-    File cliente;
-    FileWriter fw;
-    FileReader fr;
-    PrintWriter pw;
-    BufferedReader br;
-    StringTokenizer s;
+    protected File cliente;
+    protected FileWriter fw;
+    protected FileReader fr;
+    protected PrintWriter pw;
+    protected BufferedReader br;
+    protected StringTokenizer s;
     
     public mCliente()
     {

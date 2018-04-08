@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
-import vista.movimiento.formRecepcionVehiculo;
+import vista.movimiento.*;
 
 /**
  *
@@ -28,7 +28,7 @@ public class mReservaCliente {
     public mReservaCliente()
     {
         reservacliente = new File("C:\\RentCarSystem\\database\\movimiento\\reservacliente.txt");
-        path = reservacliente.getPath();
+        this.path = reservacliente.getPath();
     }
     
     public boolean verify(String ID)
@@ -40,14 +40,28 @@ public class mReservaCliente {
                 fr = new FileReader(reservacliente);
                 br = new BufferedReader(fr);
                 
-                String linea;
+                String linea, sa, en, id;
                 
                 while((linea = br.readLine()) != null)
                 {
                     s = new StringTokenizer(linea, "_");
-                    if(ID.equals(s.nextToken()))
+                    id = s.nextToken();
+                    if(ID.equals(id))
                     {
-                        its = true;
+                        formReservaCliente.txtMatricula.setText(s.nextToken());
+                        formReservaCliente.txtCliente.setText(s.nextToken());
+                        formReservaCliente.txtOferta.setText(s.nextToken());
+                        s.nextToken();
+                        sa = s.nextToken();
+                        formReservaCliente.dateSalida.setDate(setDate(sa));
+                        en = s.nextToken();
+                        formReservaCliente.dateEntrada.setDate(setDate(en));
+                        formReservaCliente.txtObservacion.setText(s.nextToken());
+                        formReservaCliente.getDiasReservas.setText(s.nextToken());
+                        formReservaCliente.getPrecioRecerva.setText(s.nextToken());
+                        formReservaCliente.linea_A = linea;
+                        fr.close();
+                        return (its = true);
                     }
                 }
                 
@@ -62,25 +76,19 @@ public class mReservaCliente {
         return its;
     }
     
-    public boolean verifay_Recepcion(String dato)
+    public boolean verify_Recepcion(String dato)
     {
-        
-        if(reservacliente.length() != 0)
-        {
+        if(reservacliente.length() != 0){
             try{
-                
                 fr = new FileReader(reservacliente);
                 br = new BufferedReader(fr);
-                
-                String linea, id, fe;
-                
-                while((linea = br.readLine()) != null)
-                {
+                String linea, id, fe, m;
+                while((linea = br.readLine()) != null){
                     s = new StringTokenizer(linea, "_");
                     id = s.nextToken();
-                    if(dato.equals(id))
-                    {
-                        formRecepcionVehiculo.getIDM.setText(id);
+                    if(dato.equals(id)){
+                        m = s.nextToken();
+                        formRecepcionVehiculo.getIDM.setText(m);
                         formRecepcionVehiculo.getIDC.setText(s.nextToken());
                         formRecepcionVehiculo.getIDO.setText(s.nextToken());
                         formRecepcionVehiculo.getFR.setText(s.nextToken());
@@ -91,6 +99,8 @@ public class mReservaCliente {
                         formRecepcionVehiculo.getO.setText(s.nextToken());
                         formRecepcionVehiculo.getDR.setText(s.nextToken());
                         formRecepcionVehiculo.getP.setText(s.nextToken());
+                        formRecepcionVehiculo.txtIDMatricula.setText(m);
+                        formRecepcionVehiculo.txtIDMatricula.setEnabled(false);
                         fr.close();
                         return (its = true);
                     }

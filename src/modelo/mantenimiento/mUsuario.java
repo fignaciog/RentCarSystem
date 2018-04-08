@@ -28,7 +28,7 @@ public class mUsuario {
         {
             root();
         }
-        path = login.getPath();
+        this.path = login.getPath();
     }
     
 
@@ -96,7 +96,6 @@ public class mUsuario {
                     formUsuario.txtNombre.setText(s.nextToken());
                     formUsuario.txtApellidos.setText(s.nextToken());
                     formUsuario.txtEmail.setText(s.nextToken());
-                    
                     its = true;
                 }
                 

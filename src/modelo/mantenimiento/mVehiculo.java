@@ -3,10 +3,9 @@ package modelo.mantenimiento;
 
 import java.io.*;
 import java.util.StringTokenizer;
-import vista.mantenimientos.formVehiculo;
-import vista.mantenimientos.formOfertas;
-import modelo.mantenimiento.mGama;
+import vista.mantenimientos.*;
 import vista.movimiento.formReservaCliente;
+import vista.consultas.vehiculo.vccMatricula;
 
 /**
  *
@@ -17,12 +16,12 @@ public class mVehiculo {
     boolean its = false;
     public String path;
     
-    File vehiculos;
-    FileReader fr;
-    FileWriter fw;
-    BufferedReader br;
-    PrintWriter pw;
-    StringTokenizer s ;
+    protected File vehiculos;
+    protected FileReader fr;
+    protected FileWriter fw;
+    protected BufferedReader br;
+    protected PrintWriter pw;
+    protected StringTokenizer s ;
     
     public mVehiculo()
     {
@@ -60,13 +59,12 @@ public class mVehiculo {
                         formVehiculo.txtColor.setText(s.nextToken());
                         formVehiculo.sInterior.setSelectedItem(s.nextToken());
                         formVehiculo.sEstado.setSelectedItem(s.nextToken());
-                        its = true;
+                        fr.close();
+                        return (its = true);
                     }
                     
                 }
-                
                 fr.close();
-                
             }catch(IOException ioe)
             {
                 
@@ -88,20 +86,16 @@ public class mVehiculo {
                 
                 while((linea = br.readLine()) != null)
                 {
-                    
                     s = new StringTokenizer(linea, "_");
-                    
                     if(dato.equals(s.nextToken()))
                     {
                         formOfertas.estados.setText("Marca: "+s.nextToken()+" | Modelo: "
                         +s.nextToken()+" | Gama: "+s.nextToken());
-                        its = true;
+                        fr.close();
+                        return (its = true);
                     }
-                    
                 }
-                
                 fr.close();
-                
             }catch(IOException ioe)
             {
                 
@@ -115,15 +109,11 @@ public class mVehiculo {
         if(vehiculos.length() != 0)
         {
             try{
-                
                 fr = new FileReader(vehiculos);
                 br = new BufferedReader(fr);
-                
                 String linea;
-                
                 while((linea = br.readLine()) != null)
                 {
-                    
                     s = new StringTokenizer(linea, "_");
                     if(!linea.contains("Rentado"))
                     {
@@ -135,7 +125,8 @@ public class mVehiculo {
                             s.nextToken();s.nextToken();s.nextToken();
                             formReservaCliente.getDesc.setText(s.nextToken());
                             formReservaCliente.estados.setText("");
-                            its = true;
+                            fr.close();
+                            return (its = true);
                         }
                     }else{
                         formReservaCliente.estados.setText("El Vehiculo no esta Disponible");
@@ -186,6 +177,51 @@ public class mVehiculo {
             }
         }
         return status;
+    }
+    
+    public boolean verify_Cmatricula(String dato)
+    {
+        if(vehiculos.length() != 0)
+        {
+            try{
+            
+                fr = new FileReader(vehiculos);
+                br = new BufferedReader(fr);
+                
+                String linea, m = "";
+                
+                while((linea = br.readLine()) != null)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    m = s.nextToken().trim();
+                    //System.out.println(m);
+                    if(m.equals(dato))
+                    {
+                        vccMatricula.vMatricula.setText(m);
+                        vccMatricula.vMarca.setText(s.nextToken());
+                        vccMatricula.vModelo.setText(s.nextToken());
+                        vccMatricula.vGama.setText(s.nextToken());
+                        vccMatricula.vTipoV.setText(s.nextToken());
+                        vccMatricula.vTipoM.setText(s.nextToken());
+                        vccMatricula.vTransm.setText(s.nextToken());
+                        vccMatricula.vDescrip.setText(s.nextToken());
+                        vccMatricula.vTecho.setText(s.nextToken());
+                        vccMatricula.vInterior.setText(s.nextToken());
+                        vccMatricula.vAire.setText(s.nextToken());
+                        vccMatricula.vColor.setText(s.nextToken());
+                        vccMatricula.vEstado.setText(s.nextToken());
+                        fr.close();
+                        return (its = true);
+                    }
+                    
+                }
+                fr.close();
+            }catch(IOException ioe)
+            {
+
+            }
+        }
+        return its;
     }
     
   public String getGama(String dato)

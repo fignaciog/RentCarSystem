@@ -26,7 +26,19 @@ public class login extends javax.swing.JFrame {
         btnRegistrar.setEnabled(false);
         txtPass.setEnabled(false);
         
+    }
+    
+    public login(String linea_A) {
         
+        initComponents();
+        ml = new mUsuario();
+        setTitle("Iniciar Seccion");
+        setLocationRelativeTo(null);
+        setVisible(true);
+        
+        btnEntrar.setEnabled(false);
+        btnRegistrar.setEnabled(false);
+        txtPass.setEnabled(false);
         
     }
     

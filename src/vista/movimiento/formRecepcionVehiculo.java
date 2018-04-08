@@ -2,8 +2,13 @@
 package vista.movimiento;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.movimiento.*;
+import controlador.modificar;
+import modelo.mantenimiento.mVehiculo;
 
 /**
  *
@@ -11,8 +16,12 @@ import modelo.movimiento.*;
  */
 public class formRecepcionVehiculo extends javax.swing.JFrame {
 
-    mRecepcionVehiculo mrv;
-    mReservaCliente mrc;
+    mRecepcionVehiculo mrv = null;
+    mReservaCliente mrc = null;
+    modificar m = null;
+    mVehiculo mv = null;
+    SimpleDateFormat s = new SimpleDateFormat("dd / MM / yyyy");
+    String linea_A, linea_B;
     
     public formRecepcionVehiculo() {
         initComponents();
@@ -39,6 +48,8 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         dateRecepcion = new com.toedter.calendar.JDateChooser();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtIDReserva = new javax.swing.JTextField();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -66,11 +77,9 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rental.png"))); // NOI18N
         jLabel1.setText(" Recepcion de Vehiculo");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         msg.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -81,9 +90,6 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         txtIDRecepcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtIDRecepcionKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIDRecepcionKeyReleased(evt);
             }
         });
 
@@ -108,54 +114,6 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         dateRecepcion.setDateFormatString("dd / MM / yyyy");
         dateRecepcion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtIDRecepcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtIDMatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtOb, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(dateRecepcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIDRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(txtOb, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(dateRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtIDMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIDRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIDMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(3, 3, 3)
-                .addComponent(dateRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtOb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("  Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +130,82 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(153, 153, 153))); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("ID Reserva");
+
+        txtIDReserva.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtIDReserva.setToolTipText("");
+        txtIDReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIDReservaKeyPressed(evt);
+            }
+        });
+
+        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtIDRecepcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtIDMatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtOb, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(dateRecepcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnCerrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtIDReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIDRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(txtOb, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(dateRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtIDMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtIDReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIDRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIDReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIDMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(3, 3, 3)
+                .addComponent(dateRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtOb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Factura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(153, 153, 153))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel7.setText("ID Matricula:");
@@ -265,16 +298,16 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(getIDM)
-                    .addComponent(getIDC)
-                    .addComponent(getIDO)
-                    .addComponent(getFR)
-                    .addComponent(getFS)
-                    .addComponent(getFE)
-                    .addComponent(getO)
-                    .addComponent(getDR)
-                    .addComponent(getP))
-                .addContainerGap(184, Short.MAX_VALUE))
+                    .addComponent(getIDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getIDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getIDO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getFR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getFS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getFE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getDR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(191, 191, 191))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +348,7 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(getP))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         estados.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -331,13 +364,10 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLayeredPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -351,19 +381,12 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLayeredPane1))))
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -372,6 +395,51 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        if(verify())
+        {
+            if(msg.getText().equals("Creando"))
+            {
+                mrv = new mRecepcionVehiculo();
+                
+                linea_A = txtIDRecepcion.getText()+"_"+txtIDReserva.getText()
+                        +"_"+txtIDMatricula.getText()+"_"+s.format(dateRecepcion.getDate())
+                        +"_"+txtOb.getText();
+                
+                if(mrv.add(linea_A))
+                {
+                    if(changeStatus())
+                    {
+                        estados.setText("Estado Cambiedo");
+                        clear();
+                         msg.setText("Datos Guardados");
+                        dateRecepcion.setDate(null);    
+                    }
+                   
+                }
+                
+                
+            }else if(msg.getText().equals("Modificando"))
+            {
+                linea_B = txtIDRecepcion.getText()+"_"+txtIDReserva.getText()
+                        +"_"+txtIDMatricula.getText()+"_"+s.format(dateRecepcion.getDate())
+                        +"_"+txtOb.getText();
+                
+                mrv = new mRecepcionVehiculo();
+                m = new modificar(linea_A, linea_B, mrv.path);
+                m.editar();
+                if(m.reenombrar())
+                {
+                    msg.setForeground(Color.blue);
+                    msg.setText("Datos Modificados");
+                    clear();
+                    dateRecepcion.setDate(null);
+                }else{
+                    msg.setText("Datos No modificados");
+                    clear();
+                    dateRecepcion.setDate(null);
+                }
+            }
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -379,47 +447,119 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void txtIDRecepcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDRecepcionKeyReleased
-        // TODO add your handling code here:
-        
-        if(!txtIDRecepcion.getText().equals(""))
-        {
-            mrv = new mRecepcionVehiculo();
-            if(mrv.verify(txtIDRecepcion.getText()))
-            {
-                msg.setForeground(Color.red);
-                msg.setText("Modificando");
-                txtIDMatricula.setEnabled(false);
-            }else{
-                msg.setForeground(Color.blue);
-                msg.setText("Creando");
-            }
-        }else{
-            msg.setText("");
-        }
-        
-    }//GEN-LAST:event_txtIDRecepcionKeyReleased
-
     private void txtIDRecepcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDRecepcionKeyPressed
         // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtIDRecepcion.getText().equals(""))
+            {
+                mrv = new mRecepcionVehiculo();
+                if(mrv.verify(txtIDRecepcion.getText()))
+                {
+                    msg.setForeground(Color.red);
+                    msg.setText("Modificando");
+                    txtIDMatricula.setEnabled(false);
+                    linea_A = txtIDRecepcion.getText()+"_"+txtIDReserva.getText()
+                        +"_"+txtIDMatricula.getText()+"_"+s.format(dateRecepcion.getDate())
+                        +"_"+txtOb.getText();
+                }else{
+                    msg.setForeground(Color.blue);
+                    msg.setText("Creando");
+                }
+            }else{
+                msg.setText("");
+                clear();
+            }
+        }
     }//GEN-LAST:event_txtIDRecepcionKeyPressed
 
     private void txtIDMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDMatriculaKeyReleased
         // TODO add your handling code here:
-        if(!txtIDMatricula.getText().equals(""))
-        {
-            mrc = new mReservaCliente();
-            if(!mrc.verifay_Recepcion(txtIDMatricula.getText()))
-            {   
-                estados.setText("No hay Matricula registrada en Resepcion cliente");
-            }else{
-                estados.setText("");
-            }
-        }
-        
     }//GEN-LAST:event_txtIDMatriculaKeyReleased
 
+    private void txtIDReservaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDReservaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtIDReserva.getText().equals(""))
+            {
+                mrc = new mReservaCliente();
+                if(mrc.verify_Recepcion(txtIDReserva.getText()))
+                {
+                    estados.setText("");
+                }else{
+                    estados.setText("Factura de Reserva no Registrada");
+                    clear();
+                }
+            }
+        }
+    }//GEN-LAST:event_txtIDReservaKeyPressed
+
+    boolean verify()
+    {
+        boolean its = true;
+        if(txtIDRecepcion.getText().equals(""))
+        {
+            txtIDRecepcion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Ingresa el ID", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtIDRecepcion.setBackground(Color.white);
+            its = false;
+        }else if(txtIDMatricula.getText().equals(""))
+        {
+            txtIDMatricula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Ingresa la Matricula", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            txtIDMatricula.setBackground(Color.white);
+            its = false;
+        }else if(dateRecepcion.getDate() == null)
+        {
+            dateRecepcion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "Ingresa la Fecha de Entrada", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            dateRecepcion.setBackground(Color.white);
+            its = false;
+        }else if(txtOb.getText().equals(""))
+        {
+            txtOb.setText("Estable");
+            its = false;
+        }
+        
+        return its;
+    }
     
+    void clear()
+    {
+        txtIDMatricula.setText("");
+        txtIDRecepcion.setText("");
+        txtIDReserva.setText("");
+        txtOb.setText("");
+        estados.setText("");
+        
+        getDR.setText("");
+        getFE.setText("");
+        getFR.setText("");
+        getFS.setText("");
+        getIDC.setText("");
+        getIDM.setText("");
+        getIDO.setText("");
+        getO.setText("");
+        getP.setText("");
+    }
+    
+    boolean changeStatus()
+    {
+        boolean its = false;
+        mv = new mVehiculo();
+            m = new modificar(mv.path);
+            if(m.change_status(mv.verify_toStatus(txtIDMatricula.getText()),1))
+            {
+                m.editar();
+                if(m.reenombrar())
+                {
+                    //estados.setText("Estado del Vehiculo Cambiado");
+                    its = true;
+                }
+            }
+        return its;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
@@ -446,14 +586,16 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLabel msg;
-    private javax.swing.JTextField txtIDMatricula;
-    private javax.swing.JTextField txtIDRecepcion;
-    private javax.swing.JTextField txtOb;
+    public static javax.swing.JTextField txtIDMatricula;
+    public static javax.swing.JTextField txtIDRecepcion;
+    public static javax.swing.JTextField txtIDReserva;
+    public static javax.swing.JTextField txtOb;
     // End of variables declaration//GEN-END:variables
 }
