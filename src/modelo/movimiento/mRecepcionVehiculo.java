@@ -14,17 +14,17 @@ import vista.movimiento.formRecepcionVehiculo;
  */
 public class mRecepcionVehiculo {
     
-    boolean its = false;
+    private boolean its = false;
     public String path;
     
-    File recepcionvehiculo;
-    FileReader fr;
-    FileWriter fw;
-    BufferedReader br;
-    PrintWriter pw;
-    StringTokenizer s;
-    SimpleDateFormat sf = new SimpleDateFormat("dd / MM / yyyy");
-    Date fechar;
+    protected File recepcionvehiculo;
+    protected FileReader fr;
+    protected FileWriter fw;
+    protected BufferedReader br;
+    protected PrintWriter pw;
+    protected StringTokenizer s;
+    protected SimpleDateFormat sf = new SimpleDateFormat("dd / MM / yyyy");
+    protected Date fechar;
     
     public mRecepcionVehiculo()
     {

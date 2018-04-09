@@ -12,12 +12,12 @@ import vista.movimiento.formReservaCliente;
  */
 public class mOferta {
     
-    File Ofertas;
-    FileReader fr;
-    BufferedReader br;
-    FileWriter fw;
-    PrintWriter pw;
-    StringTokenizer s;
+    protected File Ofertas;
+    protected FileReader fr;
+    protected BufferedReader br;
+    protected FileWriter fw;
+    protected PrintWriter pw;
+    protected StringTokenizer s;
     
     public String path;
     boolean its = false;

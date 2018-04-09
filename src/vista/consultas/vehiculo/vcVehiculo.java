@@ -1,24 +1,26 @@
 
 package vista.consultas.vehiculo;
-
 import javax.swing.JFrame;
-
+import modelo.consulta.mcVehiculo;
 /**
  *
  * @author Ignacio
  */
-public class vccVehiculo extends javax.swing.JFrame {
+public class vcVehiculo extends javax.swing.JFrame {
     
     private String Dato = "";
+    mcVehiculo mcv = null;
+    int Metodo = 0;
     
     /**
      * Creates new form Vehiculo
      */
-    public vccVehiculo() {
+    public vcVehiculo() {
         initComponents();
         setTitle("Consulta Vehiculo");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
     }
     
@@ -39,10 +41,7 @@ public class vccVehiculo extends javax.swing.JFrame {
         jLayeredPane5 = new javax.swing.JLayeredPane();
         CtipoE = new javax.swing.JComboBox<>();
         jLayeredPane6 = new javax.swing.JLayeredPane();
-        Cotro = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtDatos = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        Cgama = new javax.swing.JComboBox<>();
         jLayeredPane7 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
@@ -50,12 +49,14 @@ public class vccVehiculo extends javax.swing.JFrame {
         jSlider2 = new javax.swing.JSlider();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLayeredPane8 = new javax.swing.JLayeredPane();
+        txtMarca = new javax.swing.JTextField();
         btnEjecutar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         vistaResultado = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -72,7 +73,12 @@ public class vccVehiculo extends javax.swing.JFrame {
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         Ctipov.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        Ctipov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Dissel", "Gasolina", "Gas" }));
+        Ctipov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
+        Ctipov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CtipovActionPerformed(evt);
+            }
+        });
 
         jLayeredPane2.setLayer(Ctipov, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -96,6 +102,11 @@ public class vccVehiculo extends javax.swing.JFrame {
         jTabbedPane1.addTab("Por Tipo de Vehiculo", jLayeredPane2);
 
         txtColor.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtColorKeyReleased(evt);
+            }
+        });
 
         jLayeredPane3.setLayer(txtColor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -120,6 +131,11 @@ public class vccVehiculo extends javax.swing.JFrame {
 
         CtipoTra.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         CtipoTra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automatica", "Mecanica" }));
+        CtipoTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CtipoTraActionPerformed(evt);
+            }
+        });
 
         jLayeredPane4.setLayer(CtipoTra, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -143,7 +159,12 @@ public class vccVehiculo extends javax.swing.JFrame {
         jTabbedPane1.addTab("Por Transmision", jLayeredPane4);
 
         CtipoE.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        CtipoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponibles", "Rentados" }));
+        CtipoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponible", "Rentado" }));
+        CtipoE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CtipoEActionPerformed(evt);
+            }
+        });
 
         jLayeredPane5.setLayer(CtipoE, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -166,21 +187,15 @@ public class vccVehiculo extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Por Estado", jLayeredPane5);
 
-        Cotro.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        Cotro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Marca", "Gama" }));
+        Cgama.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        Cgama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "0", "1", "2" }));
+        Cgama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CgamaActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setText("Buscar");
-
-        txtDatos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setText("Por");
-
-        jLayeredPane6.setLayer(Cotro, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(txtDatos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(Cgama, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
         jLayeredPane6.setLayout(jLayeredPane6Layout);
@@ -188,30 +203,18 @@ public class vccVehiculo extends javax.swing.JFrame {
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(Cotro, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addComponent(Cgama, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
         );
         jLayeredPane6Layout.setVerticalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
+            .addGroup(jLayeredPane6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cotro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Cgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Otras Consultas", jLayeredPane6);
+        jTabbedPane1.addTab("Por Gama", jLayeredPane6);
 
         jLayeredPane7.setBackground(java.awt.SystemColor.controlHighlight);
 
@@ -277,6 +280,34 @@ public class vccVehiculo extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Por Precio", jLayeredPane7);
 
+        txtMarca.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyReleased(evt);
+            }
+        });
+
+        jLayeredPane8.setLayer(txtMarca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane8Layout = new javax.swing.GroupLayout(jLayeredPane8);
+        jLayeredPane8.setLayout(jLayeredPane8Layout);
+        jLayeredPane8Layout.setHorizontalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(621, Short.MAX_VALUE))
+        );
+        jLayeredPane8Layout.setVerticalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Por Marca", jLayeredPane8);
+
         btnEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnEjecutar.setText("  Buscar");
         btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,6 +318,11 @@ public class vccVehiculo extends javax.swing.JFrame {
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/forward.png"))); // NOI18N
         btnCerrar.setText("  Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(jTabbedPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnEjecutar, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -323,7 +359,7 @@ public class vccVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Matricula", "Marca", "Modelo", "Gama", "Tipo Vehiculo", "Tipo Motor", "Tipo Transmicion", "Descripcion", "Techo", "Interior", "Aire", "Color", "Estado"
+                "Matricula", "Marca", "Modelo", "Gama", "Tipo Vehiculo", "Tipo Motor", "Tipo Transmicion", "Descripcion", "Techo", "Aire", "Color", "Interior", "Estado"
             }
         ));
         jScrollPane1.setViewportView(vistaResultado);
@@ -363,13 +399,61 @@ public class vccVehiculo extends javax.swing.JFrame {
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
         // TODO add your handling code here:
         
+        if(!Dato.equals(""))
+        {
+            mcv = new mcVehiculo(Dato, Metodo);
+        }
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
-    
-    
+    private void CtipovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipovActionPerformed
+        // TODO add your handling code here:
+        Dato = (String) Ctipov.getSelectedItem();
+        Metodo = 0;
+    }//GEN-LAST:event_CtipovActionPerformed
+
+    private void txtColorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyReleased
+        // TODO add your handling code here:
+        if(!txtColor.getText().equals(""))
+        {
+            Dato = txtColor.getText();
+            Metodo = 1;
+        }
+    }//GEN-LAST:event_txtColorKeyReleased
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void CtipoTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoTraActionPerformed
+        // TODO add your handling code here:
+        Dato = (String) CtipoTra.getSelectedItem();
+        Metodo = 2;
+    }//GEN-LAST:event_CtipoTraActionPerformed
+
+    private void CtipoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoEActionPerformed
+        // TODO add your handling code here:
+        Dato = (String) CtipoE.getSelectedItem();
+        Metodo = 3;
+    }//GEN-LAST:event_CtipoEActionPerformed
+
+    private void CgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CgamaActionPerformed
+        // TODO add your handling code here:
+        Dato = (String) Cgama.getSelectedItem();
+        Metodo = 4;
+    }//GEN-LAST:event_CgamaActionPerformed
+
+    private void txtMarcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyReleased
+        // TODO add your handling code here:
+        if(!txtMarca.getText().equals(""))
+        {
+            Dato = txtMarca.getText();
+            Metodo = 5;
+        }
+    }//GEN-LAST:event_txtMarcaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Cotro;
+    private javax.swing.JComboBox<String> Cgama;
     private javax.swing.JComboBox<String> CtipoE;
     private javax.swing.JComboBox<String> CtipoTra;
     private javax.swing.JComboBox<String> Ctipov;
@@ -379,8 +463,6 @@ public class vccVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -390,12 +472,13 @@ public class vccVehiculo extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPane7;
+    private javax.swing.JLayeredPane jLayeredPane8;
     public static javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtDatos;
+    private javax.swing.JTextField txtMarca;
     public static javax.swing.JTable vistaResultado;
     // End of variables declaration//GEN-END:variables
 }

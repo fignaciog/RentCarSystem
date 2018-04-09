@@ -9,13 +9,13 @@ import javax.swing.JFrame;
  *
  * @author Ignacio
  */
-public class vccMatricula extends javax.swing.JFrame {
+public class vcMatricula extends javax.swing.JFrame {
 
     mVehiculo mv = null;
     /**
      * Creates new form Matricula
      */
-    public vccMatricula() {
+    public vcMatricula() {
         initComponents();
         setTitle("Consulta | Matricula");
         setLocationRelativeTo(null);

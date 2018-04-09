@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 import vista.mantenimientos.*;
 import vista.movimiento.formReservaCliente;
-import vista.consultas.vehiculo.vccMatricula;
+import vista.consultas.vehiculo.vcMatricula;
 
 /**
  *
@@ -197,19 +197,19 @@ public class mVehiculo {
                     //System.out.println(m);
                     if(m.equals(dato))
                     {
-                        vccMatricula.vMatricula.setText(m);
-                        vccMatricula.vMarca.setText(s.nextToken());
-                        vccMatricula.vModelo.setText(s.nextToken());
-                        vccMatricula.vGama.setText(s.nextToken());
-                        vccMatricula.vTipoV.setText(s.nextToken());
-                        vccMatricula.vTipoM.setText(s.nextToken());
-                        vccMatricula.vTransm.setText(s.nextToken());
-                        vccMatricula.vDescrip.setText(s.nextToken());
-                        vccMatricula.vTecho.setText(s.nextToken());
-                        vccMatricula.vInterior.setText(s.nextToken());
-                        vccMatricula.vAire.setText(s.nextToken());
-                        vccMatricula.vColor.setText(s.nextToken());
-                        vccMatricula.vEstado.setText(s.nextToken());
+                        vcMatricula.vMatricula.setText(m);
+                        vcMatricula.vMarca.setText(s.nextToken());
+                        vcMatricula.vModelo.setText(s.nextToken());
+                        vcMatricula.vGama.setText(s.nextToken());
+                        vcMatricula.vTipoV.setText(s.nextToken());
+                        vcMatricula.vTipoM.setText(s.nextToken());
+                        vcMatricula.vTransm.setText(s.nextToken());
+                        vcMatricula.vDescrip.setText(s.nextToken());
+                        vcMatricula.vTecho.setText(s.nextToken());
+                        vcMatricula.vInterior.setText(s.nextToken());
+                        vcMatricula.vAire.setText(s.nextToken());
+                        vcMatricula.vColor.setText(s.nextToken());
+                        vcMatricula.vEstado.setText(s.nextToken());
                         fr.close();
                         return (its = true);
                     }

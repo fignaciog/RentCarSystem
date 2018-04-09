@@ -17,13 +17,13 @@ public class mReservaCliente {
     public String path;
     private boolean its = false;
     
-    File reservacliente;
-    FileReader fr;
-    FileWriter fw;
-    BufferedReader br;
-    PrintWriter pw;
-    StringTokenizer s;
-    Date frec = null;
+    protected File reservacliente;
+    protected FileReader fr;
+    protected FileWriter fw;
+    protected BufferedReader br;
+    protected PrintWriter pw;
+    protected StringTokenizer s;
+    protected Date frec = null;
     
     public mReservaCliente()
     {

@@ -3,9 +3,12 @@ package vista;
 import vista.movimiento.*;
 import vista.mantenimientos.*;
 import vista.consultas.vehiculo.*;
+import vista.consultas.reserva.vcReserva;
+import vista.consultas.recepcion.vcRecepcion;
 import principal.login;
 import modelo.mantenimiento.mUsuario;
 import vista.consultas.cliente.*;
+import vista.consultas.vcOfertas;
 
 /**
  *
@@ -67,21 +70,22 @@ public class inicio extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         vccVehiculo = new javax.swing.JMenuItem();
         btnMatricula = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
+        btnReservas = new javax.swing.JMenuItem();
+        btnRecepcion = new javax.swing.JMenuItem();
+        btnOfertas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mCerrarS = new javax.swing.JMenuItem();
         mSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Edwardian Script ITC", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Magneto", 2, 68)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sedan.png"))); // NOI18N
+        jLabel1.setText("RentCar System");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jMenuBar1.setComponentPopupMenu(clickMenu);
 
@@ -201,25 +205,29 @@ public class inicio extends javax.swing.JFrame {
 
         jMenu3.add(jMenu6);
 
-        jMenu7.setText("Reservas");
+        btnReservas.setText("Reservas");
+        btnReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnReservas);
 
-        jMenuItem19.setText("Por Fecha");
-        jMenu7.add(jMenuItem19);
+        btnRecepcion.setText("Recepcion");
+        btnRecepcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecepcionActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnRecepcion);
 
-        jMenuItem20.setText("Por Dias");
-        jMenu7.add(jMenuItem20);
-
-        jMenu3.add(jMenu7);
-
-        jMenu8.setText("Resepcion");
-
-        jMenuItem21.setText("Por Fecha");
-        jMenu8.add(jMenuItem21);
-
-        jMenu3.add(jMenu8);
-
-        jMenuItem18.setText("Ofertas");
-        jMenu3.add(jMenuItem18);
+        btnOfertas.setText("Ofertas");
+        btnOfertas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOfertasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnOfertas);
 
         jMenuBar1.add(jMenu3);
 
@@ -254,14 +262,14 @@ public class inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1128, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -326,18 +334,36 @@ public class inicio extends javax.swing.JFrame {
 
     private void vccVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vccVehiculoActionPerformed
         // TODO add your handling code here:
-        vccVehiculo vccV = new vccVehiculo();
+        vcVehiculo vccV = new vcVehiculo();
     }//GEN-LAST:event_vccVehiculoActionPerformed
 
     private void btnMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriculaActionPerformed
         // TODO add your handling code here:
-        vccMatricula vccM = new vccMatricula();
+        vcMatricula vccM = new vcMatricula();
     }//GEN-LAST:event_btnMatriculaActionPerformed
+
+    private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
+        // TODO add your handling code here:
+        vcReserva vcr = new vcReserva();
+    }//GEN-LAST:event_btnReservasActionPerformed
+
+    private void btnRecepcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecepcionActionPerformed
+        // TODO add your handling code here:
+        vcRecepcion vcre = new vcRecepcion();
+    }//GEN-LAST:event_btnRecepcionActionPerformed
+
+    private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
+        // TODO add your handling code here:
+        vcOfertas vco = new vcOfertas();
+    }//GEN-LAST:event_btnOfertasActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnMatricula;
+    private javax.swing.JMenuItem btnOfertas;
+    private javax.swing.JMenuItem btnRecepcion;
+    private javax.swing.JMenuItem btnReservas;
     private javax.swing.JPopupMenu clickMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -346,13 +372,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenu lmVehiculo;
     private javax.swing.JMenuItem mCerrarS;
     private javax.swing.JMenuItem mCliente;
