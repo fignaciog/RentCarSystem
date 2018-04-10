@@ -58,7 +58,7 @@ public class mReservaCliente {
                         formReservaCliente.dateEntrada.setDate(setDate(en));
                         formReservaCliente.txtObservacion.setText(s.nextToken());
                         formReservaCliente.getDiasReservas.setText(s.nextToken());
-                        formReservaCliente.getPrecioRecerva.setText(s.nextToken());
+                        formReservaCliente.totalReserva.setText(s.nextToken());
                         formReservaCliente.linea_A = linea;
                         fr.close();
                         return (its = true);

@@ -82,10 +82,11 @@ public class inicio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Magneto", 2, 68)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sedan.png"))); // NOI18N
-        jLabel1.setText("RentCar System");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New folder/rental.png"))); // NOI18N
+        jLabel1.setText("RentCar System  ");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuBar1.setComponentPopupMenu(clickMenu);
 
@@ -181,6 +182,11 @@ public class inicio extends javax.swing.JFrame {
         jMenu5.add(mcClienteID);
 
         mcClienteRangoID.setText("Por Rango ID");
+        mcClienteRangoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcClienteRangoIDActionPerformed(evt);
+            }
+        });
         jMenu5.add(mcClienteRangoID);
 
         jMenu3.add(jMenu5);
@@ -262,7 +268,7 @@ public class inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1128, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -356,6 +362,11 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         vcOfertas vco = new vcOfertas();
     }//GEN-LAST:event_btnOfertasActionPerformed
+
+    private void mcClienteRangoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteRangoIDActionPerformed
+        // TODO add your handling code here:
+        vcRangoID vrid = new vcRangoID();
+    }//GEN-LAST:event_mcClienteRangoIDActionPerformed
 
     
 

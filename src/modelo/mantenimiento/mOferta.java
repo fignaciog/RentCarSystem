@@ -83,7 +83,7 @@ public class mOferta {
                     {
                         formReservaCliente.txtOferta.setText(id);
                         formReservaCliente.getOdesc.setText(s.nextToken());
-                        formReservaCliente.getPrecio.setText(s.nextToken());
+                        formReservaCliente.getPrecioOferta.setText(s.nextToken());
                         its = true;
                     }
                     

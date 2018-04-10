@@ -124,6 +124,8 @@ public class mVehiculo {
                             formReservaCliente.getGama.setText(s.nextToken());
                             s.nextToken();s.nextToken();s.nextToken();
                             formReservaCliente.getDesc.setText(s.nextToken());
+                            s.nextToken();s.nextToken();s.nextToken();s.nextToken();
+                            formReservaCliente.getEstadoVehiculo.setText(s.nextToken());
                             formReservaCliente.estados.setText("");
                             fr.close();
                             return (its = true);
