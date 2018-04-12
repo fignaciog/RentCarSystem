@@ -50,11 +50,8 @@ public class vcVehiculo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLayeredPane7 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jLabel8 = new javax.swing.JLabel();
-        jSlider2 = new javax.swing.JSlider();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        slideMinimo = new javax.swing.JSlider();
+        viewValor = new javax.swing.JLabel();
         jLayeredPane8 = new javax.swing.JLayeredPane();
         txtMarca = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -81,7 +78,7 @@ public class vcVehiculo extends javax.swing.JFrame {
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         Ctipov.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        Ctipov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
+        Ctipov.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Turismo", "Normal" }));
         Ctipov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CtipovActionPerformed(evt);
@@ -111,7 +108,7 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Ctipov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(" Por Tipo de Vehiculo  ", jLayeredPane2);
@@ -146,20 +143,20 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("  Por Color  ", jLayeredPane3);
 
         CtipoTra.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        CtipoTra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automatica", "Mecanica" }));
+        CtipoTra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
         CtipoTra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CtipoTraActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Tipo transmicion:");
+        jLabel6.setText("Cambio Automatico");
 
         jLayeredPane4.setLayer(CtipoTra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane4.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -182,13 +179,13 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CtipoTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("  Por Transmision  ", jLayeredPane4);
 
         CtipoE.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        CtipoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponible", "Rentado" }));
+        CtipoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
         CtipoE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CtipoEActionPerformed(evt);
@@ -218,7 +215,7 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(10, 10, 10)
                 .addComponent(CtipoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("  Por Estado  ", jLayeredPane5);
@@ -254,7 +251,7 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Cgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(" Por Gama ", jLayeredPane6);
@@ -262,21 +259,25 @@ public class vcVehiculo extends javax.swing.JFrame {
         jLayeredPane7.setBackground(java.awt.SystemColor.controlHighlight);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Minimo");
+        jLabel7.setText("Valor seleccionado:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("Maximo");
+        slideMinimo.setMajorTickSpacing(200);
+        slideMinimo.setMaximum(2500);
+        slideMinimo.setMinimum(800);
+        slideMinimo.setPaintLabels(true);
+        slideMinimo.setToolTipText("");
+        slideMinimo.setNextFocusableComponent(viewValor);
+        slideMinimo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slideMinimoStateChanged(evt);
+            }
+        });
 
-        jLabel10.setText("jLabel10");
-
-        jLabel12.setText("jLabel12");
+        viewValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLayeredPane7.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jSlider1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jSlider2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(slideMinimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(viewValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
         jLayeredPane7.setLayout(jLayeredPane7Layout);
@@ -285,38 +286,23 @@ public class vcVehiculo extends javax.swing.JFrame {
             .addGroup(jLayeredPane7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(slideMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jLayeredPane7Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10))
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12))
-                    .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(521, Short.MAX_VALUE))
+                        .addComponent(viewValor)))
+                .addContainerGap(481, Short.MAX_VALUE))
         );
         jLayeredPane7Layout.setVerticalGroup(
             jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(viewValor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(slideMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(" Por Precio ", jLayeredPane7);
@@ -351,7 +337,7 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(" Por Marca  ", jLayeredPane8);
@@ -378,11 +364,9 @@ public class vcVehiculo extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         vistaResultado.setModel(new javax.swing.table.DefaultTableModel(
@@ -423,14 +407,13 @@ public class vcVehiculo extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLayeredPane1))
+                    .addComponent(jLayeredPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEjecutar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCerrar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnEjecutar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,10 +426,10 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEjecutar)
-                    .addComponent(btnCerrar))
+                    .addComponent(btnEjecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -509,6 +492,11 @@ public class vcVehiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtMarcaKeyReleased
 
+    private void slideMinimoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slideMinimoStateChanged
+        // TODO add your handling code here:
+        viewValor.setText("RD$ "+String.valueOf(slideMinimo.getValue()));
+    }//GEN-LAST:event_slideMinimoStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Cgama;
     private javax.swing.JComboBox<String> CtipoE;
@@ -517,9 +505,7 @@ public class vcVehiculo extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEjecutar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -527,7 +513,6 @@ public class vcVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
@@ -538,11 +523,11 @@ public class vcVehiculo extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JLayeredPane jLayeredPane8;
     public static javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSlider slideMinimo;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtMarca;
+    private javax.swing.JLabel viewValor;
     public static javax.swing.JTable vistaResultado;
     // End of variables declaration//GEN-END:variables
 }
