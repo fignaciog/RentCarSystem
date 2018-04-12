@@ -2,6 +2,9 @@
 package controlador;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+import modelo.mantenimiento.mVehiculo;
 
 /**
  *
@@ -19,6 +22,8 @@ public class modificar {
     FileWriter fw;
     BufferedReader br;
     PrintWriter pw;
+    
+    StringTokenizer s;
     
     public modificar()
     {
@@ -69,7 +74,8 @@ public class modificar {
             
             while((linea_file = br.readLine()) != null)
             {
-                if(linea_file.equals(linea_A))
+                s = new StringTokenizer(linea_file, "_");
+                if(s.nextToken().equals(linea_A))
                 {
                     escribir(linea_B);
                 }else{
@@ -93,8 +99,34 @@ public class modificar {
             
             while((linea_file = br.readLine()) != null)
             {
+                
                 if(!linea_file.equals(linea_A))
                 {
+                    escribir(linea_file);
+                }
+            }
+            fr.close();            
+        }catch(IOException ioe){
+            //ioe.printStackTrace();
+        }
+    }
+    
+    public void editarMatricula(String matricula, String linea_A)
+    {
+        try{
+            
+            fr = new FileReader(file_A);
+            br = new BufferedReader(fr);
+            
+            String linea_file;
+            
+            while((linea_file = br.readLine()) != null)
+            {
+                s = new StringTokenizer(linea_file, "_");
+                if(s.nextToken().equals(matricula))
+                {
+                    escribir(linea_A);
+                }else{
                     escribir(linea_file);
                 }
             }
@@ -116,27 +148,4 @@ public class modificar {
         file_B.renameTo(file_A = new File(path_A));
         return set;
     }
-    
-    public boolean change_status(String linea_A, int tipe)
-    {
-        this.linea_A = linea_A;
-        if(tipe == 0)
-        {
-            linea_B = linea_A.replaceFirst("Disponible", "Rentado");
-            if(linea_B.contains("Rentado"))
-            {
-                its = true;
-            }
-        }else if(tipe == 1)
-        {
-            linea_B = linea_A.replaceFirst("Rentado", "Disponible");
-            if(linea_B.contains("Disponible"))
-            {
-                its = true;
-            }
-        }
-        
-        return its;
-    }
-    
 }

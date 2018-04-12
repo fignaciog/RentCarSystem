@@ -1,0 +1,43 @@
+private String Matricula;
+private String Marca;
+private String Modelo;
+private int tipo_Vehiculo;
+private int tipo_Motor;
+private int Gama;
+private String Descripcion_Veh;
+private Boolean techo_electrico;
+private Boolean Aire_Acondicionado;
+private Boolean Interior_Cuero;
+private String Color_Veh;
+private Boolean Cambio_Auto;
+private Boolean Status_Veh;
+
+
+double pxd = Double.valueOf(getPrecioxDia.getText()), totalR;
+        if(getPrecioOferta.getText().equals(""))
+        {
+            totalR = (double) d * pxd;
+        }else{
+            double po = Double.valueOf(getPrecioOferta.getText());
+            po = (((pxd*d)*po)/100);
+            totalR = (((double) d * pxd)-po);
+        }
+
+this.linea_A = linea_A;
+        s = new StringTokenizer(linea_A, "_");
+        if(tipe == 0)
+        {
+            linea_B = linea_A.replaceFirst("Disponible", "Rentado");
+            if(linea_B.contains("Rentado"))
+            {
+                its = true;
+            }
+        }else if(tipe == 1)
+        {
+            linea_B = linea_A.replaceFirst("Rentado", "Disponible");
+            if(linea_B.contains("Disponible"))
+            {
+                its = true;
+            }
+        }
+        

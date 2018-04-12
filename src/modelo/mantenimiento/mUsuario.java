@@ -60,7 +60,7 @@ public class mUsuario {
             fw = new FileWriter(login);
             pw = new PrintWriter(fw);
             
-            pw.println(0+"_"+"administrator"+"_"+"123456"+"_"+0+"_"+"root"+"_"+
+            pw.println("administrator"+"_"+"123456"+"_"+0+"_"+"root"+"_"+
                     "user root"+"_"+"RentCarSystem@email.com");
             
             fw.close();
@@ -72,8 +72,8 @@ public class mUsuario {
         
     }
 
-// Varificar ID ============================================================================
-    public boolean verify_ID(String dato)
+// Varificar Usuario ============================================================================
+    public boolean verify(String dato)
     {
         try{
             
@@ -85,12 +85,9 @@ public class mUsuario {
             
             while((linea = br.readLine()) != null)
             {
-                
                 s = new StringTokenizer(linea,"_");
-                
                 if(dato.equals(s.nextToken()))
                 {
-                    formUsuario.txtUser.setText(s.nextToken());
                     formUsuario.txtPass.setText(s.nextToken());
                     formUsuario.sAcceso.setSelectedIndex(Integer.valueOf(s.nextToken()));
                     formUsuario.txtNombre.setText(s.nextToken());
@@ -123,13 +120,10 @@ public class mUsuario {
             while((linea = br.readLine()) != null)
             {
                 s = new StringTokenizer(linea,"_");
-                
-                s.nextToken();
                 if(d.equals(s.nextToken()))
                 {
                     its = true;
                 }
-                
             }
             
             fr.close();
@@ -157,13 +151,10 @@ public class mUsuario {
                 s = new StringTokenizer(linea,"_");
                 
                 s.nextToken();
-                s.nextToken();
                 
                 if(d.equals(s.nextToken()))
                 {
-                    
                     its = true;
-                    
                 }
                 
             }
@@ -191,7 +182,6 @@ public class mUsuario {
             while((linea = br.readLine()) != null)
             {
                 s = new StringTokenizer(linea,"_");
-                s.nextElement();
                 if(u.equals(s.nextElement()) && p.equals(s.nextElement()))
                 {
                     set = String.valueOf(s.nextElement());

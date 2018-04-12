@@ -193,16 +193,7 @@ public class permisos extends javax.swing.JFrame {
     boolean changeStatus()
     {
         boolean its = false;
-        mv = new mVehiculo();
-            m = new modificar(mv.path);
-            if(m.change_status(mv.verify_toStatus(M),1))
-            {
-                m.editar();
-                if(m.reenombrar())
-                {
-                    its = true;
-                }
-            }
+
         return its;
     }
     

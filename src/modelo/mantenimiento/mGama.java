@@ -106,8 +106,8 @@ public class mGama {
                     
                     if(dato.equals(s.nextToken()))
                     {
-                        formVehiculo.mensajes.setForeground(Color.blue);
-                        formVehiculo.mensajes.setText("Tipo de Gama: "+s.nextToken()+" | Precio: RD$ "+s.nextToken());
+                        formVehiculo.gamaDescr.setText(s.nextToken());
+                        formVehiculo.gamaPrecio.setText(s.nextToken());
                         ver = true;
                     }
                     

@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import modelo.mantenimiento.mVehiculo;
 import modelo.mantenimiento.mGama;
 import controlador.modificar;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -19,6 +20,20 @@ public class formVehiculo extends javax.swing.JFrame {
     mVehiculo mv;
     modificar editor;
     mGama mg;
+    
+    private String Matricula = "";
+    private String Marca = "";
+    private String Modelo = "";
+    private int tipo_Vehiculo;
+    private int tipo_Motor;
+    private int Gama;
+    private String Descripcion_Veh = "";
+    private Boolean techo_electrico;
+    private Boolean Aire_Acondicionado;
+    private Boolean Interior_Cuero;
+    private String Color_Veh = "";
+    private Boolean Cambio_Auto;
+    private Boolean Status_Veh;
     
     /**
      * Creates new form vistaVehiculo
@@ -63,10 +78,14 @@ public class formVehiculo extends javax.swing.JFrame {
         sTipoVehiculo = new javax.swing.JComboBox<>();
         sTipoMotor = new javax.swing.JComboBox<>();
         txtColor = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        gamaDescr = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        gamaPrecio = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         msg = new javax.swing.JLabel();
-        mensajes = new javax.swing.JLabel();
+        estados = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,19 +97,29 @@ public class formVehiculo extends javax.swing.JFrame {
         jLabel1.setText("  Vehiculo");
         jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
-        Formulario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Matricula");
 
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtMatriculaKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyPressed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Marca");
+
+        txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyPressed(evt);
+            }
+        });
+
+        txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtModeloKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Modelo");
@@ -105,6 +134,9 @@ public class formVehiculo extends javax.swing.JFrame {
         jLabel7.setText("Gama");
 
         txtGama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtGamaKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGamaKeyReleased(evt);
             }
@@ -113,37 +145,59 @@ public class formVehiculo extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Descripcion");
 
+        txtDescrip.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripKeyPressed(evt);
+            }
+        });
+
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel9.setText("Techo");
+        jLabel9.setText("Techo Electrico");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setText("Aire acondiconado");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel11.setText("Interior");
+        jLabel11.setText("Interior Cuero");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setText("Color");
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel13.setText("Transmisión");
+        jLabel13.setText("Cambio Automatico");
 
-        sTipoTrans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Automatica", "Mecanica" }));
+        sTipoTrans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel14.setText("Estado");
 
-        sEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Disponible", "Rentado" }));
+        sEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Rentado" }));
 
         sAire.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
 
-        sTecho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Electrico", "Normal" }));
+        sTecho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
 
-        sInterior.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Cuero", "Tela", "Vinilo" }));
+        sInterior.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
 
-        sTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Sedan", "Camioneta", "Jeepeta", "Mini Bus" }));
+        sTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Turistico", "Normal" }));
 
-        sTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Gasolina", "Disel", "Gas" }));
+        sTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Diesel", "Gasolina" }));
+
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColorKeyPressed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText("Descripcion");
+
+        gamaDescr.setEnabled(false);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Precio");
+
+        gamaPrecio.setEnabled(false);
 
         Formulario.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(txtMatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -171,6 +225,10 @@ public class formVehiculo extends javax.swing.JFrame {
         Formulario.setLayer(sTipoVehiculo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(sTipoMotor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Formulario.setLayer(txtColor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(gamaDescr, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(jLabel17, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Formulario.setLayer(gamaPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout FormularioLayout = new javax.swing.GroupLayout(Formulario);
         Formulario.setLayout(FormularioLayout);
@@ -180,50 +238,34 @@ public class formVehiculo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FormularioLayout.createSequentialGroup()
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FormularioLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 73, Short.MAX_VALUE))
-                            .addGroup(FormularioLayout.createSequentialGroup()
-                                .addComponent(txtGama)
-                                .addContainerGap())))
+                        .addComponent(jLabel7)
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(FormularioLayout.createSequentialGroup()
-                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel8)
-                                .addGroup(FormularioLayout.createSequentialGroup()
-                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel13)))
-                                .addComponent(txtDescrip)
-                                .addGroup(FormularioLayout.createSequentialGroup()
-                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel12))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel14)
-                                        .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8)
+                            .addGroup(FormularioLayout.createSequentialGroup()
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(sTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(sTipoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sTipoTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)))
+                            .addComponent(txtDescrip)
+                            .addGroup(FormularioLayout.createSequentialGroup()
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12))
+                                .addGap(18, 18, 18)
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)))
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(sTecho, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,8 +277,30 @@ public class formVehiculo extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(sAire, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jLabel10)))
+                            .addGroup(FormularioLayout.createSequentialGroup()
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtGama, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(FormularioLayout.createSequentialGroup()
+                                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGap(12, 12, 12))
+                                    .addGroup(FormularioLayout.createSequentialGroup()
+                                        .addComponent(gamaDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel17)
+                                            .addComponent(gamaPrecio))))))
+                        .addContainerGap(27, Short.MAX_VALUE))))
         );
         FormularioLayout.setVerticalGroup(
             FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,14 +309,23 @@ public class formVehiculo extends javax.swing.JFrame {
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel16))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gamaDescr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gamaPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -285,7 +358,7 @@ public class formVehiculo extends javax.swing.JFrame {
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
@@ -308,7 +381,7 @@ public class formVehiculo extends javax.swing.JFrame {
         msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msg.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
-        mensajes.setForeground(new java.awt.Color(255, 51, 51));
+        estados.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New folder/rentcar64.png"))); // NOI18N
@@ -320,7 +393,7 @@ public class formVehiculo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -329,8 +402,8 @@ public class formVehiculo extends javax.swing.JFrame {
                         .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -342,16 +415,16 @@ public class formVehiculo extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                     .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnguardar)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCerrar)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mensajes, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -361,20 +434,29 @@ public class formVehiculo extends javax.swing.JFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         mv = new mVehiculo();
+        Marca = txtMarca.getText();
+        Modelo = txtModelo.getText();
+        Cambio_Auto = sTipoTrans.getSelectedIndex() == 1;
+        techo_electrico = sTecho.getSelectedIndex() == 1;
+        Aire_Acondicionado = sAire.getSelectedIndex() == 1;
+        Interior_Cuero = sInterior.getSelectedIndex() == 1;
+        Status_Veh = sEstado.getSelectedIndex() == 0;
+        Descripcion_Veh = txtDescrip.getText();
+        tipo_Vehiculo = sTipoVehiculo.getSelectedIndex();
+        tipo_Motor = sTipoMotor.getSelectedIndex();
+        Color_Veh = txtColor.getText();
         
         if(verifyData())
         {
             if(msg.getText().equals("Modificando"))
             {
-                    linea_B = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
-                        txtModelo.getText()+"_"+txtGama.getText()+"_"+
-                        sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
-                        +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
-                        +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
-                        +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
-                        +"_"+sEstado.getSelectedItem();
+                
+                linea_B = Matricula+"_"+Marca+"_"+Modelo+"_"+Gama+"_"+
+                tipo_Vehiculo+"_"+tipo_Motor+"_"+Cambio_Auto+"_"+Descripcion_Veh+"_"+
+                techo_electrico+"_"+Aire_Acondicionado+"_"+Color_Veh+"_"+
+                Interior_Cuero+"_"+Status_Veh;
 
-                   editor = new modificar(linea_A, linea_B, mv.path);
+                   editor = new modificar(Matricula, linea_B, mv.path);
                    editor.editar();
                    if(editor.reenombrar())
                    {
@@ -387,13 +469,11 @@ public class formVehiculo extends javax.swing.JFrame {
                        clear();
                    }
             }else if(msg.getText().equals("Creando")){
-                linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
-                                txtModelo.getText()+"_"+txtGama.getText()+"_"+
-                                sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
-                                +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
-                                +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
-                                +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
-                                +"_"+sEstado.getSelectedItem();
+                        
+                        linea_A = Matricula+"_"+Marca+"_"+Modelo+"_"+Gama+"_"+
+                        tipo_Vehiculo+"_"+tipo_Motor+"_"+Cambio_Auto+"_"+Descripcion_Veh+"_"+
+                        techo_electrico+"_"+Aire_Acondicionado+"_"+Color_Veh+"_"+
+                        Interior_Cuero+"_"+Status_Veh;
 
                         if(mv.add(linea_A))
                         {
@@ -415,60 +495,114 @@ public class formVehiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void txtMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyReleased
+    private void txtGamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGamaKeyReleased
         // TODO add your handling code here:
-        
-        mv = new mVehiculo();
-        
-        if(!txtMatricula.getText().equals("") && txtMatricula.getText().length() > 3)
+        checkGama();
+    }//GEN-LAST:event_txtGamaKeyReleased
+
+    private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            if(!mv.verify(txtMatricula.getText()))
+            Matricula = txtMatricula.getText();
+            mv = new mVehiculo();
+            if(mv.verify(Matricula))
             {
+                msg.setForeground(Color.red);
+                msg.setText("Modificando");
+                checkGama();
+                
+            }else{
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");
                 clear();
+            }
+            txtMatricula.transferFocus();
+        }
+    }//GEN-LAST:event_txtMatriculaKeyPressed
+
+    private void txtMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtMatricula.getText().equals(""))
+            {
+                txtMarca.transferFocus();
+            }
+        }
+    }//GEN-LAST:event_txtMarcaKeyPressed
+
+    private void txtModeloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtModelo.getText().equals(""))
+            {
+                txtModelo.transferFocus();
+            }
+        }
+    }//GEN-LAST:event_txtModeloKeyPressed
+
+    private void txtGamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGamaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+           checkGama(); 
+           if(!txtGama.getText().equals(""))
+           {
+               txtGama.transferFocus();
+           }
+        }
+    }//GEN-LAST:event_txtGamaKeyPressed
+
+    private void txtDescripKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtDescrip.getText().equals(""))
+            {
+                txtDescrip.transferFocus();
+            }
+        }
+    }//GEN-LAST:event_txtDescripKeyPressed
+
+    private void txtColorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(!txtColor.getText().equals(""))
+            {
+                
+            }
+        }
+    }//GEN-LAST:event_txtColorKeyPressed
+    
+    void checkGama()
+    {
+        mg = new mGama();
+        try{
+            if(!String.valueOf(Gama).equals(""))
+            {
+                Gama = Integer.valueOf(txtGama.getText());
+                if(!mg.externVerify(String.valueOf(Gama)))
+                {
+                    estados.setText("El ID de la Gama no Existe");
+                    gamaDescr.setText("");
+                    gamaPrecio.setText("");
+                }else{
+                    estados.setText("");
+                }
             }else{
-                msg.setForeground(Color.red);
-                msg.setText("Modificando");
-                linea_A = txtMatricula.getText()+"_"+txtMarca.getText()+"_"+
-                         txtModelo.getText()+"_"+txtGama.getText()+"_"+
-                         sTipoVehiculo.getSelectedItem()+"_"+sTipoMotor.getSelectedItem()
-                         +"_"+sTipoTrans.getSelectedItem()+"_"+txtDescrip.getText()
-                         +"_"+sTecho.getSelectedItem()+"_"+sAire.getSelectedItem()
-                         +"_"+txtColor.getText()+"_"+sInterior.getSelectedItem()
-                         +"_"+sEstado.getSelectedItem();
+                gamaDescr.setText("");
+                gamaPrecio.setText("");
+                estados.setText("");
             }
             
-        }else{
-            clear();
-            msg.setText("");
-        }
-        
-    }//GEN-LAST:event_txtMatriculaKeyReleased
-
-    private void txtGamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGamaKeyReleased
-        // TODO add your handling code here:
-        mg = new mGama();
-        String l = txtGama.getText();
-        if(!txtGama.getText().equals(""))
+        }catch(NumberFormatException e)
         {
-            if(!mg.externVerify(l))
-            {
-                mensajes.setText("El ID de la Gama no Existe");
-                txtGama.setBackground(Color.red);
-                txtGama.setForeground(Color.white);
-            }else{
-                
-                txtGama.setBackground(Color.white);
-                txtGama.setForeground(Color.black);
-            }
-        }else{
-            mensajes.setText("");
+            estados.setText("No ingrese letras en tipo de Gama");
         }
-        
-        
-        
-    }//GEN-LAST:event_txtGamaKeyReleased
+    }
     
     void clear()
     {
@@ -493,7 +627,7 @@ public class formVehiculo extends javax.swing.JFrame {
     {
         boolean its = true;
         
-        if(txtMatricula.getText().equals(""))
+        if(Matricula.equals(""))
         {
             txtMatricula.setBackground(Color.red);
             JOptionPane.showMessageDialog(this, "Debe ingresar la Matricula", 
@@ -576,15 +710,7 @@ public class formVehiculo extends javax.swing.JFrame {
                     "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
             sInterior.setBackground(Color.white);
             its = false;
-        }else if(sEstado.getSelectedIndex() == 0)
-        {
-            sEstado.setBackground(Color.red);
-            JOptionPane.showMessageDialog(this, "Debe seleccionar el Estado del Vehiculo", 
-                    "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
-            sEstado.setBackground(Color.white);
-            its = false;
         }
-            
         return its;
     }
     
@@ -593,6 +719,9 @@ public class formVehiculo extends javax.swing.JFrame {
     private javax.swing.JLayeredPane Formulario;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnguardar;
+    public static javax.swing.JLabel estados;
+    public static javax.swing.JTextField gamaDescr;
+    public static javax.swing.JTextField gamaPrecio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -600,6 +729,8 @@ public class formVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -608,7 +739,6 @@ public class formVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    public static javax.swing.JLabel mensajes;
     private javax.swing.JLabel msg;
     public static javax.swing.JComboBox<String> sAire;
     public static javax.swing.JComboBox<String> sEstado;

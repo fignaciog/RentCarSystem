@@ -9,7 +9,7 @@ import modelo.consulta.mcVehiculo;
 public class vcVehiculo extends javax.swing.JFrame {
     
     private String Dato = "";
-    mcVehiculo mcv = null;
+    mcVehiculo mcv = new mcVehiculo();
     int Metodo = 0;
     
     /**
@@ -21,6 +21,7 @@ public class vcVehiculo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
+        mcv.total_Vehiculo();
         setVisible(true);
     }
     

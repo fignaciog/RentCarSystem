@@ -15,6 +15,7 @@ public class mVehiculo {
     
     boolean its = false;
     public String path;
+    mGama mg = new mGama();
     
     protected File vehiculos;
     protected FileReader fr;
@@ -28,7 +29,6 @@ public class mVehiculo {
         vehiculos = new File("C:\\RentCarSystem\\database\\mantenimiento\\vehiculos.txt");
         path = vehiculos.getPath();
     }
-    
     public boolean verify(String dato)
     {
         if(vehiculos.length() != 0)
@@ -50,15 +50,45 @@ public class mVehiculo {
                         formVehiculo.txtMarca.setText(s.nextToken());
                         formVehiculo.txtModelo.setText(s.nextToken());
                         formVehiculo.txtGama.setText(s.nextToken());
-                        formVehiculo.sTipoVehiculo.setSelectedItem(s.nextToken());
-                        formVehiculo.sTipoMotor.setSelectedItem(s.nextToken());
-                        formVehiculo.sTipoTrans.setSelectedItem(s.nextToken());
+                        formVehiculo.sTipoVehiculo.setSelectedIndex(Integer.valueOf(s.nextToken()));
+                        formVehiculo.sTipoMotor.setSelectedIndex(Integer.valueOf(s.nextToken()));
+                        // Cambio Automatico
+                        if(s.nextToken().equals("true"))
+                        {
+                            formVehiculo.sTipoTrans.setSelectedIndex(1);
+                        }else{
+                            formVehiculo.sTipoTrans.setSelectedIndex(2);
+                        }
                         formVehiculo.txtDescrip.setText(s.nextToken());
-                        formVehiculo.sTecho.setSelectedItem(s.nextToken());
-                        formVehiculo.sAire.setSelectedItem(s.nextToken());
+                        // Techo
+                            if(s.nextToken().equals("true"))
+                            {
+                                formVehiculo.sTecho.setSelectedIndex(1);
+                            }else{
+                                formVehiculo.sTecho.setSelectedIndex(2);
+                            }
+                        // Aire acondicionado
+                            if(s.nextToken().equals("true"))
+                            {
+                                formVehiculo.sAire.setSelectedIndex(1);
+                            }else{
+                                formVehiculo.sAire.setSelectedIndex(2);
+                            }
                         formVehiculo.txtColor.setText(s.nextToken());
-                        formVehiculo.sInterior.setSelectedItem(s.nextToken());
-                        formVehiculo.sEstado.setSelectedItem(s.nextToken());
+                        // Interior
+                            if(s.nextToken().equals("true"))
+                            {
+                                formVehiculo.sInterior.setSelectedIndex(1);
+                            }else{
+                                formVehiculo.sInterior.setSelectedIndex(2);
+                            }
+                        // Estado
+                        if(s.nextToken().equals("true"))
+                        {
+                            formVehiculo.sEstado.setSelectedIndex(0);
+                        }else{
+                            formVehiculo.sEstado.setSelectedIndex(1);
+                        }
                         fr.close();
                         return (its = true);
                     }
@@ -72,7 +102,7 @@ public class mVehiculo {
         }
         return its;
     }
-    
+ 
     public boolean verify_Oferta(String dato)
     {
         if(vehiculos.length() != 0)
@@ -89,8 +119,11 @@ public class mVehiculo {
                     s = new StringTokenizer(linea, "_");
                     if(dato.equals(s.nextToken()))
                     {
-                        formOfertas.estados.setText("Marca: "+s.nextToken()+" | Modelo: "
-                        +s.nextToken()+" | Gama: "+s.nextToken());
+                        formOfertas.marcaVeh.setText(s.nextToken());
+                        formOfertas.modeloVeh.setText(s.nextToken());
+                        formOfertas.precioGama.setText(String.valueOf(mg.getPrecio(s.nextToken())));
+                        s.nextToken();s.nextToken();s.nextToken();
+                        formOfertas.descVeh.setText(s.nextToken());
                         fr.close();
                         return (its = true);
                     }
@@ -147,7 +180,7 @@ public class mVehiculo {
     
     public String verify_toStatus(String dato)
     {
-        String status = "";
+        String status ="";
         if(vehiculos.length() != 0)
         {
             try{
@@ -161,10 +194,8 @@ public class mVehiculo {
                 {
                     
                     s = new StringTokenizer(linea, "_");
-                    
                     if(dato.equals(s.nextToken()))
                     {
-                        status = linea;
                         fr.close();
                         return status;
                     }
@@ -226,7 +257,7 @@ public class mVehiculo {
         return its;
     }
     
-  public String getGama(String dato)
+    public String getGama(String dato)
     {
         String g = "";
         if(vehiculos.length() != 0)
@@ -280,6 +311,58 @@ public class mVehiculo {
             
         }
         return its;
+    }
+    
+    public String Status(String Matricula)
+    {
+       String linea_A = "";
+        try{
+            
+            fr = new FileReader(vehiculos);
+            br = new BufferedReader(fr);
+            
+            String linea;
+            
+            String MATRICULA,MARCA,MODELO,GAMA,TIPO_VEHICULO,TIPO_MOTOR,TRANSMISION,
+            DESCRIPCION,TECHO,AIRE,COLOR,INTERIOR,ESTADO;
+            
+            while((linea = br.readLine()) != null)
+            {
+                s = new StringTokenizer(linea, "_");
+                MATRICULA = s.nextToken();
+                MARCA = s.nextToken();
+                MODELO = s.nextToken();
+                GAMA = s.nextToken();
+                TIPO_VEHICULO = s.nextToken();
+                TIPO_MOTOR = s.nextToken();
+                TRANSMISION = s.nextToken();
+                DESCRIPCION = s.nextToken();
+                TECHO = s.nextToken();
+                AIRE  = s.nextToken();
+                COLOR = s.nextToken();
+                INTERIOR = s.nextToken();
+                ESTADO = s.nextToken();
+                if(MATRICULA.equals(Matricula))
+                {
+                    if(ESTADO.equals("true"))
+                    {
+                        linea_A = MATRICULA+"_"+MARCA+"_"+MODELO+"_"+GAMA+"_"+TIPO_VEHICULO+"_"+TIPO_MOTOR+"_"+TRANSMISION+"_"+
+                        DESCRIPCION+"_"+TECHO+"_"+AIRE+"_"+COLOR+"_"+INTERIOR+"_"+"false";
+                    }else if(ESTADO.equals("false")){
+                        linea_A = MATRICULA+"_"+MARCA+"_"+MODELO+"_"+GAMA+"_"+TIPO_VEHICULO+"_"+TIPO_MOTOR+"_"+TRANSMISION+"_"+
+                        DESCRIPCION+"_"+TECHO+"_"+AIRE+"_"+COLOR+"_"+INTERIOR+"_"+"true";
+                    }
+                    
+                }
+            }
+            
+            fr.close();
+
+        }catch(IOException e)
+        {
+            
+        }
+        return linea_A;
     }
     
     

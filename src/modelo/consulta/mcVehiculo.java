@@ -11,7 +11,7 @@ import vista.consultas.vehiculo.vcVehiculo;
  *
  * @author Ignacio
  */
-public class mcVehiculo extends mVehiculo {
+public final class mcVehiculo extends mVehiculo {
     
     DefaultTableModel md = null;
     Object[] fila = null;
@@ -58,6 +58,38 @@ public class mcVehiculo extends mVehiculo {
     {
         md = (DefaultTableModel)vcVehiculo.vistaResultado.getModel();
         fila = new Object[13];
+    }
+    
+    public void total_Vehiculo()
+    {
+        mv = new mVehiculo();
+        jTable();
+        clearTable();
+        try{
+            fr = new FileReader(vehiculos);
+            br = new BufferedReader(fr);
+            String linea;
+            while((linea = br.readLine()) != null)
+            {
+                s = new StringTokenizer(linea, "_");
+                fila[0] = s.nextToken();
+                fila[1] = s.nextToken();
+                fila[2] = s.nextToken();
+                fila[3] = s.nextToken();
+                fila[4] = s.nextToken();
+                fila[5] = s.nextToken();
+                fila[6] = s.nextToken();
+                fila[7] = s.nextToken();
+                fila[8] = s.nextToken();
+                fila[9] = s.nextToken();
+                fila[10] = s.nextToken();
+                fila[11] = s.nextToken();
+                fila[12] = s.nextToken();
+                md.addRow(fila);
+            }
+            fr.close();
+        }catch(IOException ioe){
+        }
     }
     
     public final void tipoVehiculo(String Dato)
