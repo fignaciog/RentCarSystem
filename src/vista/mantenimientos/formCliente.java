@@ -334,7 +334,6 @@ public class formCliente extends javax.swing.JFrame {
         {
             if(!txtCedula.getText().equals("   -       - "))
             {
-                
                 if(mc.verify(txtCedula.getText()))
                 {
                     msg.setForeground(Color.red);
@@ -343,8 +342,9 @@ public class formCliente extends javax.swing.JFrame {
                 }else{
                     msg.setForeground(Color.blue);
                     msg.setText("Creando");
+                    clear();
                 }
-                checkCedula();
+                //checkCedula();
             }else{
                 clear();
                 msg.setText("");
@@ -433,7 +433,7 @@ public class formCliente extends javax.swing.JFrame {
     
     void clear()
     {
-        txtCedula.setText("");
+        //txtCedula.setText("");
         txtNombre.setText("");
         txtApellidos.setText("");
         txtDireccion.setText("");
@@ -444,7 +444,7 @@ public class formCliente extends javax.swing.JFrame {
     void checkCedula()
     {
         try{
-            ID_Cedula = Integer.valueOf(txtCedula.getText().replace("_", ""));
+            ID_Cedula = Integer.valueOf((txtCedula.getText().replace("_", "")));
         }catch(NumberFormatException n)
         {
             estados.setText("No ingrese letras en el campo de cedula");

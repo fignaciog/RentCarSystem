@@ -27,7 +27,6 @@ public class formReservaCliente extends javax.swing.JFrame {
     reservas r;
     mVehiculo mv;
     modificar m;
-    permisos p;
     
     private int id_Reserva;
     private String id_Matricula;

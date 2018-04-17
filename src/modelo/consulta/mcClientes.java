@@ -20,13 +20,39 @@ public class mcClientes extends mCliente{
     
     public mcClientes()
     {
-        
+        totalClientes();
     }
     
     void jTable()
     {
         md = (DefaultTableModel)vcCliente.vistaResultado.getModel();
         fila = new Object[6];
+    }
+    
+    public final void totalClientes()
+    {
+        mc = new mCliente();
+        jTable();
+        try{
+            fr = new FileReader(cliente);
+            br = new BufferedReader(fr);
+            String linea,c, n;
+            while((linea = br.readLine()) != null)
+            {
+                s = new StringTokenizer(linea, "_");   
+                fila[0] = s.nextToken();
+                fila[1] = s.nextToken();
+                fila[2] = s.nextToken();
+                fila[3] = s.nextToken();
+                fila[4] = s.nextToken();
+                fila[5] = s.nextToken();
+                md.addRow(fila);
+            }
+            fr.close();
+        }catch(IOException ioe)
+        {
+            
+        }
     }
     
     public boolean Cedula(String dato)
@@ -66,6 +92,7 @@ public class mcClientes extends mCliente{
     {
         mc = new mCliente();
         jTable();
+        clearTable();
         try{
             fr = new FileReader(cliente);
             br = new BufferedReader(fr);
@@ -99,6 +126,7 @@ public class mcClientes extends mCliente{
         jTable();
         mc = new mCliente();
         jTable();
+        clearTable();
         try{
             fr = new FileReader(cliente);
             br = new BufferedReader(fr);
@@ -131,6 +159,7 @@ public class mcClientes extends mCliente{
     {
         mc = new mCliente();
         jTable();
+        clearTable();
         try{
             fr = new FileReader(cliente);
             br = new BufferedReader(fr);
@@ -145,8 +174,8 @@ public class mcClientes extends mCliente{
                 e = s.nextToken();
                 t = s.nextToken();
                 T = t.replace("-", "");
-                System.out.println(T);
-                if(t.contains(dato))
+                
+                if(T.contains(dato))
                 {
                     fila[0] = c;
                     fila[1] = n;

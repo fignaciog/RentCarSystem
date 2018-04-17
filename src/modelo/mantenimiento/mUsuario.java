@@ -136,7 +136,7 @@ public class mUsuario {
     }  
 
 // Verificar Password ============================================================================
-    public boolean verify_Pass(String d)
+    public boolean verify_Pass(String Login_User, String Login_Pass)
     {
         try{
             
@@ -149,18 +149,17 @@ public class mUsuario {
             while((linea = br.readLine()) != null)
             {
                 s = new StringTokenizer(linea,"_");
-                
-                s.nextToken();
-                
-                if(d.equals(s.nextToken()))
+                if(Login_User.equals(s.nextToken()))
                 {
-                    its = true;
+                    if(Login_Pass.equals(s.nextToken()))
+                    {
+                       fr.close();
+                       return (its = true); 
+                    }
                 }
                 
             }
-            
             fr.close();
-            
         }catch(IOException ioe){
             //Main.msg.setText("Error de db");
         }

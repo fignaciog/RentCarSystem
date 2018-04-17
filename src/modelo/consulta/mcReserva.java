@@ -92,6 +92,43 @@ public class mcReserva extends mReservaCliente {
         }
     }
     
+    public void allReserva()
+    {
+        mrv = new mReservaCliente();
+        jTable();
+        clearTable();
+        
+        if(reservacliente.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(reservacliente);
+                br = new BufferedReader(fr);
+                String linea, r, m, c, o, fR, fS, fE, O, dR, tR;
+            
+                while((linea = br.readLine()) != null)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    fila[0] = s.nextToken();
+                    fila[1] = s.nextToken();
+                    fila[2] = s.nextToken();
+                    fila[3] = s.nextToken();
+                    fila[4] = s.nextToken();
+                    fila[5] = s.nextToken();
+                    fila[6] = s.nextToken();
+                    fila[7] = s.nextToken();
+                    fila[8] = s.nextToken();
+                    fila[9] = "RD$ "+s.nextToken();
+                    md.addRow(fila);
+                }
+                fr.close();
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+    }
+    
     public final void fecha(String Dato)
     {
         mrv = new mReservaCliente();

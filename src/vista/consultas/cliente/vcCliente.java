@@ -20,6 +20,7 @@ public class vcCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
+        mcc = new mcClientes();
         setVisible(true);
     }
     

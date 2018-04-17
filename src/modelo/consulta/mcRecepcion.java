@@ -35,6 +35,41 @@ public class mcRecepcion extends mRecepcionVehiculo{
         fila = new Object[5];
     }
     
+    // Metodo para Visualizar todos los registros
+    public void allRecepciones(){
+        
+        mr = new mRecepcionVehiculo();
+        jTable();
+        clearTable();
+        
+        if(recepcionvehiculo.length() != 0)
+        {
+            try{
+                
+                fr = new FileReader(recepcionvehiculo);
+                br = new BufferedReader(fr);
+                
+                String linea;
+                
+                while((linea = br.readLine()) != null)
+                {
+                    s = new StringTokenizer(linea, "_");
+                    fila[0] = s.nextToken();
+                    fila[1] = s.nextToken();
+                    fila[2] = s.nextToken();
+                    fila[3] = s.nextToken();
+                    fila[4] = s.nextToken();
+                    md.addRow(fila);
+                }
+                
+            }catch(IOException ioe)
+            {
+                
+            }
+        }
+        
+    }
+    
     public void fecha(String Dato)
     {
         mr = new mRecepcionVehiculo();
