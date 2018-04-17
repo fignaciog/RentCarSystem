@@ -18,7 +18,7 @@ public class formCliente extends javax.swing.JFrame {
     String linea_A, linea_B;
     mCliente mc;
     
-    private int ID_Cedula;
+    private long ID_Cedula;
     private String Nombre_Cte;
     private String Apellidos_cte;
     private String Direccion_Cte;
@@ -310,6 +310,7 @@ public class formCliente extends javax.swing.JFrame {
                         msg.setForeground(Color.blue);
                         msg.setText("Datos Guardados");
                         clear();
+                        txtCedula.setText("");
                     }else{
                         msg.setForeground(Color.red);
                         msg.setText("Error al Guardar Datos");

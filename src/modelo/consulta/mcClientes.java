@@ -28,7 +28,7 @@ public class mcClientes extends mCliente{
         md = (DefaultTableModel)vcCliente.vistaResultado.getModel();
         fila = new Object[6];
     }
-    
+    // Vista en general de clientes registrados
     public final void totalClientes()
     {
         mc = new mCliente();
@@ -54,7 +54,7 @@ public class mcClientes extends mCliente{
             
         }
     }
-    
+    // Vista por Cedula
     public boolean Cedula(String dato)
     {
         boolean its = false;
@@ -87,7 +87,7 @@ public class mcClientes extends mCliente{
         }
         return its;
     }
-    
+    // Vista por Nombre
     public void Nombre(String dato)
     {
         mc = new mCliente();
@@ -120,7 +120,7 @@ public class mcClientes extends mCliente{
             
         }
     }
-    
+    // Vista por Apellidos
     public void Apellidos(String dato)
     {
         jTable();
@@ -154,7 +154,7 @@ public class mcClientes extends mCliente{
             
         }
     }
-    
+    // Vista por Telefono
     public void Telefono(String dato)
     {
         mc = new mCliente();
@@ -193,7 +193,7 @@ public class mcClientes extends mCliente{
         }
         jTable();
     }
-    
+    // Reseteo de Tabla
     public void clearTable()
     {
         jTable();
@@ -201,6 +201,42 @@ public class mcClientes extends mCliente{
         {
             md.removeRow(i);
             i-=1;
+        }
+    }
+    
+    public void rangoID(String Start, String End)
+    {
+        mc = new mCliente();
+        long i = Long.parseLong(Start), f = Long.parseLong(End), CED;
+        jTable();
+        clearTable();
+        try{
+            fr = new FileReader(cliente);
+            br = new BufferedReader(fr);
+            String linea, idc , ID;
+            while((linea = br.readLine()) != null)
+            {
+                s = new StringTokenizer(linea, "_");
+                
+                ID = s.nextToken();
+                idc = ID.replace("-", "");
+                CED = Long.parseLong(idc);
+                
+                if(CED >= i && CED <= f)
+                {
+                    fila[0] = ID;
+                    fila[1] = s.nextToken();
+                    fila[2] = s.nextToken();
+                    fila[3] = s.nextToken();
+                    fila[4] = s.nextToken();
+                    fila[5] = s.nextToken();
+                    md.addRow(fila);
+                }
+            }
+            fr.close();
+        }catch(IOException ioe)
+        {
+            
         }
     }
     

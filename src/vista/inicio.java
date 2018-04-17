@@ -66,7 +66,6 @@ public class inicio extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         mcCliente = new javax.swing.JMenuItem();
         mcClienteID = new javax.swing.JMenuItem();
-        mcClienteRangoID = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         vccVehiculo = new javax.swing.JMenuItem();
         btnMatricula = new javax.swing.JMenuItem();
@@ -180,14 +179,6 @@ public class inicio extends javax.swing.JFrame {
             }
         });
         jMenu5.add(mcClienteID);
-
-        mcClienteRangoID.setText("Por Rango ID");
-        mcClienteRangoID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mcClienteRangoIDActionPerformed(evt);
-            }
-        });
-        jMenu5.add(mcClienteRangoID);
 
         jMenu3.add(jMenu5);
 
@@ -363,11 +354,6 @@ public class inicio extends javax.swing.JFrame {
         vcOfertas vco = new vcOfertas();
     }//GEN-LAST:event_btnOfertasActionPerformed
 
-    private void mcClienteRangoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcClienteRangoIDActionPerformed
-        // TODO add your handling code here:
-        vcRangoID vrid = new vcRangoID();
-    }//GEN-LAST:event_mcClienteRangoIDActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -396,7 +382,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mVehiculo;
     private javax.swing.JMenuItem mcCliente;
     private javax.swing.JMenuItem mcClienteID;
-    private javax.swing.JMenuItem mcClienteRangoID;
     private javax.swing.JMenuItem vccVehiculo;
     // End of variables declaration//GEN-END:variables
 }

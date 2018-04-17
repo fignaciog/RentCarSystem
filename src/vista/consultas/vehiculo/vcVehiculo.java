@@ -60,6 +60,7 @@ public class vcVehiculo extends javax.swing.JFrame {
         vistaResultado = new javax.swing.JTable();
         btnEjecutar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -395,6 +396,14 @@ public class vcVehiculo extends javax.swing.JFrame {
             }
         });
 
+        btnReset.setText("Actualizar");
+        btnReset.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 204), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 51, 51), new java.awt.Color(102, 102, 255)));
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -411,6 +420,8 @@ public class vcVehiculo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEjecutar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -425,9 +436,11 @@ public class vcVehiculo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEjecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
@@ -447,7 +460,7 @@ public class vcVehiculo extends javax.swing.JFrame {
 
     private void CtipovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipovActionPerformed
         // TODO add your handling code here:
-        Dato = (String) Ctipov.getSelectedItem();
+        Dato = String.valueOf(Ctipov.getSelectedIndex());
         Metodo = 0;
     }//GEN-LAST:event_CtipovActionPerformed
 
@@ -467,19 +480,19 @@ public class vcVehiculo extends javax.swing.JFrame {
 
     private void CtipoTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoTraActionPerformed
         // TODO add your handling code here:
-        Dato = (String) CtipoTra.getSelectedItem();
+        Dato = String.valueOf(CtipoTra.getSelectedIndex());
         Metodo = 2;
     }//GEN-LAST:event_CtipoTraActionPerformed
 
     private void CtipoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoEActionPerformed
         // TODO add your handling code here:
-        Dato = (String) CtipoE.getSelectedItem();
+        Dato = String.valueOf(CtipoE.getSelectedIndex());
         Metodo = 3;
     }//GEN-LAST:event_CtipoEActionPerformed
 
     private void CgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CgamaActionPerformed
         // TODO add your handling code here:
-        Dato = (String) Cgama.getSelectedItem();
+        Dato = String.valueOf(Cgama.getSelectedItem());
         Metodo = 4;
     }//GEN-LAST:event_CgamaActionPerformed
 
@@ -497,6 +510,11 @@ public class vcVehiculo extends javax.swing.JFrame {
         viewValor.setText("RD$ "+String.valueOf(slideMinimo.getValue()));
     }//GEN-LAST:event_slideMinimoStateChanged
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+         mcv.total_Vehiculo();
+    }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Cgama;
     private javax.swing.JComboBox<String> CtipoE;
@@ -504,6 +522,7 @@ public class vcVehiculo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Ctipov;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEjecutar;
+    private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
