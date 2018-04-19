@@ -4,6 +4,7 @@ package vista.consultas.reserva;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.consulta.mcReserva;
 /**
  *
@@ -25,7 +26,7 @@ public class vcReserva extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         mcr = new mcReserva();
-        mcr.allReserva();
+        mcr.metodoConsulta(Dato, Metodo);
         setVisible(true);
     }
     
@@ -34,6 +35,7 @@ public class vcReserva extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
+        fechas = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         msg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,6 +48,10 @@ public class vcReserva extends javax.swing.JFrame {
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel4 = new javax.swing.JLabel();
         fecha = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
+        btnfR = new javax.swing.JRadioButton();
+        btnfS = new javax.swing.JRadioButton();
+        btnfE = new javax.swing.JRadioButton();
         btnBuscar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
@@ -111,7 +117,7 @@ public class vcReserva extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addContainerGap(464, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +133,8 @@ public class vcReserva extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("   Por cantidad de Dias   ", jLayeredPane1);
 
-        jLabel4.setText("Selecciones la fecha");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel4.setText("Fecha");
 
         fecha.setDateFormatString("dd / MM / yyyy");
         fecha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -137,8 +144,48 @@ public class vcReserva extends javax.swing.JFrame {
             }
         });
 
+        fechas.add(btnfR);
+        btnfR.setText("Por Feche Reserva");
+
+        fechas.add(btnfS);
+        btnfS.setText("Por Fecha Salida");
+
+        fechas.add(btnfE);
+        btnfE.setText("Por Fecha Entrada");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnfR)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnfS)
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnfE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnfR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnfS)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnfE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
         jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(fecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -149,16 +196,23 @@ public class vcReserva extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("   Por Fecha   ", jLayeredPane2);
@@ -197,7 +251,7 @@ public class vcReserva extends javax.swing.JFrame {
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -232,15 +286,15 @@ public class vcReserva extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane3)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -249,20 +303,44 @@ public class vcReserva extends javax.swing.JFrame {
 
     private void txtDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiasKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            if(!Dato.equals(""))
-            {
-                mcr = new mcReserva(Dato, Metodo);
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(!Dato.equals("")){
+                Dato = txtDias.getText();
+                Metodo = 1;
             }
         }
     }//GEN-LAST:event_txtDiasKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        mcr = new mcReserva();
+        
+        if(btnfR.isSelected()){
+            Metodo = 2;
+        }
+
+        if(btnfS.isSelected()){
+            Metodo = 3;
+        }
+
+        if(btnfE.isSelected()){
+            Metodo = 4;
+        }
+        
         if(!Dato.equals(""))
         {
-            mcr = new mcReserva(Dato, Metodo);
+            mcr.metodoConsulta(Dato, Metodo);
+        }else{
+            
+            try{
+                Dato = s.format(fecha.getDate());
+            }catch(NullPointerException n){}
+            
+            if(!btnfR.isSelected() || !btnfS.isSelected() || !btnfE.isSelected()){
+                JOptionPane.showMessageDialog(this, "Elije un tipo de fecha", "Campo Obligatorio", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                mcr.metodoConsulta(Dato, Metodo);
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -276,19 +354,13 @@ public class vcReserva extends javax.swing.JFrame {
         if(!txtDias.getText().equals(""))
         {
             Dato = txtDias.getText();
-            Metodo = 0;
+            Metodo = 1;
         }
     }//GEN-LAST:event_txtDiasKeyReleased
 
     private void fechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaPropertyChange
         // TODO add your handling code here:
-        try{
-            Dato = s.format(fecha.getDate());
-            Metodo = 1;
-        }catch(NullPointerException n)
-        {
-            
-        }
+        
         
     }//GEN-LAST:event_fechaPropertyChange
 
@@ -296,7 +368,11 @@ public class vcReserva extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JRadioButton btnfE;
+    private javax.swing.JRadioButton btnfR;
+    private javax.swing.JRadioButton btnfS;
     private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.ButtonGroup fechas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -306,6 +382,7 @@ public class vcReserva extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel msg;

@@ -480,13 +480,26 @@ public class vcVehiculo extends javax.swing.JFrame {
 
     private void CtipoTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoTraActionPerformed
         // TODO add your handling code here:
-        Dato = String.valueOf(CtipoTra.getSelectedIndex());
+        if(CtipoTra.getSelectedIndex() == 1)
+        {
+            Dato = "true";
+        }else if(CtipoTra.getSelectedIndex() == 2)
+        {
+            Dato = "false";
+        }
         Metodo = 2;
     }//GEN-LAST:event_CtipoTraActionPerformed
 
     private void CtipoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CtipoEActionPerformed
         // TODO add your handling code here:
         Dato = String.valueOf(CtipoE.getSelectedIndex());
+        if(CtipoE.getSelectedIndex() == 1)
+        {
+            Dato = "true";
+        }else if(CtipoE.getSelectedIndex() == 2)
+        {
+            Dato = "false";
+        }
         Metodo = 3;
     }//GEN-LAST:event_CtipoEActionPerformed
 

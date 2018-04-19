@@ -28,95 +28,83 @@ public class mOferta {
         path = Ofertas.getPath();
     }
     
-    public boolean verify(String dato)
-    {
-        if(Ofertas.length() != 0)
-        {
+    // Metodo para verificar si el ID oferta existe
+    public boolean verify(String dato){
+        if(Ofertas.length() != 0){
             try{
-            
                 fr = new FileReader(Ofertas);
                 br = new BufferedReader(fr);
-
                 String linea;
-
-                while((linea = br.readLine()) != null)
-                {
+                while((linea = br.readLine()) != null){
                     s = new StringTokenizer(linea, "_");
-                    
-                    if(dato.equals(s.nextToken()))
-                    {
+                    if(dato.equals(s.nextToken())){
                         formOfertas.txtMatricula.setText(s.nextToken());
                         formOfertas.txtDescrip.setText(s.nextToken());
-                        formOfertas.txtPrecio.setText(s.nextToken());
+                        formOfertas.txtPorciento.setText(s.nextToken());
                         its = true;
                     }
-                    
                 }
-                
                 fr.close();
-
             }catch(IOException ioe)
             {
-
+                its = false;
             }
         }
         return its;
     }
     
-    public boolean verify_Reserva(String dato)
-    {
-        if(Ofertas.length() != 0)
-        {
+    // Metodo para visualizar informacion en el fromulario de oferta
+    public boolean verify_Reserva(String dato, int n){
+        if(Ofertas.length() != 0){
             try{
-            
                 fr = new FileReader(Ofertas);
                 br = new BufferedReader(fr);
-
                 String linea, id;
-
-                while((linea = br.readLine()) != null)
-                {
+                while((linea = br.readLine()) != null){
                     s = new StringTokenizer(linea, "_");
-                    
                     id = s.nextToken();
-                    if(dato.equals(s.nextToken()))
-                    {
-                        formReservaCliente.txtOferta.setText(id);
-                        formReservaCliente.getOdesc.setText(s.nextToken());
-                        formReservaCliente.getPrecioOferta.setText(s.nextToken());
-                        its = true;
-                    }
                     
+                    switch(n){
+                        case 1:
+                            if(dato.equals(s.nextToken())){
+                                formReservaCliente.txtOferta.addItem("-");
+                                formReservaCliente.txtOferta.addItem(id);
+                                its = true;
+                            }
+                            break;
+                        case 2:
+                            if(dato.equals(id)){
+                                s.nextToken();
+                                formReservaCliente.getOdesc.setText(s.nextToken());
+                                s.nextToken();
+                                formReservaCliente.getPrecioOferta.setText(s.nextToken());
+                                its = true;
+                            }
+                            break;
+                            default:
+                            break;
+                    }
                 }
-                
                 fr.close();
-
             }catch(IOException ioe)
             {
-
+                its = false;
             }
         }
         return its;
     }
     
-    public boolean add(String linea_A)
-    {
+    // Metodo para añadir nueva informacion
+    public boolean add(String linea_A){
         try{
-            
             fw = new FileWriter(Ofertas,true);
             pw = new PrintWriter(fw);
-            
             pw.println(linea_A);
-            
             fw.close();
-            
             its = true;
-            
         }catch(IOException ioe){
-            
+            its = false;
         }
-        
         return its;
     }
-    
 }

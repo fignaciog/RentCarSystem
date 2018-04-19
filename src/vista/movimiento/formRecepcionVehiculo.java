@@ -102,6 +102,7 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
             }
         });
 
+        txtIDMatricula.setEnabled(false);
         txtIDMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDMatriculaKeyReleased(evt);
@@ -215,32 +216,50 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("ID Matricula:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("ID Cliente:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("ID Oferta:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Fecha Reserva:");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Fecha Salida:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Fecha Entrada:");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setText("Observacion:");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Dias Reserva:");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Precio:");
+
+        getIDM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getIDC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getIDO.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getFR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getFS.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getFE.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getO.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getDR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        getP.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -377,7 +396,7 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLayeredPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, 6, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -509,8 +528,7 @@ public class formRecepcionVehiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIDReservaFocusGained
 
-    boolean verify()
-    {
+    boolean verify(){
         boolean its = true;
         if(txtIDRecepcion.getText().equals(""))
         {

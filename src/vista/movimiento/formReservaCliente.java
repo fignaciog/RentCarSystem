@@ -22,7 +22,7 @@ import principal.*;
  */
 public class formReservaCliente extends javax.swing.JFrame {
 
-    
+    mOferta mo;
     mReservaCliente mrc;
     reservas r;
     mVehiculo mv;
@@ -34,7 +34,7 @@ public class formReservaCliente extends javax.swing.JFrame {
     private int id_Oferta = 0;
     private String Observacion;
     private int Dia_reserva;
-    private Double total_Reserva;
+    private Double total_Reserva = 0.0;
     private Date Fecha_reserva, Fecha_Salida, Fecha_Entrada;
     
     private Date factual = new Date();
@@ -53,9 +53,8 @@ public class formReservaCliente extends javax.swing.JFrame {
         
         initComponents();
         setTitle("Reserva Cliente | RentCar System");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        //setExtendedState(MAXIMIZED_HORIZ);
+        setExtendedState(MAXIMIZED_BOTH);
         setVisible(true);
         
         try{
@@ -77,13 +76,13 @@ public class formReservaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MC = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         msg = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         idmatricula = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtOferta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         getFechaReserva = new javax.swing.JLabel();
@@ -94,7 +93,7 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         getDiasReservas = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        totalReserva = new javax.swing.JLabel();
+        totalReservaSO = new javax.swing.JLabel();
         dateSalida = new com.toedter.calendar.JDateChooser();
         dateEntrada = new com.toedter.calendar.JDateChooser();
         txtCliente = new javax.swing.JFormattedTextField();
@@ -103,6 +102,14 @@ public class formReservaCliente extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        txtOferta = new javax.swing.JComboBox<>();
+        msgOferta = new javax.swing.JLabel();
+        toRD = new javax.swing.JLabel();
+        labeloferta = new javax.swing.JLabel();
+        totalReservaCO = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        MCSO = new javax.swing.JRadioButton();
+        MCCO = new javax.swing.JRadioButton();
         estados = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         Vehiculo = new javax.swing.JLayeredPane();
@@ -156,21 +163,13 @@ public class formReservaCliente extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtMatriculaKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyReleased(evt);
+            }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("ID Cliente");
-
-        txtOferta.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtOfertaFocusLost(evt);
-            }
-        });
-        txtOferta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtOfertaKeyPressed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("ID Oferta");
@@ -198,11 +197,12 @@ public class formReservaCliente extends javax.swing.JFrame {
         getDiasReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getDiasReservas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Total Reserva");
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel12.setText("Total Reserva Sin Oferta");
 
-        totalReserva.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        totalReserva.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        totalReservaSO.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        totalReservaSO.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         dateSalida.setFocusTraversalPolicyProvider(true);
         dateSalida.setFocusable(false);
@@ -263,10 +263,42 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("RD$ ");
 
+        txtOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        txtOferta.setEnabled(false);
+        txtOferta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtOfertaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtOfertaFocusLost(evt);
+            }
+        });
+
+        msgOferta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        msgOferta.setForeground(new java.awt.Color(51, 51, 255));
+
+        toRD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        labeloferta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        labeloferta.setForeground(new java.awt.Color(204, 0, 0));
+
+        totalReservaCO.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel26.setText("Metodo de Cobro");
+
+        MC.add(MCSO);
+        MCSO.setForeground(new java.awt.Color(51, 51, 255));
+        MCSO.setSelected(true);
+        MCSO.setText("Sin Oferta");
+
+        MC.add(MCCO);
+        MCCO.setForeground(new java.awt.Color(204, 0, 0));
+        MCCO.setText("Con Oferta");
+
         jLayeredPane1.setLayer(idmatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtMatricula, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtOferta, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(getFechaReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -277,7 +309,7 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(getDiasReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(totalReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(totalReservaSO, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(dateSalida, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(dateEntrada, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -286,6 +318,14 @@ public class formReservaCliente extends javax.swing.JFrame {
         jLayeredPane1.setLayer(btnGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnCerrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtOferta, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(msgOferta, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(toRD, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labeloferta, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(totalReservaCO, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel26, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(MCSO, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(MCCO, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -295,16 +335,27 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(MCSO)
+                        .addGap(18, 18, 18)
+                        .addComponent(MCCO))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(getDiasReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(91, 91, 91)
+                            .addComponent(getDiasReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(totalReservaSO, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labeloferta)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(toRD)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalReservaCO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -328,23 +379,25 @@ public class formReservaCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(txtOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(msgOferta))
+                    .addComponent(jLabel26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
@@ -353,15 +406,12 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(idmatricula)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMatricula)
                             .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
@@ -371,28 +421,45 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addComponent(getFechaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(msgOferta))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(24, 24, 24)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12)
+                        .addComponent(labeloferta))
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(totalReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(getDiasReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
+                    .addComponent(totalReservaCO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toRD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalReservaSO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getDiasReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MCSO)
+                    .addComponent(MCCO))
+                .addGap(18, 18, 18)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        estados.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         estados.setForeground(new java.awt.Color(255, 0, 0));
-        estados.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        estados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         estados.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         Vehiculo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Vehiculo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
@@ -450,7 +517,7 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addComponent(getEstadoVehiculo)
                     .addComponent(getMarca)
                     .addComponent(getGama))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         VehiculoLayout.setVerticalGroup(
             VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +542,7 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addGroup(VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(getPrecioxDia))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Cliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
@@ -614,8 +681,7 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Oferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Vehiculo.getAccessibleContext().setAccessibleParent(Vehiculo);
@@ -630,17 +696,19 @@ public class formReservaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(estados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane3)
+                            .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLayeredPane3)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -652,16 +720,13 @@ public class formReservaCliente extends javax.swing.JFrame {
                     .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(estados, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -671,34 +736,35 @@ public class formReservaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         mrc = new mReservaCliente();
         
-        id_Reserva = Integer.valueOf(txtIDReserva.getText());
-        id_Matricula = txtMatricula.getText();
-        //cedula
-        if(!txtOferta.getText().equals("")){
-            id_Oferta = Integer.valueOf(txtOferta.getText());
-        }
-        Observacion = txtObservacion.getText();
-        Dia_reserva = Integer.valueOf(getDiasReservas.getText());
-        total_Reserva = Double.valueOf(totalReserva.getText());
-        Fecha_reserva = factual;
-        Fecha_Salida = dateSalida.getDate();
-        Fecha_Entrada = dateEntrada.getDate();
-        
-        
         if(verify())
         {
+            id_Reserva = Integer.valueOf(txtIDReserva.getText());
+            id_Matricula = txtMatricula.getText();
+            //cedula
+            if(txtOferta.isEnabled()){
+                id_Oferta = txtOferta.getSelectedIndex();
+            }
+            //Observacion = txtObservacion.getText();
+            Dia_reserva = Integer.valueOf(getDiasReservas.getText());
+
+            if(MCSO.isSelected()){
+                total_Reserva = Double.valueOf(totalReservaSO.getText());
+            }
+
+            if(MCCO.isSelected()){
+                total_Reserva = Double.valueOf(totalReservaCO.getText());
+            }
+
+            Fecha_reserva = factual;
+            Fecha_Salida = dateSalida.getDate();
+            Fecha_Entrada = dateEntrada.getDate();
             
             linea_A = id_Reserva+"_"+id_Matricula+"_"+txtCliente.getText()+"_"
                     +id_Oferta+"_"+s.format(Fecha_reserva)+"_"
                     +s.format(Fecha_Salida)+"_"+s.format(Fecha_Entrada)
                     +"_"+Observacion+"_"+Dia_reserva+"_"
                     +total_Reserva;        
-            /*
-            linea_A = txtIDReserva.getText()+"_"+txtMatricula.getText()+"_"+txtCliente.getText()+"_"
-                    +txtOferta.getText()+"_"+getFechaReserva.getText()+"_"
-                    +s.format(Fecha_Salida)+"_"+s.format(Fecha_Entrada)
-                    +"_"+txtObservacion.getText()+"_"+getDiasReservas.getText()+"_"
-                    +totalReserva.getText();*/
+           
             
                     if(changeStatus())
                     {
@@ -721,37 +787,11 @@ public class formReservaCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void txtMatriculaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatriculaFocusLost
-        // TODO add your handling code here:
-        if(!txtMatricula.getText().equals("")){
-            r = new reservas();
-            mGama mg = new mGama();
-            if(!getGama.getText().equals(""))
-            {
-                getPrecioxDia.setText(String.valueOf(mg.getPrecio(getGama.getText())));
-            }
-            
-        }
-    }//GEN-LAST:event_txtMatriculaFocusLost
-
     private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            r = new reservas();
-            if(!r.model_A(txtMatricula.getText()))
-            {
-                estados.setText("La Matricula ingresada no existe!");
-                idmatricula.setForeground(Color.red);
-                security(0);
-                txtMatricula.setEnabled(true);
-            }else{
-                estados.setText("");
-                idmatricula.setForeground(Color.black);
-                security(1);
-                txtMatricula.transferFocus();
-            }
-            
+           
         }
     }//GEN-LAST:event_txtMatriculaKeyPressed
 
@@ -788,7 +828,8 @@ public class formReservaCliente extends javax.swing.JFrame {
                 if(K >= Z){
                     if(J >= Y){
                         if(I > (X+1)){
-                            for(int i = X; i<I;i++)
+                            d = 0;
+                            for(int i = X; i<=I;i++)
                             {
                                 d++;
                             }
@@ -828,10 +869,13 @@ public class formReservaCliente extends javax.swing.JFrame {
             mrc = new mReservaCliente();
             if(mrc.verify(txtIDReserva.getText()))
             {
+                txtOferta.addItem("-");
                 msg.setForeground(Color.red);
                 msg.setText("Registrado");
                 estados.setText("La informacion no se puede modificar, solo puede ser borrada por el administrador");
                 security(0);
+                txtMatricula.setEnabled(false);
+                btnGuardar.setEnabled(false);
             }else{
                 msg.setForeground(Color.blue);
                 msg.setText("Creando");
@@ -840,46 +884,72 @@ public class formReservaCliente extends javax.swing.JFrame {
                 estados.setText("");
                 dateSalida.setCalendar(null);
                 dateEntrada.setCalendar(null);
+                txtMatricula.setEnabled(true);
             }
             txtIDReserva.transferFocus();
         }
     }//GEN-LAST:event_txtIDReservaKeyPressed
 
-    private void txtOfertaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOfertaKeyPressed
+    private void txtMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyReleased
         // TODO add your handling code here:
-        if(!txtOferta.getText().equals(""))
-        {
-            if(!r.model_C(txtMatricula.getText()))
-            {
-                txtOferta.setText("No tiene");
-                if(txtOferta.getText().equals("No tiene"))
-                {
-                    getPrecioOferta.setText("");
-                    getOdesc.setText("");
+        if(!txtMatricula.getText().equals("")){
+            r = new reservas();
+            mv = new mVehiculo();
+            if(mv.verify_Reserva(txtMatricula.getText())){
+                if(mv.verifyStatus(txtMatricula.getText())){
+                    security(1);
+                    getPrecioxDia.setText( String.valueOf(r.getPrecio(txtMatricula.getText())));
+                    txtMatricula.transferFocus();
+                }else{
+                    estados.setText("La Matricula No esta Disponible");
+                    clearInfoVeh();
+                    security(0);
                 }
             }else{
-                estados.setText("");
+                estados.setText("La Matricula No esta Registrada");
+                clearInfoVeh();
+                security(0);
+            }
+                
+        }
+    }//GEN-LAST:event_txtMatriculaKeyReleased
+
+    private void txtMatriculaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatriculaFocusLost
+        // TODO add your handling code here:
+        if(!txtMatricula.getText().equals("")){
+            txtOferta.removeAllItems();
+            mo = new mOferta();
+            if(!mo.verify_Reserva(txtMatricula.getText(), 1)){
+                clearInfoOta();
+                msgOferta.setText("");
+            }else{
+                txtOferta.setEnabled(true);
+                msgOferta.setText("Hay ofertas Disponibles para este Vehiculo");
             }
         }
-    }//GEN-LAST:event_txtOfertaKeyPressed
+            
+    }//GEN-LAST:event_txtMatriculaFocusLost
 
     private void txtOfertaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOfertaFocusLost
         // TODO add your handling code here:
-        if(!txtOferta.getText().equals(""))
-        {
-            if(!r.model_C(txtMatricula.getText()))
-            {
-                txtOferta.setText("No tiene");
-                if(txtOferta.getText().equals("No tiene"))
-                {
-                    getPrecioOferta.setText("");
-                    getOdesc.setText("");
-                }
-            }else{
-                estados.setText("");
-            }
+        mo = new mOferta();
+        if(!mo.verify_Reserva(String.valueOf(txtOferta.getSelectedItem()), 2)){
+            clearInfoOta();
+            txtOferta.setEnabled(false);
+        }else{
+            calculo(d);
+            labeloferta.setText("Total Reserva Con Oferta");
+            toRD.setText("RD$ ");
         }
+        
     }//GEN-LAST:event_txtOfertaFocusLost
+
+    private void txtOfertaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOfertaFocusGained
+        // TODO add your handling code here:
+        if(!txtOferta.getSelectedItem().equals("-")){
+            txtOferta.transferFocus();
+        }
+    }//GEN-LAST:event_txtOfertaFocusGained
 
     
     boolean verify()
@@ -918,32 +988,44 @@ public class formReservaCliente extends javax.swing.JFrame {
         }else if(txtObservacion.getText().equals(""))
         {
             Observacion = "Buen Estado";
+        }else if(total_Reserva == 0.0){
+            JOptionPane.showMessageDialog(this, "Total Reserva", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
+            its = false;
         }
         return its;
     }
 
-    void clear()
-    {
-        //txtIDReserva.setText("");
+    void clear(){
         txtMatricula.setText("");
         txtCliente.setText("");
-        txtOferta.setText("");
+        txtOferta.removeAllItems();
         getDiasReservas.setText("");
-        totalReserva.setText("");
+        totalReservaSO.setText("");
         txtObservacion.setText("");
-        
+        clearInfoVeh();
+        clearInfoCte();
+        clearInfoOta();
+        linea_A = "";
+        estados.setText("");
+        msg.setText("");
+    }
+    void clearInfoVeh(){
         getMarca.setText("");
         getGama.setText("");
         getDesc.setText("");
         getEstadoVehiculo.setText("");
-        
+        getPrecioxDia.setText("");
+    }
+    
+    void clearInfoCte(){
         getFullname.setText("");
         getDirec.setText("");
         getPhone.setText("");
-        
+    }
+    
+    void clearInfoOta(){
         getOdesc.setText("");
         getPrecioOferta.setText("");
-        linea_A = "";
     }
     
     boolean changeStatus()
@@ -954,52 +1036,52 @@ public class formReservaCliente extends javax.swing.JFrame {
         return m.reenombrar();
     }
     
-    void security(int i)
-    {
-        if(i == 0)
-        {
-            //txtIDReserva.setEnabled(false);
-            txtMatricula.setEnabled(false);
+    void security(int i){
+        if(i == 0){
             txtCliente.setEnabled(false);
             txtOferta.setEnabled(false);
             dateSalida.setEnabled(false);
             dateEntrada.setEnabled(false);
             getDiasReservas.setEnabled(false);
-            totalReserva.setEnabled(false);
+            totalReservaSO.setEnabled(false);
             txtObservacion.setEnabled(false);
-        }else if(i == 1)
-        {
-            //txtIDReserva.setEnabled(true);
-            txtMatricula.setEnabled(true);
+            MCSO.setEnabled(false);
+            MCCO.setEnabled(false);
+        }else if(i == 1){
             txtCliente.setEnabled(true);
             txtOferta.setEnabled(true);
             dateSalida.setEnabled(true);
             dateEntrada.setEnabled(true);
             getDiasReservas.setEnabled(true);
-            totalReserva.setEnabled(true);
+            totalReservaSO.setEnabled(true);
             txtObservacion.setEnabled(true);
+            MCSO.setEnabled(true);
+            MCCO.setEnabled(true);
         }
     }
     
-    void calculo(int d)
-    {
+    void calculo(int d){
         Double totalR, pxd;
-        if(txtOferta.getText().equals(""))
-        {
+        if(getPrecioOferta.getText().equals("")){
             Dia_reserva = Integer.valueOf(getDiasReservas.getText());
             pxd = Double.valueOf(getPrecioxDia.getText());
             totalR = (Dia_reserva * pxd);
+            totalReservaSO.setText(String.valueOf(totalR));
         }else{
             Dia_reserva = Integer.valueOf(getDiasReservas.getText());
             pxd = Double.valueOf(getPrecioOferta.getText());
             totalR = (Dia_reserva * pxd);
+            totalReservaCO.setText(String.valueOf(totalR));
         }
-        totalReserva.setText(String.valueOf(totalR));
+        
     }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane Cliente;
+    private javax.swing.ButtonGroup MC;
+    private javax.swing.JRadioButton MCCO;
+    private javax.swing.JRadioButton MCSO;
     private javax.swing.JLayeredPane Oferta;
     private javax.swing.JLayeredPane Vehiculo;
     private javax.swing.JButton btnCerrar;
@@ -1036,6 +1118,7 @@ public class formReservaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1045,12 +1128,16 @@ public class formReservaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JLabel labeloferta;
     private javax.swing.JLabel msg;
-    public static javax.swing.JLabel totalReserva;
+    private javax.swing.JLabel msgOferta;
+    private javax.swing.JLabel toRD;
+    private javax.swing.JLabel totalReservaCO;
+    public static javax.swing.JLabel totalReservaSO;
     public static javax.swing.JFormattedTextField txtCliente;
     private javax.swing.JTextField txtIDReserva;
     public static javax.swing.JTextField txtMatricula;
     public static javax.swing.JTextField txtObservacion;
-    public static javax.swing.JTextField txtOferta;
+    public static javax.swing.JComboBox<String> txtOferta;
     // End of variables declaration//GEN-END:variables
 }

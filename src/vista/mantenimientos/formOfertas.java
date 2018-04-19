@@ -52,22 +52,25 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtDescrip = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         limite = new javax.swing.JLabel();
+        txtPorciento = new javax.swing.JTextField();
         estados = new javax.swing.JLabel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        marcaVeh = new javax.swing.JTextField();
-        modeloVeh = new javax.swing.JTextField();
-        descVeh = new javax.swing.JTextField();
-        precioGama = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        PcO = new javax.swing.JLabel();
+        marcaVeh = new javax.swing.JLabel();
+        modeloVeh = new javax.swing.JLabel();
+        descVeh = new javax.swing.JLabel();
+        precioGama = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -104,6 +107,9 @@ public class formOfertas extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtMatriculaKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyReleased(evt);
+            }
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -113,18 +119,7 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel5.setText("Descripcion");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setText("Precio");
-
-        txtPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPrecioFocusGained(evt);
-            }
-        });
-        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyReleased(evt);
-            }
-        });
+        jLabel6.setText("Porciento");
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("  Guardar");
@@ -145,7 +140,17 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New folder/rentcar64.png"))); // NOI18N
 
-        jLabel11.setText("Limite de Oferta");
+        jLabel11.setText("Resultado");
+
+        limite.setBackground(new java.awt.Color(0, 0, 0));
+        limite.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        limite.setForeground(new java.awt.Color(0, 176, 90));
+
+        txtPorciento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPorcientoKeyReleased(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtID, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -154,12 +159,12 @@ public class formOfertas extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtDescrip, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnCerrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(limite, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtPorciento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -185,17 +190,14 @@ public class formOfertas extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                                    .addComponent(jLabel6))
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtPorciento, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(limite))
                                     .addComponent(jLabel11)
-                                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(limite, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(42, 42, 42))
         );
@@ -220,22 +222,21 @@ public class formOfertas extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(limite))
+                    .addComponent(limite)
+                    .addComponent(txtPorciento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         estados.setForeground(new java.awt.Color(255, 0, 51));
         estados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion Vehiculo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jLayeredPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Marca");
@@ -249,22 +250,36 @@ public class formOfertas extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Precio Gama");
 
-        marcaVeh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        marcaVeh.setEnabled(false);
+        jLabel12.setText("Informacion de la Matricula");
 
-        modeloVeh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        modeloVeh.setEnabled(false);
+        jLabel13.setText("Precio con Oferta Aplicada");
 
-        descVeh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        descVeh.setEnabled(false);
+        PcO.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        PcO.setForeground(new java.awt.Color(0, 0, 255));
 
-        precioGama.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        precioGama.setEnabled(false);
+        marcaVeh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        marcaVeh.setForeground(new java.awt.Color(102, 102, 102));
+        marcaVeh.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        modeloVeh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        modeloVeh.setForeground(new java.awt.Color(102, 102, 102));
+        modeloVeh.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        descVeh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        descVeh.setForeground(new java.awt.Color(102, 102, 102));
+        descVeh.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        precioGama.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        precioGama.setForeground(new java.awt.Color(102, 102, 102));
+        precioGama.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(PcO, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(marcaVeh, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(modeloVeh, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(descVeh, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -274,38 +289,50 @@ public class formOfertas extends javax.swing.JFrame {
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PcO)
+                    .addComponent(jLabel13)
                     .addComponent(jLabel7)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel10)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(marcaVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modeloVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(descVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(precioGama, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(precioGama, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modeloVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(marcaVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(marcaVeh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(marcaVeh)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modeloVeh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(modeloVeh)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descVeh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(descVeh)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(precioGama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(precioGama)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PcO)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -315,17 +342,20 @@ public class formOfertas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(estados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(jLayeredPane2)
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +365,14 @@ public class formOfertas extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLayeredPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(estados, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -369,7 +401,7 @@ public class formOfertas extends javax.swing.JFrame {
             {
                 // almaceno la nueva linea en una variable
                 linea_B = txtID.getText()+"_"+txtMatricula.getText()
-                                 +"_"+txtDescrip.getText()+"_"+txtPrecio.getText();
+                                 +"_"+txtDescrip.getText()+"_"+txtPorciento.getText()+"_"+PcO.getText();
 
                 // inicializo el objeto de mi clase modificar
                 editor = new modificar(linea_A, linea_B, mo.path);
@@ -392,7 +424,7 @@ public class formOfertas extends javax.swing.JFrame {
             {
                 // almaceno la nueva linea en una variable
                 linea_A = txtID.getText()+"_"+txtMatricula.getText()
-                                 +"_"+txtDescrip.getText()+"_"+txtPrecio.getText();
+                                 +"_"+txtDescrip.getText()+"_"+txtPorciento.getText()+"_"+PcO.getText();
 
                 // finalizo verificando que los datos se guardaron en el archivo
                 // correctamente.
@@ -435,7 +467,8 @@ public class formOfertas extends javax.swing.JFrame {
 
                     msg.setForeground(Color.red);
                     msg.setText("Modificando");
-
+                    vehiculo();
+                    porciento();
                     if(!matricula())
                     {
                         infoVehiculo();
@@ -477,7 +510,6 @@ public class formOfertas extends javax.swing.JFrame {
                     infoVehiculo();
                 }else{
                     estados.setText("");
-                    limite.setText(String.valueOf(limitePorciento(Double.valueOf(precioGama.getText()))));
                 }
             }else{
                 infoVehiculo();
@@ -486,37 +518,60 @@ public class formOfertas extends javax.swing.JFrame {
 
     private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            if(!txtMatricula.getText().equals(""))
-            {
-                if(!mv.verify_Oferta(txtMatricula.getText()))
-                {
-                    estados.setText("La Matricula no existe");
-                    infoVehiculo();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(!txtMatricula.getText().equals("")){
+                if(matricula()){
+                    
                 }else{
-                    estados.setText("");
-                    limite.setText(String.valueOf(limitePorciento(Double.valueOf(precioGama.getText()))));
+                    infoVehiculo();
+                    estados.setText("La Matricula insertada no existe!");
                 }
-            }else{
-                infoVehiculo();
-            }
+            }else{ infoVehiculo(); }
         }
     }//GEN-LAST:event_txtMatriculaKeyPressed
 
-    private void txtPrecioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioFocusGained
+    private void txtMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyReleased
         // TODO add your handling code here:
-        limite.setText(String.valueOf(limitePorciento(Double.valueOf(precioGama.getText()))));
-    }//GEN-LAST:event_txtPrecioFocusGained
+         if(!txtMatricula.getText().equals("")){
+             if(!txtMatricula.getText().equals("")){
+                if(matricula()){
+                    estados.setText("");
+                    porciento();
+                }else{
+                    infoVehiculo();
+                    estados.setText("La Matricula insertada no existe!");
+                }
+            }else{ infoVehiculo(); }
+        }else{ infoVehiculo(); }
+    }//GEN-LAST:event_txtMatriculaKeyReleased
 
-    private void txtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyReleased
+    private void txtPorcientoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoKeyReleased
         // TODO add your handling code here:
-        try{
-            Precio_Oferta = Double.valueOf(txtPrecio.getText());
-        }catch(NumberFormatException n){
-            estados.setText("No ingrese letras en el precio");
+        if(!txtPorciento.getText().equals("")){
+            try{
+                if(!(Double.valueOf(txtPorciento.getText()) <= 0)){
+                    estados.setText("");
+                    if(Double.valueOf(txtPorciento.getText()) < 15){
+                        estados.setText("");
+                        Precio_Oferta = Double.valueOf(txtPorciento.getText());
+                        verLimite(Precio_Oferta);
+                        limite.setText("RD$ "+String.valueOf(setPorciento(Precio_Oferta)));
+                        Double vPcO = Double.valueOf(precioGama.getText()) - setPorciento(Precio_Oferta);
+                        PcO.setText(String.valueOf(vPcO));
+                    }else{
+                        estados.setText("Has pasado el limite de una oferta. Consultalo con tu superior");
+                    }
+                }else{
+                    estados.setText("La oferta no puede ser Menor o Igual a CERO");
+                }
+            }catch(NumberFormatException n){
+                estados.setText("No ingrese letras en el precio");
+            }
+        }else{
+            limite.setText("");
+            PcO.setText("");
         }
-    }//GEN-LAST:event_txtPrecioKeyReleased
+    }//GEN-LAST:event_txtPorcientoKeyReleased
 
     boolean verificar()
     {
@@ -545,17 +600,11 @@ public class formOfertas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese una Descripcion", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
             txtDescrip.setBackground(Color.white);
             v = false;
-        }else if(txtPrecio.getText().equals(""))
+        }else if(txtPorciento.getText().equals(""))
         {
-            txtPrecio.setBackground(Color.red);
+            txtPorciento.setBackground(Color.red);
             JOptionPane.showMessageDialog(this, "Ingrese el Precio", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
-            txtPrecio.setBackground(Color.white);
-            v = false;
-        }else if(Double.valueOf(txtPrecio.getText()) < limitePorciento(Precio_Gama))
-        {
-            txtPrecio.setBackground(Color.red);
-            JOptionPane.showMessageDialog(this, "La Oferta ingresada no concuerda con los terminos", "Campo Obligatorio", JOptionPane.ERROR_MESSAGE);
-            txtPrecio.setBackground(Color.white);
+            txtPorciento.setBackground(Color.white);
             v = false;
         }
         
@@ -567,10 +616,11 @@ public class formOfertas extends javax.swing.JFrame {
         //txtID.setText("");
         txtMatricula.setText("");
         txtDescrip.setText("");
-        txtPrecio.setText("");
+        txtPorciento.setText("");
         linea_A = "";
         linea_B = "";
         estados.setText("");
+        PcO.setText("");
     }
     
     boolean matricula()
@@ -586,21 +636,68 @@ public class formOfertas extends javax.swing.JFrame {
         descVeh.setText("");
         precioGama.setText("");
         limite.setText("");
+        PcO.setText("");
     }
     
-    Double limitePorciento(Double precioGama)
-    {
-        return ((precioGama*15)/100);
+    Double setPorciento(Double po){
+        Double pg = Double.valueOf(precioGama.getText());
+        return ((pg * po) / 100);
     }
+    
+    void verLimite(Double x){
+        if(x < 5)
+        {
+            limite.setForeground(Color.black);
+        }else if(x > 5 && x < 10){
+            limite.setForeground(Color.orange);
+        }else{
+            limite.setForeground(Color.red);
+        }
+    }
+    
+    void porciento(){
+        if(!txtPorciento.getText().equals("")){
+            if(!(Double.valueOf(txtPorciento.getText()) <= 0)){
+                estados.setText("");
+                if(Double.valueOf(txtPorciento.getText()) < 15){
+                    estados.setText("");
+                    Precio_Oferta = Double.valueOf(txtPorciento.getText());
+                    verLimite(Precio_Oferta);
+                    limite.setText("RD$ "+String.valueOf(setPorciento(Precio_Oferta)));
+                    Double vPcO = Double.valueOf(precioGama.getText()) - setPorciento(Precio_Oferta);
+                    PcO.setText(String.valueOf(vPcO));
+                }else{
+                    estados.setText("Has pasado el limite de una oferta. Consultalo con tu superior");
+                }
+            }else{
+                estados.setText("La oferta no puede ser Menor o Igual a CERO");
+            }
+        }
+    }
+    
+    void vehiculo(){
+        if(!txtMatricula.getText().equals("")){
+            if(matricula()){
+
+            }else{
+                infoVehiculo();
+                estados.setText("La Matricula insertada no existe!");
+            }
+        }else{ infoVehiculo(); }
+    }
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PcO;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar;
-    public static javax.swing.JTextField descVeh;
+    public static javax.swing.JLabel descVeh;
     public static javax.swing.JLabel estados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -612,13 +709,13 @@ public class formOfertas extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLabel limite;
-    public static javax.swing.JTextField marcaVeh;
-    public static javax.swing.JTextField modeloVeh;
+    public static javax.swing.JLabel marcaVeh;
+    public static javax.swing.JLabel modeloVeh;
     private javax.swing.JLabel msg;
-    public static javax.swing.JTextField precioGama;
+    public static javax.swing.JLabel precioGama;
     public static javax.swing.JTextField txtDescrip;
     private javax.swing.JTextField txtID;
     public static javax.swing.JTextField txtMatricula;
-    public static javax.swing.JTextField txtPrecio;
+    public static javax.swing.JTextField txtPorciento;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,8 +29,8 @@ public class mVehiculo {
         vehiculos = new File("C:\\RentCarSystem\\database\\mantenimiento\\vehiculos.txt");
         path = vehiculos.getPath();
     }
-    public boolean verify(String dato)
-    {
+    
+    public boolean verify(String dato){
         if(vehiculos.length() != 0)
         {
             try{
@@ -105,20 +105,14 @@ public class mVehiculo {
  
     public boolean verify_Oferta(String dato)
     {
-        if(vehiculos.length() != 0)
-        {
+        if(vehiculos.length() != 0){
             try{
-                
                 fr = new FileReader(vehiculos);
                 br = new BufferedReader(fr);
-                
                 String linea;
-                
-                while((linea = br.readLine()) != null)
-                {
+                while((linea = br.readLine()) != null){
                     s = new StringTokenizer(linea, "_");
-                    if(dato.equals(s.nextToken()))
-                    {
+                    if(dato.equals(s.nextToken())){
                         formOfertas.marcaVeh.setText(s.nextToken());
                         formOfertas.modeloVeh.setText(s.nextToken());
                         formOfertas.precioGama.setText(String.valueOf(mg.getPrecio(s.nextToken())));
@@ -137,10 +131,8 @@ public class mVehiculo {
         return its;
     }
     
-    public boolean verify_Reserva(String dato)
-    {
-        if(vehiculos.length() != 0)
-        {
+    public boolean verify_Reserva(String dato){
+        if(vehiculos.length() != 0){
             try{
                 fr = new FileReader(vehiculos);
                 br = new BufferedReader(fr);
@@ -178,9 +170,9 @@ public class mVehiculo {
         return its;
     }
     
-    public String verify_toStatus(String dato)
+    public boolean verifyStatus(String dato)
     {
-        String status ="";
+        boolean status = false;
         if(vehiculos.length() != 0)
         {
             try{
@@ -194,14 +186,28 @@ public class mVehiculo {
                 {
                     
                     s = new StringTokenizer(linea, "_");
-                    if(dato.equals(s.nextToken()))
+                    
+                    if(dato.equals(s.nextToken()))// Matricula
                     {
+                        s.nextToken();// 1
+                        s.nextToken();// 2
+                        s.nextToken();// 3
+                        s.nextToken();// 4
+                        s.nextToken();// 5
+                        s.nextToken();// 6
+                        s.nextToken();// 7
+                        s.nextToken();// 8
+                        s.nextToken();// 9
+                        s.nextToken();// 10
+                        s.nextToken();// 11
                         fr.close();
-                        return status;
+                        if(s.nextToken().equals("true")){
+                            return (status = true);
+                        }
+                            
                     }
                     
                 }
-                
                 fr.close();
                 
             }catch(IOException ioe)

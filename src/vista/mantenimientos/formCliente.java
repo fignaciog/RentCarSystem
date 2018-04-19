@@ -136,6 +136,9 @@ public class formCliente extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyReleased(evt);
+            }
         });
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -393,6 +396,28 @@ public class formCliente extends javax.swing.JFrame {
             txtTelefono.transferFocus();
         }
     }//GEN-LAST:event_txtTelefonoKeyPressed
+
+    private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
+        // TODO add your handling code here:
+        mc = new mCliente();
+        if(!txtCedula.getText().equals("   -       - ") && txtCedula.getText().length() >= 13)
+        {
+            if(mc.verify(txtCedula.getText()))
+            {
+                msg.setForeground(Color.red);
+                msg.setText("Modificando");
+                linea_A = txtCedula.getText(); 
+            }else{
+                msg.setForeground(Color.blue);
+                msg.setText("Creando");
+                clear();
+            }
+            //checkCedula();
+        }else{
+            clear();
+            msg.setText("");
+        }
+    }//GEN-LAST:event_txtCedulaKeyReleased
 
     boolean verificar()
     {

@@ -40,7 +40,7 @@ public class mReservaCliente {
                 fr = new FileReader(reservacliente);
                 br = new BufferedReader(fr);
                 
-                String linea, sa, en, id;
+                String linea, sa, en, id, tr;
                 
                 while((linea = br.readLine()) != null)
                 {
@@ -50,15 +50,18 @@ public class mReservaCliente {
                     {
                         formReservaCliente.txtMatricula.setText(s.nextToken());
                         formReservaCliente.txtCliente.setText(s.nextToken());
-                        formReservaCliente.txtOferta.setText(s.nextToken());
+                        tr = s.nextToken();
                         s.nextToken();
+                        if(tr.equals("0")){
+                            formReservaCliente.txtOferta.setSelectedItem(tr);
+                        }
                         sa = s.nextToken();
                         formReservaCliente.dateSalida.setDate(setDate(sa));
                         en = s.nextToken();
                         formReservaCliente.dateEntrada.setDate(setDate(en));
                         formReservaCliente.txtObservacion.setText(s.nextToken());
                         formReservaCliente.getDiasReservas.setText(s.nextToken());
-                        formReservaCliente.totalReserva.setText(s.nextToken());
+                        formReservaCliente.totalReservaSO.setText(s.nextToken());
                         formReservaCliente.linea_A = linea;
                         fr.close();
                         return (its = true);

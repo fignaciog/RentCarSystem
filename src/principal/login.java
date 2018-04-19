@@ -88,6 +88,9 @@ public class login extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUserKeyReleased(evt);
+            }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -96,6 +99,9 @@ public class login extends javax.swing.JFrame {
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPassKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPassKeyReleased(evt);
             }
         });
 
@@ -296,6 +302,44 @@ public class login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
+        // TODO add your handling code here:
+        if(!txtUser.getText().equals(""))
+        {
+            ml = new mUsuario();
+            Login_Usuario = txtUser.getText();
+            if(ml.verify_User(Login_Usuario))
+            {
+                txtPass.setEnabled(true);
+                msg.setText("");
+                txtUser.setEnabled(false);
+            }else{
+                msg.setText("Usuario no registrado");
+            }
+        }
+    }//GEN-LAST:event_txtUserKeyReleased
+
+    private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
+        // TODO add your handling code here:
+        if(!txtPass.getText().equals(""))
+        {
+            ml = new mUsuario();
+            Pass_login = txtPass.getText();
+            if(ml.verify_Pass(Login_Usuario, Pass_login))
+            {
+                msg.setText("");
+                btnEntrar.setEnabled(true);
+                txtPass.setEnabled(false);
+                if(ml.verify_Acceso(Login_Usuario, Pass_login).equals("0"))
+                {
+                    btnRegistrar.setEnabled(true);
+                }
+            }else{
+                msg.setText("Contraseña incorrecta");
+            }
+        }
+    }//GEN-LAST:event_txtPassKeyReleased
 
     /**
      * @param args the command line arguments

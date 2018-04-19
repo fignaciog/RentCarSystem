@@ -47,22 +47,18 @@ public class modificar {
         file_B = new File(path_A+"_");
     }
     
+    // Metodo para escribir en el archivo
     void escribir(String linea)
     {
         try{
-            
             fw = new FileWriter(file_B, true);
             pw = new PrintWriter(fw);
-            
             pw.println(linea);
-            
             fw.close();
-            
-        }catch(IOException ioe){
-            //ioe.printStackTrace();
-        }
+        }catch(IOException ioe){}
     }
     
+    // Metodo para editar informacion
     public void editar()
     {
         try{
@@ -87,7 +83,7 @@ public class modificar {
             //ioe.printStackTrace();
         }
     }
-    
+    // Metodo para borrar linea
     public void editar(String Linea_A)
     {
         try{
@@ -135,11 +131,10 @@ public class modificar {
             //ioe.printStackTrace();
         }
     }
-    
+    // Metodo para reemplazar el archivo
     public boolean reenombrar()
     {
         boolean set = false;
-        //System.out.println(file_A.getPath());
         if(file_A.exists())
         {
             file_A.delete();

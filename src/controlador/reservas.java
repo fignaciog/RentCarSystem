@@ -41,21 +41,15 @@ public class reservas {
         return its;
     }
     
-    public boolean model_C(String ID)
-    {
-        mo = new mOferta();
-        if(mo.verify_Reserva(ID))
-        {
-            its = true;
-        }
-        return its;
-    }
-    
     public Double getPrecio(String matricula)
     {
         mGama mg = new mGama();
         mv = new mVehiculo();
         return mg.getPrecio(mv.getGama(matricula));
+    }
+    
+    public void getOfertas(){
+        
     }
     
     

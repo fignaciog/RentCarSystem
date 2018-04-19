@@ -21,33 +21,17 @@ public class mcReserva extends mReservaCliente {
         
     }
     
-    public mcReserva(String Dato, int Metodo)
-    {
-        switch(Metodo)
-        {
-            case 0:
-                diasReserva(Dato);
-                break;
-            case 1:
-                fecha(Dato);
-                break;
-            default:
-                break;
-        }
-    }
-    
     void jTable()
     {
         md = (DefaultTableModel)vcReserva.vistaResultado.getModel();
         fila = new Object[10];
     }
     
-    public final void diasReserva(String Dato)
+    public final void metodoConsulta(String Dato, int n)
     {
         mrv = new mReservaCliente();
-        jTable();
         clearTable();
-        
+        jTable();
         if(reservacliente.length() != 0)
         {
             try{
@@ -56,8 +40,7 @@ public class mcReserva extends mReservaCliente {
                 br = new BufferedReader(fr);
                 String linea, r, m, c, o, fR, fS, fE, O, dR, tR;
             
-                while((linea = br.readLine()) != null)
-                {
+                while((linea = br.readLine()) != null){
                     s = new StringTokenizer(linea, "_");
                     r = s.nextToken();
                     m = s.nextToken();
@@ -69,20 +52,85 @@ public class mcReserva extends mReservaCliente {
                     O = s.nextToken();
                     dR = s.nextToken();
                     tR = s.nextToken();
-                    if(dR.contains(Dato))
-                    {
-                        fila[0] = r;
-                        fila[1] = m;
-                        fila[2] = c;
-                        fila[3] = o;
-                        fila[4] = fR;
-                        fila[5] = fS;
-                        fila[6] = fE;
-                        fila[7] = O;
-                        fila[8] = dR;
-                        fila[9] = tR;
-                        md.addRow(fila);
+                    
+                    switch(n){
+                        case 0:
+                            fila[0] = r;
+                            fila[1] = m;
+                            fila[2] = c;
+                            fila[3] = o;
+                            fila[4] = fR;
+                            fila[5] = fS;
+                            fila[6] = fE;
+                            fila[7] = O;
+                            fila[8] = dR;
+                            fila[9] = tR;
+                            md.addRow(fila);
+                            break;
+                        case 1:
+                            if(dR.contains(Dato)){
+                                fila[0] = r;
+                                fila[1] = m;
+                                fila[2] = c;
+                                fila[3] = o;
+                                fila[4] = fR;
+                                fila[5] = fS;
+                                fila[6] = fE;
+                                fila[7] = O;
+                                fila[8] = dR;
+                                fila[9] = tR;
+                                md.addRow(fila);
+                            }
+                            break;
+                        case 2:
+                            if(fR.contains(Dato)){
+                                fila[0] = r;
+                                fila[1] = m;
+                                fila[2] = c;
+                                fila[3] = o;
+                                fila[4] = fR;
+                                fila[5] = fS;
+                                fila[6] = fE;
+                                fila[7] = O;
+                                fila[8] = dR;
+                                fila[9] = tR;
+                                md.addRow(fila);
+                            }
+                            break;
+                        case 3:
+                            if(fS.contains(Dato)){
+                                fila[0] = r;
+                                fila[1] = m;
+                                fila[2] = c;
+                                fila[3] = o;
+                                fila[4] = fR;
+                                fila[5] = fS;
+                                fila[6] = fE;
+                                fila[7] = O;
+                                fila[8] = dR;
+                                fila[9] = tR;
+                                md.addRow(fila);
+                            }
+                            break;
+                        case 4:
+                            if(fE.contains(Dato)){
+                                fila[0] = r;
+                                fila[1] = m;
+                                fila[2] = c;
+                                fila[3] = o;
+                                fila[4] = fR;
+                                fila[5] = fS;
+                                fila[6] = fE;
+                                fila[7] = O;
+                                fila[8] = dR;
+                                fila[9] = tR;
+                                md.addRow(fila);
+                            }
+                            break;
+                        default:
+                            break;
                     }
+                    
                 }
                 fr.close();
             }catch(IOException ioe)
@@ -92,92 +140,6 @@ public class mcReserva extends mReservaCliente {
         }
     }
     
-    public void allReserva()
-    {
-        mrv = new mReservaCliente();
-        jTable();
-        clearTable();
-        
-        if(reservacliente.length() != 0)
-        {
-            try{
-                
-                fr = new FileReader(reservacliente);
-                br = new BufferedReader(fr);
-                String linea, r, m, c, o, fR, fS, fE, O, dR, tR;
-            
-                while((linea = br.readLine()) != null)
-                {
-                    s = new StringTokenizer(linea, "_");
-                    fila[0] = s.nextToken();
-                    fila[1] = s.nextToken();
-                    fila[2] = s.nextToken();
-                    fila[3] = s.nextToken();
-                    fila[4] = s.nextToken();
-                    fila[5] = s.nextToken();
-                    fila[6] = s.nextToken();
-                    fila[7] = s.nextToken();
-                    fila[8] = s.nextToken();
-                    fila[9] = "RD$ "+s.nextToken();
-                    md.addRow(fila);
-                }
-                fr.close();
-            }catch(IOException ioe)
-            {
-                
-            }
-        }
-    }
-    
-    public final void fecha(String Dato)
-    {
-        mrv = new mReservaCliente();
-        jTable();
-        clearTable();
-        
-        if(reservacliente.length() != 0)
-        {
-            try{
-                
-                fr = new FileReader(reservacliente);
-                br = new BufferedReader(fr);
-                String linea, r, m, c, o, fR, fS, fE, O, dR, tR;
-            
-                while((linea = br.readLine()) != null)
-                {
-                    s = new StringTokenizer(linea, "_");
-                    r = s.nextToken();
-                    m = s.nextToken();
-                    c = s.nextToken();
-                    o = s.nextToken();
-                    fR = s.nextToken();
-                    fS = s.nextToken();
-                    fE= s.nextToken();
-                    O = s.nextToken();
-                    dR = s.nextToken();
-                    tR = s.nextToken();
-                    if(fR.equals(Dato))
-                    {
-                        fila[0] = r;
-                        fila[1] = m;
-                        fila[2] = c;
-                        fila[3] = o;
-                        fila[4] = fR;
-                        fila[5] = fS;
-                        fila[6] = fE;
-                        fila[7] = O;
-                        fila[8] = dR;
-                        fila[9] = tR;
-                        md.addRow(fila);
-                    }
-                }
-                fr.close();
-            }catch(IOException ioe)
-            {
-                
-            }
-        }
-    }
     
     public void clearTable()
     {

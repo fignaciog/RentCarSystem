@@ -1,0 +1,2 @@
+Los archivos del sistema se guardan en la Sisguiente ruta:
+C:/RentCarSystem/database/mantenimiento
